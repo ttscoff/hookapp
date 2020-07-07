@@ -1,0 +1,86 @@
+== hook - CLI interface for Hook.app (macOS)
+
+v0.0.1
+
+=== Global Options
+=== --help
+Show this message
+
+
+
+=== --version
+Display the program version
+
+
+
+=== Commands
+==== Command: <tt>clip  FILE_OR_URL</tt>
+Copy Hook URL for file to clipboard
+
+
+===== Options
+===== -m|--[no-]markdown
+Use Markdown format for link
+
+
+
+==== Command: <tt>clone|cp  SOURCE TARGET</tt>
+Clone all hooks from one file or url onto another
+
+
+==== Command: <tt>help  command</tt>
+Shows a list of commands or help for one command
+
+Gets help for the application or its commands. Can also list the commands in a way helpful to creating a bash-style completion function
+===== Options
+===== -c
+List commands one per line, to assist with shell completion
+
+
+
+==== Command: <tt>link|ln  SOURCE [SOURCE, ...] TARGET</tt>
+Create bidirectional links from files to target
+
+
+===== Options
+===== -a|--[no-]all
+Link every listed file or url to every other
+
+
+
+==== Command: <tt>list|ls  FILE_OR_URL [FILE_OR_URL, ...]</tt>
+List bookmarks for file or url
+
+
+===== Options
+===== -o|--output_format format
+
+Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
+
+[Default Value] verbose
+
+
+===== -f|--[no-]files_only
+Output only hooks with file paths (exclude e.g. emails)
+
+
+
+===== --[no-]null
+Separate results with NULL separator, only applies with "paths" output for single file argument
+
+
+
+==== Command: <tt>open  FILE_OR_URL</tt>
+Select and open from a menu of hooked files
+
+
+==== Command: <tt>remove|rm  ITEM_1 ITEM_2</tt>
+Remove a hook between two files or urls
+
+
+===== Options
+===== -a|--[no-]all
+Remove ALL links on files, requires confirmation
+
+
+

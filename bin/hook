@@ -1,0 +1,154 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'gli'
+require 'hook'
+
+# Main class for GLI app
+class App
+  extend GLI::App
+
+  program_desc 'CLI interface for Hook.app (macOS)'
+
+  version Hook::VERSION
+
+  subcommand_option_handling :normal
+  arguments :strict
+
+  hooker = nil
+
+  # desc 'Describe some switch here'
+  # switch [:s,:switch]
+
+  # desc 'Describe some flag here'
+  # default_value 'the default'
+  # arg_name 'The name of the argument'
+  # flag [:f,:flagname]
+
+  desc 'List bookmarks for file or url'
+  arg_name 'FILE_OR_URL [FILE_OR_URL, ...]'
+  command %i[list ls] do |c|
+    c.desc 'Output only hooks with file paths (exclude e.g. emails)'
+    c.switch %i[f files_only]
+
+    c.desc 'Separate results with NULL separator, only applies with "paths" output for single file argument'
+    c.switch [:null]
+
+    valid_formats = %w[hooks paths markdown verbose]
+    fmt_list = valid_formats.map { |fmt| fmt.sub(/^(.)(.*?)$/, '(\1)\2') }.join(', ')
+    c.desc "Output format [#{fmt_list}]"
+    c.default_value 'verbose'
+    c.arg_name 'format'
+    c.flag %i[o output_format]
+
+    c.action do |_global_options, options, args|
+      valid_format_rx = valid_formats.map { |fmt| fmt.sub(/^(.)(.*)$/, '^\1(\2)?$') }
+      valid_format = false
+      valid_format_rx.each_with_index do |rx, i|
+        cmp = Regexp.new(rx, 'i')
+
+        next unless options[:o] =~ cmp
+
+        valid_format = true
+        options[:o] = valid_formats[i]
+        break
+      end
+      unless valid_format
+        puts 'Invalid output format'
+        Process.exit 1
+      end
+      result = hooker.linked_bookmarks(args, { files_only: options[:f],
+                                               format: options[:o],
+                                               null_separator: options[:null] })
+
+      puts result
+    end
+  end
+
+  desc 'Create bidirectional links from files to target'
+  arg_name 'SOURCE [SOURCE, ...] TARGET'
+  command %i[link ln] do |c|
+    c.desc 'Link every listed file or url to every other'
+    c.switch %i[a all]
+    c.action do |_global_options, options, args|
+      if args.length < 2
+        puts 'At least 2 files must be specified'
+        Process.exit 1
+      end
+      if options[:a]
+        puts hooker.link_all(args)
+      else
+        puts hooker.link_files(args)
+      end
+    end
+  end
+
+  desc 'Copy Hook URL for file to clipboard'
+  arg_name 'FILE_OR_URL'
+  command %i[clip] do |c|
+    c.desc 'Use Markdown format for link'
+    c.switch %i[m markdown]
+
+    c.action do |_global_options, options, args|
+      result = hooker.copy_bookmark(args[0], { markdown: options[:m] })
+      puts result
+    end
+  end
+
+  desc 'Remove a hook between two files or urls'
+  arg_name 'ITEM_1 ITEM_2'
+  command %i[remove rm] do |c|
+    c.desc 'Remove ALL links on files, requires confirmation'
+    c.switch %i[a all]
+
+    c.action do |_global_options, options, args|
+      result = hooker.delete_hooks(args, { all: options[:r] })
+      puts result
+    end
+  end
+
+  desc 'Clone all hooks from one file or url onto another'
+  arg_name 'SOURCE TARGET'
+  command %i[clone cp] do |c|
+    c.action do |_global_options, _options, args|
+      raise "Two file paths required (#{args.length} given)" if args.length != 2
+
+      result = hooker.clone_hooks(args)
+      puts result
+    end
+  end
+
+  desc 'Select and open from a menu of hooked files'
+  arg_name 'FILE_OR_URL'
+  command %i[open] do |c|
+    c.action do |_global_options, _options, args|
+      raise "One file path or url required (#{args.length} given)" if args.length != 1
+
+      hooker.open_linked(args[0])
+    end
+  end
+
+  pre do |global, command, options, args|
+    # Pre logic here
+    # Return true to proceed; false to abort and not call the
+    # chosen command
+    # Use skips_pre before a command to skip this block
+    # on that command only
+    hooker = Hooker.new(global)
+    true
+  end
+
+  post do |global, command, options, args|
+    # Post logic here
+    # Use skips_post before a command to skip this
+    # block on that command only
+  end
+
+  on_error do |exception|
+    # Error logic here
+    # return false to skip default error handling
+    true
+  end
+end
+
+exit App.run(ARGV)
