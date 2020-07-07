@@ -1,0 +1,6 @@
+= hookapp
+
+A CLI for Hook.app on macOS.
+
+:include:hook.rdoc
+

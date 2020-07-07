@@ -1,5 +1,5 @@
 # Ensure we require the local version and not one we might have installed already
-require File.join([File.dirname(__FILE__),'lib','hook','version.rb'])
+require File.join([File.dirname(__FILE__), 'lib', 'hook', 'version.rb'])
 spec = Gem::Specification.new do |s|
   s.name = 'hookapp'
   s.version = Hook::VERSION
@@ -11,7 +11,7 @@ spec = Gem::Specification.new do |s|
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
-  s.extra_rdoc_files = ['README.rdoc','hookapp.rdoc']
+  s.extra_rdoc_files = ['README.rdoc','hook.rdoc']
   s.rdoc_options << '--title' << 'hook' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'hook'
