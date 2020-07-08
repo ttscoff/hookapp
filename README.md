@@ -4,7 +4,9 @@ A CLI for Hook.app on macOS.
 
 ## Installation
 
-`gem install hookapp`
+`gem install hookapp`. 
+
+If you're on a stock Ruby install (i.e. have never installed `rvm` or `rbenv`), you may need sudo and your system password: `sudo gem install hookapp`.
 
 ## Usage
 
