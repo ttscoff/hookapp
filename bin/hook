@@ -26,7 +26,7 @@ class App
   # flag [:f,:flagname]
 
   desc 'List hooks on a file or url'
-  arg_name 'FILE_OR_URL [FILE_OR_URL, ...]'
+  arg_name 'FILE_OR_URL [FILE_OR_URL...]'
   command %i[list ls] do |c|
     c.desc 'Output only bookmarks with file paths (exclude e.g. emails)'
     c.switch %i[f files_only], { negatable: false, default_value: false }
@@ -52,7 +52,7 @@ class App
   end
 
   desc 'Create bidirectional hooks between two or more files/urls'
-  arg_name 'SOURCE [SOURCE, ...] TARGET'
+  arg_name 'SOURCE [SOURCE...] TARGET'
   command %i[link ln] do |c|
     c.desc 'Link every listed file or url to every other'
     c.switch %i[a all],  { negatable: false, default_value: false }
