@@ -21,7 +21,12 @@ class String
     elsif self =~ /^(hook|http)/
       self
     else
-      false
+      if self =~ /^\[.*?\]\((.*?)\)$/
+        mdlink = $1
+        mdlink.valid_hook
+      else
+        false
+      end
     end
   end
 
@@ -34,6 +39,18 @@ end
 class Hooker
   def initialize(global_args)
     @global_args = global_args
+  end
+
+  def validate_format(fmt, options)
+    valid_format_rx = options.map { |fmt| fmt.sub(/^(.)(.*)$/, '^\1(\2)?$') }
+    valid_format = false
+    valid_format_rx.each_with_index do |rx, i|
+      cmp = Regexp.new(rx, 'i')
+      next unless fmt =~ cmp
+      valid_format = options[i]
+      break
+    end
+    return valid_format
   end
 
   def bookmark_for(url)
@@ -95,6 +112,15 @@ class Hooker
       warn 'Invalid selection'
       Process.exit 1
     end
+  end
+
+  def open_gui(url)
+    `osascript <<'APPLESCRIPT'
+    tell application "Hook"
+      set _mark to bookmark from URL "#{url.valid_hook}"
+      invoke on _mark
+    end tell
+    APPLESCRIPT`
   end
 
   def open_linked(url)

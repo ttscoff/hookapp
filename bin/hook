@@ -25,55 +25,49 @@ class App
   # arg_name 'The name of the argument'
   # flag [:f,:flagname]
 
-  desc 'List bookmarks for file or url'
+  desc 'List hooks on a file or url'
   arg_name 'FILE_OR_URL [FILE_OR_URL, ...]'
   command %i[list ls] do |c|
-    c.desc 'Output only hooks with file paths (exclude e.g. emails)'
-    c.switch %i[f files_only]
+    c.desc 'Output only bookmarks with file paths (exclude e.g. emails)'
+    c.switch %i[f files_only], { negatable: false, default_value: false }
 
     c.desc 'Separate results with NULL separator, only applies with "paths" output for single file argument'
-    c.switch [:null]
+    c.switch %i[null], { negatable: false, default_value: false }
 
     valid_formats = %w[hooks paths markdown verbose]
     fmt_list = valid_formats.map { |fmt| fmt.sub(/^(.)(.*?)$/, '(\1)\2') }.join(', ')
     c.desc "Output format [#{fmt_list}]"
-    c.default_value 'verbose'
-    c.arg_name 'format'
-    c.flag %i[o output_format]
+    c.flag %i[o output_format], { arg_name: 'format', default_value: 'paths' }
 
     c.action do |_global_options, options, args|
-      valid_format_rx = valid_formats.map { |fmt| fmt.sub(/^(.)(.*)$/, '^\1(\2)?$') }
-      valid_format = false
-      valid_format_rx.each_with_index do |rx, i|
-        cmp = Regexp.new(rx, 'i')
+      valid_format = hooker.validate_format(options[:o], valid_formats)
+      raise 'Invalid output format' unless valid_format
 
-        next unless options[:o] =~ cmp
-
-        valid_format = true
-        options[:o] = valid_formats[i]
-        break
-      end
-      unless valid_format
-        puts 'Invalid output format'
-        Process.exit 1
-      end
       result = hooker.linked_bookmarks(args, { files_only: options[:f],
-                                               format: options[:o],
+                                               format: valid_format,
                                                null_separator: options[:null] })
 
       puts result
     end
   end
 
-  desc 'Create bidirectional links from files to target'
+  desc 'Create bidirectional hooks between two or more files/urls'
   arg_name 'SOURCE [SOURCE, ...] TARGET'
   command %i[link ln] do |c|
     c.desc 'Link every listed file or url to every other'
-    c.switch %i[a all]
+    c.switch %i[a all],  { negatable: false, default_value: false }
+
+    c.desc 'Paste URL from clipboard'
+    c.switch %i[p paste], { negatable: false, default_value: false }
+
     c.action do |_global_options, options, args|
+      if options[:p]
+        clipboard = `pbpaste`.strip
+        clipboard.valid_hook!
+        args.push(clipboard) if clipboard
+      end
       if args.length < 2
-        puts 'At least 2 files must be specified'
-        Process.exit 1
+        raise 'At least 2 files must be specified, or one file with --paste'
       end
       if options[:a]
         puts hooker.link_all(args)
@@ -83,10 +77,10 @@ class App
     end
   end
 
-  desc 'Copy Hook URL for file to clipboard'
+  desc 'Copy Hook URL for file/url to clipboard'
   arg_name 'FILE_OR_URL'
   command %i[clip] do |c|
-    c.desc 'Use Markdown format for link'
+    c.desc 'Copy as Markdown'
     c.switch %i[m markdown]
 
     c.action do |_global_options, options, args|
@@ -95,7 +89,7 @@ class App
     end
   end
 
-  desc 'Remove a hook between two files or urls'
+  desc 'Remove a hook between two files/urls'
   arg_name 'ITEM_1 ITEM_2'
   command %i[remove rm] do |c|
     c.desc 'Remove ALL links on files, requires confirmation'
@@ -111,24 +105,34 @@ class App
   arg_name 'SOURCE TARGET'
   command %i[clone cp] do |c|
     c.action do |_global_options, _options, args|
-      raise "Two file paths required (#{args.length} given)" if args.length != 2
+      raise "Wrong number of arguments. Two file paths or urls required (#{args.length} given)" if args.length != 2
 
       result = hooker.clone_hooks(args)
       puts result
     end
   end
 
-  desc 'Select and open from a menu of hooked files'
+  desc 'Select from hooks on a file/url and open in default application'
   arg_name 'FILE_OR_URL'
-  command %i[open] do |c|
+  command %i[select] do |c|
     c.action do |_global_options, _options, args|
-      raise "One file path or url required (#{args.length} given)" if args.length != 1
+      raise "Wrong number of arguments. One file path or url required (#{args.length} given)" if args.length != 1
 
       hooker.open_linked(args[0])
     end
   end
 
-  pre do |global, command, options, args|
+  desc 'Open the specified file or url in Hook GUI'
+  arg_name 'FILE_OR_URL'
+  command %i[open gui] do |c|
+    c.action do |_global_options, _options, args|
+      raise "Wrong number of arguments. One file path or url required (#{args.length} given)" if args.length != 1
+
+      hooker.open_gui(args[0])
+    end
+  end
+
+  pre do |global, _command, _options, _args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the
     # chosen command
@@ -138,7 +142,7 @@ class App
     true
   end
 
-  post do |global, command, options, args|
+  post do |_global, _command, _options, _args|
     # Post logic here
     # Use skips_post before a command to skip this
     # block on that command only
