@@ -18,15 +18,11 @@ class String
   def valid_hook
     if File.exist?(self)
       File.expand_path(self)
-    elsif self =~ /\S+:\/\//
-      self
+    elsif self =~ /^\[.*?\]\((.*?)\)$/
+      mdlink = $1
+      mdlink.valid_hook
     else
-      if self =~ /^\[.*?\]\((.*?)\)$/
-        mdlink = $1
-        mdlink.valid_hook
-      else
-        nil
-      end
+      self
     end
   end
 
@@ -42,15 +38,16 @@ class Hooker
   end
 
   def validate_format(fmt, options)
-    valid_format_rx = options.map { |fmt| fmt.sub(/^(.)(.*)$/, '^\1(\2)?$') }
+    valid_format_rx = options.map { |format| format.sub(/^(.)(.*)$/, '^\1(\2)?$') }
     valid_format = false
     valid_format_rx.each_with_index do |rx, i|
       cmp = Regexp.new(rx, 'i')
       next unless fmt =~ cmp
+
       valid_format = options[i]
       break
     end
-    return valid_format
+    valid_format
   end
 
   def bookmark_for(url)
@@ -218,9 +215,9 @@ class Hooker
           return true
         end tell
       APPLESCRIPT`
-      return "Hook removed between #{source} and #{target}"
+      "Hook removed between #{source} and #{target}"
     else
-      raise "Invalid number of URLs or files specified"
+      raise 'Invalid number of URLs or files specified'
 
     end
   end
@@ -228,9 +225,7 @@ class Hooker
   def link_all(args)
     args.each do |file|
       source = file.valid_hook
-      link_to = args.dup.map(&:valid_url).reject { |url|
-        url == source
-      }
+      link_to = args.dup.map(&:valid_url).reject { |url| url == source }
       link_to.each do |url|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
