@@ -66,18 +66,3 @@ You can open a hooked file or URL by running `hook select file1.md`. This will d
 
 You can also open a file in the Hook GUI using `hook open file1.md`.
 
-### Changelog
-
-#### 0.0.5
-
-- `hook from APP_NAME` command
-- General code cleanup
-
-#### 0.0.4
-
-- Fix "conversion of nil into string" error
-
-#### 0.0.3
-
-- Fix to handle all url types, not just hook: and http:
-
