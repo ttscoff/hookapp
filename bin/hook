@@ -17,14 +17,6 @@ class App
 
   hooker = nil
 
-  # desc 'Describe some switch here'
-  # switch [:s,:switch]
-
-  # desc 'Describe some flag here'
-  # default_value 'the default'
-  # arg_name 'The name of the argument'
-  # flag [:f,:flagname]
-
   desc 'List hooks on a file or url'
   arg_name 'FILE_OR_URL [FILE_OR_URL...]'
   command %i[list ls] do |c|
@@ -81,11 +73,35 @@ class App
   arg_name 'FILE_OR_URL'
   command %i[clip] do |c|
     c.desc 'Copy as Markdown'
-    c.switch %i[m markdown]
+    c.switch %i[m markdown], { negatable: false, default_value: false }
+
+    c.desc 'Copy from application'
+    c.flag %i[a app], { arg_name: 'APP_NAME' }
 
     c.action do |_global_options, options, args|
-      result = hooker.copy_bookmark(args[0], { markdown: options[:m] })
-      puts result
+      raise 'Wrong number of arguments. Requires a path/url or -a APP_NAME' if args.length != 1 && !options[:a]
+
+      if options[:a]
+        puts hooker.bookmark_from_app(options[:a], { copy: true, markdown: options[:m] })
+      else
+        puts hooker.clip_bookmark(args[0], { markdown: options[:m] })
+      end
+    end
+  end
+
+  desc 'Get a Hook URL for the frontmost window of an app'
+  arg_name 'APPLICATION_NAME'
+  command %i[from] do |c|
+    c.desc 'Output as Markdown'
+    c.switch %i[m markdown], { negatable: false, default_value: false }
+
+    c.desc 'Copy to clipboard'
+    c.switch %i[c copy], { negatable: false, default_value: false }
+
+    c.action do |_global_options, options, args|
+      raise "Wrong number of arguments (1 expected, #{args.length} given)" if args.length != 1
+
+      puts hooker.bookmark_from_app(args[0], { copy: options[:c], markdown: options[:m] })
     end
   end
 

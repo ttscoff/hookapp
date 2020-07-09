@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hookapp (0.0.3)
+    hookapp (0.0.4)
       gli (= 2.19.0)
 
 GEM

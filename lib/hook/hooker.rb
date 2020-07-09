@@ -29,6 +29,26 @@ class String
   def valid_hook!
     replace valid_hook
   end
+
+  # Capitalize only if no uppercase
+  def cap
+    unless self =~ /[A-Z]/
+      capitalize
+    else
+      self
+    end
+  end
+
+  def cap!
+    replace cap
+  end
+
+  def clip
+    res = `/bin/echo -n #{Shellwords.escape(self)} | pbcopy`.strip
+    raise "Failed to copy to clipboard" unless res.empty?
+
+    true
+  end
 end
 
 # Hook.app CLI interface
@@ -85,15 +105,39 @@ class Hooker
     hooks.split_hooks
   end
 
-  def copy_bookmark(url, opts)
+  def bookmark_from_app(app, opts)
+    mark = `osascript <<'APPLESCRIPT'
+      tell application "System Events" to set front_app to name of first application process whose frontmost is true
+      tell application "#{app}" to activate
+      delay 2
+      tell application "Hook"
+        set _hook to (bookmark from active window)
+        set _output to (title of _hook & "||" & address of _hook & "||" & path of _hook)
+      end tell
+      tell application front_app to activate
+      return _output
+    APPLESCRIPT`.strip.split_hook
+    title = mark[:name].empty? ? "#{app.cap} link" : mark[:name]
+    output = opts[:markdown] ? "[#{title}](#{mark[:url]})" : mark[:url]
+
+    if opts[:copy]
+      "Copied Markdown link for '#{title}' to clipboard" if output.clip
+    else
+      output
+    end
+  end
+
+  def clip_bookmark(url, opts)
     mark = bookmark_for(url)
-    output = if opts[:markdown]
-               "[#{mark[:name]}](#{mark[:url]})"
-             else
-               mark[:url]
-             end
-    `/bin/echo -n #{Shellwords.escape(output)} | pbcopy`
-    %(Copied #{opts[:markdown] ? 'Markdown link' : 'Hook URL'} for '#{mark[:name]}' to clipboard)
+    copy_bookmark(mark[:name], mark[:url], opts)
+  end
+
+  def copy_bookmark(title, url, opts)
+    raise "No URL found" if url.empty?
+    title = title.empty? ? 'No title' : mark[:name]
+    output = opts[:markdown] ? "[#{title}](#{url})" : url
+    output.clip
+    %(Copied #{opts[:markdown] ? 'Markdown link' : 'Hook URL'} for '#{title}' to clipboard)
   end
 
   def select_hook(marks)
@@ -103,12 +147,9 @@ class Hooker
     end
     STDERR.print 'Open which bookmark: '
     sel = STDIN.gets.strip.to_i
-    if sel.positive? && sel <= marks.length
-      marks[sel - 1]
-    else
-      warn 'Invalid selection'
-      Process.exit 1
-    end
+    raise 'Invalid selection' unless sel.positive? && sel <= marks.length
+
+    marks[sel - 1]
   end
 
   def open_gui(url)
