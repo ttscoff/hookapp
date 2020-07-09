@@ -18,14 +18,14 @@ class String
   def valid_hook
     if File.exist?(self)
       File.expand_path(self)
-    elsif self =~ /^(hook|http)/
+    elsif self =~ /\S+:\/\//
       self
     else
       if self =~ /^\[.*?\]\((.*?)\)$/
         mdlink = $1
         mdlink.valid_hook
       else
-        false
+        nil
       end
     end
   end
