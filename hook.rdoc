@@ -1,6 +1,6 @@
 == hook - CLI interface for Hook.app (macOS)
 
-v0.0.2
+v0.0.4
 
 === Global Options
 === --help
@@ -19,13 +19,35 @@ Copy Hook URL for file/url to clipboard
 
 
 ===== Options
-===== -m|--[no-]markdown
+===== -a|--app APP_NAME
+
+Copy from application
+
+[Default Value] None
+
+
+===== -m|--markdown
 Copy as Markdown
 
 
 
 ==== Command: <tt>clone|cp  SOURCE TARGET</tt>
 Clone all hooks from one file or url onto another
+
+
+==== Command: <tt>from  APPLICATION_NAME</tt>
+Get a Hook URL for the frontmost window of an app
+
+
+===== Options
+===== -c|--copy
+Copy to clipboard
+
+
+
+===== -m|--markdown
+Output as Markdown
+
 
 
 ==== Command: <tt>help  command</tt>
@@ -38,7 +60,7 @@ List commands one per line, to assist with shell completion
 
 
 
-==== Command: <tt>link|ln  SOURCE [SOURCE, ...] TARGET</tt>
+==== Command: <tt>link|ln  SOURCE [SOURCE...] TARGET</tt>
 Create bidirectional hooks between two or more files/urls
 
 
@@ -53,7 +75,7 @@ Paste URL from clipboard
 
 
 
-==== Command: <tt>list|ls  FILE_OR_URL [FILE_OR_URL, ...]</tt>
+==== Command: <tt>list|ls  FILE_OR_URL [FILE_OR_URL...]</tt>
 List hooks on a file or url
 
 
