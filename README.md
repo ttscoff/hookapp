@@ -28,6 +28,7 @@ Run `hook help` for usage:
     COMMANDS
         clip       - Copy Hook URL for file/url to clipboard
         clone, cp  - Clone all hooks from one file or url onto another
+        from       - Get a Hook URL for the frontmost window of an app
         help       - Shows a list of commands or help for one command
         link, ln   - Create bidirectional hooks between two or more files/urls
         list, ls   - List hooks on a file or url
@@ -66,6 +67,11 @@ You can open a hooked file or URL by running `hook select file1.md`. This will d
 You can also open a file in the Hook GUI using `hook open file1.md`.
 
 ### Changelog
+
+#### 0.0.5
+
+- `hook from APP_NAME` command
+- General code cleanup
 
 #### 0.0.4
 
