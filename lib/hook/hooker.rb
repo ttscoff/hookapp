@@ -134,7 +134,7 @@ class Hooker
 
   def copy_bookmark(title, url, opts)
     raise "No URL found" if url.empty?
-    title = title.empty? ? 'No title' : mark[:name]
+    title = title.empty? ? 'No title' : title
     output = opts[:markdown] ? "[#{title}](#{url})" : url
     output.clip
     %(Copied #{opts[:markdown] ? 'Markdown link' : 'Hook URL'} for '#{title}' to clipboard)

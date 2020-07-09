@@ -10,7 +10,7 @@ If you're on a stock Ruby install (i.e. have never installed `rvm` or `rbenv`), 
 
 ## Usage
 
-Run `hook help` for usage:
+Run `hook help` for usage.
 
 	NAME
 	    hook - CLI interface for Hook.app (macOS)
@@ -26,8 +26,8 @@ Run `hook help` for usage:
 	    --version - Display the program version
 
     COMMANDS
-        clip       - Copy Hook URL for file/url to clipboard
-        clone, cp  - Clone all hooks from one file or url onto another
+        clip, cp   - Copy Hook URL for file/url to clipboard
+        clone      - Clone all hooks from one file or url onto another
         from       - Get a Hook URL for the frontmost window of an app
         help       - Shows a list of commands or help for one command
         link, ln   - Create bidirectional hooks between two or more files/urls
@@ -44,9 +44,9 @@ Run `hook help COMMAND` on any of the commands for more details.
 
 The `link` command always creates bidirectional hooks. Give it two or more files or urls and it will create links between them. By default it links all files to the last file in the list. Add the `--all` flag to link all files to every other file in the list. This can be abbreviated as `hook ln -a file1.md file2.pdf "https://brettterpstra.com"`.
 
-Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hook URL to the clipboard, and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
+Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hook URL to the clipboard (aliased as `cp`), and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
 
-You can also clone all of the links on one file to another, great for adding a new file to a group that's fully crosslinked. Just use `hook clone file1.md file2.pdf`. This command is abbreviated as `cp`.
+You can also clone all of the links on one file to another, great for adding a new file to a group that's fully crosslinked. Just use `hook clone file1.md file2.pdf`.
 
 ### Listing hooks
 

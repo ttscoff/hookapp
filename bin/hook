@@ -71,7 +71,7 @@ class App
 
   desc 'Copy Hook URL for file/url to clipboard'
   arg_name 'FILE_OR_URL'
-  command %i[clip] do |c|
+  command %i[clip cp] do |c|
     c.desc 'Copy as Markdown'
     c.switch %i[m markdown], { negatable: false, default_value: false }
 
@@ -119,7 +119,7 @@ class App
 
   desc 'Clone all hooks from one file or url onto another'
   arg_name 'SOURCE TARGET'
-  command %i[clone cp] do |c|
+  command %i[clone] do |c|
     c.action do |_global_options, _options, args|
       raise "Wrong number of arguments. Two file paths or urls required (#{args.length} given)" if args.length != 2
 

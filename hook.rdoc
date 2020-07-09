@@ -1,6 +1,6 @@
 == hook - CLI interface for Hook.app (macOS)
 
-v0.0.4
+v0.0.5
 
 === Global Options
 === --help
@@ -14,7 +14,7 @@ Display the program version
 
 
 === Commands
-==== Command: <tt>clip  FILE_OR_URL</tt>
+==== Command: <tt>clip|cp  FILE_OR_URL</tt>
 Copy Hook URL for file/url to clipboard
 
 
@@ -31,7 +31,7 @@ Copy as Markdown
 
 
 
-==== Command: <tt>clone|cp  SOURCE TARGET</tt>
+==== Command: <tt>clone  SOURCE TARGET</tt>
 Clone all hooks from one file or url onto another
 
 

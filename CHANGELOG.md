@@ -1,3 +1,8 @@
+#### 0.0.6
+
+- Fix missing variable in clipboard functions
+- Mv `cp` alias to mean `clip` instead of `clone`
+
 #### 0.0.5
 
 - `hook from APP_NAME` command
