@@ -266,7 +266,7 @@ class Hooker
   def link_all(args)
     args.each do |file|
       source = file.valid_hook
-      link_to = args.dup.map(&:valid_url).reject { |url| url == source }
+      link_to = args.dup.map(&:valid_hook).reject { |url| url == source }
       link_to.each do |url|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
