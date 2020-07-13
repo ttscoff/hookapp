@@ -154,7 +154,7 @@ class App
     # chosen command
     # Use skips_pre before a command to skip this block
     # on that command only
-    hooker = Hooker.new(global)
+    hooker = Hooker.new
     true
   end
 

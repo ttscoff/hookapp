@@ -15,8 +15,8 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options << '--title' << 'hook' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'hook'
-  s.add_development_dependency('rake')
-  s.add_development_dependency('rdoc')
-  s.add_development_dependency('aruba')
+  s.add_development_dependency('rake','~> 13.0.1')
+  s.add_development_dependency('rdoc','~> 6.1.2')
+  s.add_development_dependency('aruba','~> 0.14.14')
   s.add_runtime_dependency('gli','2.19.0')
 end
