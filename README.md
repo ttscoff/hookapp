@@ -26,15 +26,17 @@ Run `hook help` for usage.
 	    --version - Display the program version
 
     COMMANDS
-        clip, cp   - Copy Hook URL for file/url to clipboard
-        clone      - Clone all hooks from one file or url onto another
-        from       - Get a Hook URL for the frontmost window of an app
-        help       - Shows a list of commands or help for one command
-        link, ln   - Create bidirectional hooks between two or more files/urls
-        list, ls   - List hooks on a file or url
-        open, gui  - Open the specified file or url in Hook GUI
-        remove, rm - Remove a hook between two files/urls
-        select     - Select from hooks on a file/url and open in default application
+        clip, cp     - Copy Hook URL for file/url to clipboard
+        clone        - Clone all hooks from one file or url onto another
+        find, search - Search bookmarks
+        from         - Get a Hook URL for the frontmost window of an app
+        help         - Shows a list of commands or help for one command
+        link, ln     - Create bidirectional hooks between two or more files/urls
+        list, ls     - List hooks on a file or url
+        open, gui    - Open the specified file or url in Hook GUI
+        remove, rm   - Remove a hook between two files/urls
+        select       - Select from hooks on a file/url and open in default  
+                       application
 
 Run `hook help COMMAND` on any of the commands for more details.
 
@@ -66,3 +68,6 @@ You can open a hooked file or URL by running `hook select file1.md`. This will d
 
 You can also open a file in the Hook GUI using `hook open file1.md`.
 
+### Searching hooks
+
+Use `hook find` (or `hook search`) and a search string to find bookmarks containing that string in the title, path, or url. Use `hook find -n` to search bookmark names only. All of the options from `hook ls`/`hook list` (output format, files only, null separator, etc.) work with `find`/`search`. See `hook help find` for details.
