@@ -43,6 +43,36 @@ class App
     end
   end
 
+  desc 'Search bookmarks'
+  arg_name 'SEARCH_STRING'
+  command %i[find search] do |c|
+    c.desc 'Output only bookmarks with file paths (exclude e.g. emails)'
+    c.switch %i[f files_only], { negatable: false, default_value: false }
+
+    c.desc 'Separate results with NULL separator, only applies with "paths" output for single file argument'
+    c.switch %i[null], { negatable: false, default_value: false }
+
+    valid_formats = %w[hooks paths markdown verbose]
+    fmt_list = valid_formats.map { |fmt| fmt.sub(/^(.)(.*?)$/, '(\1)\2') }.join(', ')
+    c.desc "Output format [#{fmt_list}]"
+    c.flag %i[o output_format], { arg_name: 'format', default_value: 'paths' }
+
+    c.desc "Search only bookmark names"
+    c.switch %i[n names_only], { negatable: false, default_value: false }
+
+    c.action do |_global_options, options, args|
+      valid_format = hooker.validate_format(options[:o], valid_formats)
+      raise 'Invalid output format' unless valid_format
+
+      result = hooker.search_bookmarks(args.join(" "), { files_only: options[:f],
+                                               format: valid_format,
+                                               null_separator: options[:null],
+                                               names_only: options[:n] })
+
+      puts result
+    end
+  end
+
   desc 'Create bidirectional hooks between two or more files/urls'
   arg_name 'SOURCE [SOURCE...] TARGET'
   command %i[link ln] do |c|
@@ -112,7 +142,7 @@ class App
     c.switch %i[a all]
 
     c.action do |_global_options, options, args|
-      result = hooker.delete_hooks(args, { all: options[:r] })
+      result = hooker.delete_hooks(args, { all: options[:a] })
       puts result
     end
   end

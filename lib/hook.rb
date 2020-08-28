@@ -1,5 +1,6 @@
-require 'hook/version.rb'
+# frozen_string_literal: true
 
+require 'hook/version.rb'
 require 'shellwords'
 require 'cgi'
 require 'hook/string.rb'

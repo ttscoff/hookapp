@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
+# Hook.app functions
 module HookApp
+  # Check if fmt fully matches or matches the first
+  # character of available options
+  # return full valid format or nil
   def validate_format(fmt, options)
     valid_format_rx = options.map { |format| format.sub(/^(.)(.*)$/, '^\1(\2)?$') }
-    valid_format = false
+    valid_format = nil
     valid_format_rx.each_with_index do |rx, i|
       cmp = Regexp.new(rx, 'i')
       next unless fmt =~ cmp
@@ -18,8 +24,8 @@ module HookApp
 
     mark = `osascript <<'APPLESCRIPT'
       tell application "Hook"
-        set _hook to bookmark from URL "#{url}"
-        return title of _hook & "||" & address of _hook & "||" & path of _hook
+        set _hook to make bookmark with data "#{url}"
+        return name of _hook & "||" & address of _hook & "||" & path of _hook
       end tell
     APPLESCRIPT`.strip
     mark.split_hook
@@ -31,12 +37,11 @@ module HookApp
 
     hooks = `osascript <<'APPLESCRIPT'
       tell application "Hook"
-        set _mark to bookmark from URL "#{url}"
-        if _mark is {} then return ""
-        set _hooks to bookmarks hooked to _mark
+        set _mark to make bookmark with data "#{url}"
+        set _hooks to hooked bookmarks of _mark
         set _out to {}
         repeat with _hook in _hooks
-          set _out to _out & (title of _hook & "||" & address of _hook & "||" & path of _hook)
+          set _out to _out & (name of _hook & "||" & address of _hook & "||" & path of _hook)
         end repeat
         set {astid, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "^^"}
         set _output to _out as string
@@ -54,7 +59,7 @@ module HookApp
       delay 2
       tell application "Hook"
         set _hook to (bookmark from active window)
-        set _output to (title of _hook & "||" & address of _hook & "||" & path of _hook)
+        set _output to (name of _hook & "||" & address of _hook & "||" & path of _hook)
       end tell
       tell application front_app to activate
       return _output
@@ -66,6 +71,58 @@ module HookApp
       "Copied Markdown link for '#{title}' to clipboard" if output.clip
     else
       output
+    end
+  end
+
+  def search_name(search)
+    `osascript <<'APPLESCRIPT'
+      set searchString to "#{search.strip}"
+      tell application "Hook"
+        set _marks to every bookmark whose name contains searchString
+        set _out to {}
+        repeat with _hook in _marks
+          set _out to _out & (name of _hook & "||" & address of _hook & "||" & path of _hook)
+        end repeat
+        set {astid, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "^^"}
+        set _output to _out as string
+        set AppleScript's text item delimiters to astid
+        return _output
+      end tell
+    APPLESCRIPT`.strip.split_hooks
+  end
+
+  def search_path_or_address(search)
+    `osascript <<'APPLESCRIPT'
+      set searchString to "#{search.strip}"
+      tell application "Hook"
+        set _marks to every bookmark whose path contains searchString or address contains searchString
+        set _out to {}
+        repeat with _hook in _marks
+          set _out to _out & (name of _hook & "||" & address of _hook & "||" & path of _hook)
+        end repeat
+        set {astid, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "^^"}
+        set _output to _out as string
+        set AppleScript's text item delimiters to astid
+        return _output
+      end tell
+    APPLESCRIPT`.strip.split_hooks
+  end
+
+  def search_bookmarks(search, opts)
+    result = search_name(search)
+    unless opts[:names_only]
+      more_results = search_path_or_address(search)
+      result = result.concat(more_results).uniq
+    end
+
+    separator = opts[:format] == 'paths' && opts[:null_separator] ? "\0" : "\n"
+
+    output = output_array(result, opts)
+
+    if opts[:format] =~ /^v/
+      "Search results for: #{search}\n---------\n" + output.join("\n")
+    else
+      output.join(separator)
     end
   end
 
@@ -97,7 +154,7 @@ module HookApp
   def open_gui(url)
     `osascript <<'APPLESCRIPT'
     tell application "Hook"
-      set _mark to bookmark from URL "#{url.valid_hook}"
+      set _mark to make bookmark with data "#{url.valid_hook}"
       invoke on _mark
     end tell
     APPLESCRIPT`
@@ -125,9 +182,9 @@ module HookApp
       puts "Linking #{file} and #{target}..."
       `osascript <<'APPLESCRIPT'
         tell application "Hook"
-          set _mark1 to bookmark from URL "#{file}"
-          set _mark2 to bookmark from URL "#{target}"
-          hook together _mark1 and _mark2
+          set _mark1 to make bookmark with data "#{file}"
+          set _mark2 to make bookmark with data "#{target}"
+          hook _mark1 and _mark2
           return true
         end tell
       APPLESCRIPT`
@@ -144,9 +201,9 @@ module HookApp
       hooks.each do |hook|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
-            set _mark1 to bookmark from URL "#{hook[:url]}"
-            set _mark2 to bookmark from URL "#{target}"
-            hook together _mark1 and _mark2
+            set _mark1 to make bookmark with data "#{hook[:url]}"
+            set _mark2 to make bookmark with data "#{target}"
+            hook _mark1 and _mark2
             return true
           end tell
         APPLESCRIPT`
@@ -164,9 +221,9 @@ module HookApp
       get_hooks(url).each do |hook|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
-            set _mark1 to bookmark from URL "#{hook[:url]}"
-            set _mark2 to bookmark from URL "#{url}"
-            remove hook between _mark1 and _mark2
+            set _mark1 to make bookmark with data "#{hook[:url]}"
+            set _mark2 to make bookmark with data "#{url}"
+            unhook _mark1 and _mark2
             return true
           end tell
         APPLESCRIPT`
@@ -192,9 +249,9 @@ module HookApp
       target = urls[1]
       `osascript <<'APPLESCRIPT'
         tell application "Hook"
-          set _mark1 to bookmark from URL "#{source}"
-          set _mark2 to bookmark from URL "#{target}"
-          remove hook between _mark1 and _mark2
+          set _mark1 to make bookmark with data "#{source}"
+          set _mark2 to make bookmark with data "#{target}"
+          unhook _mark1 and _mark2
           return true
         end tell
       APPLESCRIPT`
@@ -212,9 +269,9 @@ module HookApp
       link_to.each do |url|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
-            set _mark1 to bookmark from URL "#{source}"
-            set _mark2 to bookmark from URL "#{url}"
-            hook together _mark1 and _mark2
+            set _mark1 to make bookmark with data "#{source}"
+            set _mark2 to make bookmark with data "#{url}"
+            hook _mark1 and _mark2
             return true
           end tell
         APPLESCRIPT`
@@ -248,32 +305,7 @@ module HookApp
 
       hooks_arr = get_hooks(url)
 
-      if !hooks_arr.empty?
-        hooks_arr.reject! { |h| h[:path].nil? || h[:path] == '' } if opts[:files_only]
-
-        output = []
-
-        case opts[:format]
-        when /^m/
-          hooks_arr.each do |h|
-            output.push("- [#{h[:name]}](#{h[:url]})")
-          end
-        when /^p/
-          hooks_arr.each do |h|
-            output.push(h[:path].nil? ? h[:url] : h[:path])
-          end
-        when /^h/
-          hooks_arr.each do |h|
-            output.push(h[:url])
-          end
-        else
-          hooks_arr.each do |h|
-            output.push("Title: #{h[:name]}\nPath: #{h[:path]}\nAddress: #{h[:url]}\n---------------------")
-          end
-        end
-      else
-        output = ['No bookmarks']
-      end
+      output = output_array(hooks_arr, opts)
       result.push({ file: filename, links: output.join(separator) })
     end
 
@@ -288,4 +320,42 @@ module HookApp
     end
     result.join(separator)
   end
+
+  def output_array(hooks_arr, opts)
+    if !hooks_arr.empty?
+      hooks_arr.reject! { |h| h[:path].nil? || h[:path] == '' } if opts[:files_only]
+
+      output = []
+
+      case opts[:format]
+      when /^m/
+        hooks_arr.each do |h|
+          if h[:name].empty?
+            title = h[:url]
+          else
+            title = h[:name]
+          end
+          output.push("- [#{title}](#{h[:url]})")
+        end
+      when /^p/
+        hooks_arr.each do |h|
+          output.push(h[:path].nil? ? h[:url] : h[:path])
+        end
+      when /^h/
+        hooks_arr.each do |h|
+          output.push(h[:url])
+        end
+      else
+        hooks_arr.each do |h|
+          output.push("Title: #{h[:name]}\nPath: #{h[:path]}\nAddress: #{h[:url]}\n---------------------")
+        end
+      end
+    else
+      output = ['No bookmarks']
+    end
+
+    output
+  end
 end
+
+

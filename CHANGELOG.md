@@ -1,3 +1,8 @@
+#### 2.0.0
+
+- Revamped to use Hook 2.0 AppleScript syntax
+- Added `find` command to search bookmarks
+
 #### 0.0.6
 
 - Fix missing variable in clipboard functions

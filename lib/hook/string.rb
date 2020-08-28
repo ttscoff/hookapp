@@ -1,11 +1,21 @@
+# frozen_string_literal: true
+
 # String helpers
 class String
+  def nil_if_missing
+    if self =~ /missing value/
+      return nil
+    else
+      self
+    end
+  end
+
   def split_hook
     elements = split(/\|\|/)
     {
-      name: elements[0],
-      url: elements[1],
-      path: elements[2]
+      name: elements[0].nil_if_missing,
+      url: elements[1].nil_if_missing,
+      path: elements[2].nil_if_missing
     }
   end
 
