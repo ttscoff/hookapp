@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'shellwords'
-
+require 'uri'
 # Hook.app functions
 module HookApp
   # Create a single regex for validation of an
@@ -217,22 +217,35 @@ module HookApp
         return false
       end
 
-      "#{id}\t#{mark[:path]}\t#{mark[:url]}"
+      if mark[:path]
+        loc = File.dirname(mark[:path])
+      elsif mark[:url]
+        url = URI.parse(mark[:url])
+        id = mark[:url]
+        loc = url.scheme + " - " + url.hostname
+      else
+        loc = ""
+      end
+
+      "#{id}\t#{mark[:path]}\t#{mark[:url]}\t#{loc}"
     }.delete_if { |mark| !mark }
 
     raise "Error processing available hooks" if options.empty?
 
     args = ['--layout=reverse-list',
-            '--prompt="esc: cancel, tab: multi-select, return: open > "',
+            '--header="esc: cancel, tab: multi-select, return: open > "',
+            '--prompt="  Select hooks > "',
             '--multi',
             '--tabstop=4',
             '--delimiter="\t"',
-            '--with-nth=1',
+            '--with-nth=1,4',
             '--height=60%',
             '--min-height=10'
           ]
 
-    sel = `echo #{Shellwords.escape(options.join("\n"))} | lib/helpers/fuzzyfilefinder #{args.join(' ')}`.chomp
+    fzf = File.join(File.dirname(__FILE__), '../helpers/fuzzyfilefinder')
+
+    sel = `echo #{Shellwords.escape(options.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
     res = sel.split(/\n/).map { |s|
       ps = s.split(/\t/)
       { name: ps[0], path: ps[1], url: ps[2] }

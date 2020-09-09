@@ -1,9 +1,9 @@
-Wed, 09 Sep 2020 10:26:06 -0500
+Wed, 09 Sep 2020 10:31:34 -0500
 README.rdoc	Tue, 07 Jul 2020 16:57:07 -0500
 lib/hook.rb	Wed, 09 Sep 2020 05:37:30 -0500
-lib/hook/hookapp.rb	Wed, 09 Sep 2020 10:17:02 -0500
+lib/hook/hookapp.rb	Wed, 09 Sep 2020 10:31:09 -0500
 lib/hook/hooker.rb	Wed, 09 Sep 2020 04:52:29 -0500
 lib/hook/markdown_document_listener.rb	Wed, 09 Sep 2020 10:24:43 -0500
 lib/hook/string.rb	Fri, 28 Aug 2020 13:00:21 -0500
-lib/hook/version.rb	Wed, 09 Sep 2020 03:55:32 -0500
+lib/hook/version.rb	Wed, 09 Sep 2020 10:27:29 -0500
 bin/hook	Wed, 09 Sep 2020 10:23:01 -0500

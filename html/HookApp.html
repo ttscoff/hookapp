@@ -345,7 +345,7 @@
 
           
           <div class="method-source-code" id="clone_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 301</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_hooks</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">valid_hook</span>
   <span class="ruby-identifier">source</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">valid_hook</span>
@@ -433,7 +433,7 @@
 
           
           <div class="method-source-code" id="delete_all_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 324</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 326</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Are you sure you want to delete ALL hooks from #{url} (y/N)? &quot;</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-constant">STDIN</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">strip</span>
@@ -480,7 +480,7 @@
 
           
           <div class="method-source-code" id="delete_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 343</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 345</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_hooks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">urls</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:valid_hook</span>).<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">url</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span> }
   <span class="ruby-identifier">output</span> = []
@@ -626,7 +626,7 @@
 
           
           <div class="method-source-code" id="link_all-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 373</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 375</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_all</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">source</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">valid_hook</span>
@@ -673,7 +673,7 @@
 
           
           <div class="method-source-code" id="link_files-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 278</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_files</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">target</span>.<span class="ruby-identifier">valid_hook!</span>
@@ -724,7 +724,7 @@
 
           
           <div class="method-source-code" id="linked_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 392</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 394</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linked_bookmarks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">result</span> = []
 
@@ -799,7 +799,7 @@
 
           
           <div class="method-source-code" id="open_gui-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 249</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_gui</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
   tell application &quot;Hook&quot;
@@ -843,7 +843,7 @@
 
           
           <div class="method-source-code" id="open_linked-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 265</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 267</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_linked</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">empty?</span>
@@ -884,7 +884,7 @@
 
           
           <div class="method-source-code" id="output_array-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 439</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 441</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_array</span>(<span class="ruby-identifier">hooks_arr</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:files_only</span>]
@@ -1130,7 +1130,9 @@
           <span class="ruby-string">&#39;--min-height=10&#39;</span>
         ]
 
-  <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(options.join(&quot;\n&quot;))} | lib/helpers/fuzzyfilefinder #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-identifier">fzf</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-string">&#39;../helpers/fuzzyfilefinder&#39;</span>)
+
+  <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(options.join(&quot;\n&quot;))} | &#39;#{fzf}&#39; #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">sel</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">ps</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
     { <span class="ruby-value">name:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">0</span>], <span class="ruby-value">path:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">1</span>], <span class="ruby-value">url:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">2</span>] }

@@ -29,6 +29,10 @@ Run `hook list` with no file/url argument to list all bookmarks.}
 
   arg_name 'FILE_OR_URL [FILE_OR_URL...]'
   command %i[list ls] do |c|
+    c.desc 'Generate a menu to select hook(s) for opening'
+    c.long_desc 'This option is a shortcut to `hook select` and overrides any other arguments.'
+    c.switch %i[s select]
+
     c.desc 'Output only bookmarks with file paths (exclude e.g. emails)'
     c.switch %i[f files_only], { negatable: false, default_value: false }
 
@@ -41,6 +45,9 @@ Run `hook list` with no file/url argument to list all bookmarks.}
     c.flag %i[o output_format], { arg_name: 'format', default_value: 'paths' }
 
     c.action do |_global_options, options, args|
+      if options[:s]
+        return hooker.open_linked(args[0])
+      end
       valid_format = hooker.validate_format(options[:o], valid_formats)
       exit_now!("Invalid output format: \"#{options[:o]}\"", 6) unless valid_format
 
