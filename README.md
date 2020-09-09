@@ -1,6 +1,10 @@
-# hookapp
+# Hook CLI
 
-A CLI for Hook.app on macOS. 
+CLI interface for Hook.app (macOS)
+
+> Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+
+*v2.0.2*
 
 ## Installation
 
@@ -12,31 +16,35 @@ If you're on a stock Ruby install (i.e. have never installed `rvm` or `rbenv`), 
 
 Run `hook help` for usage.
 
-	NAME
-	    hook - CLI interface for Hook.app (macOS)
+```nohighlight
+NAME
+    hook - CLI interface for Hook.app (macOS)
 
-	SYNOPSIS
-	    hook [global options] command [command options] [arguments...]
+SYNOPSIS
+    hook [global options] command [command options] [arguments...]
 
-	VERSION
-	    0.0.1
+VERSION
+    0.0.1
 
-	GLOBAL OPTIONS
-	    --help    - Show this message
-	    --version - Display the program version
+GLOBAL OPTIONS
+    --help    - Show this message
+    --version - Display the program version
 
-    COMMANDS
-        clip, cp     - Copy Hook URL for file/url to clipboard
-        clone        - Clone all hooks from one file or url onto another
-        find, search - Search bookmarks
-        from         - Get a Hook URL for the frontmost window of an app
-        help         - Shows a list of commands or help for one command
-        link, ln     - Create bidirectional hooks between two or more files/urls
-        list, ls     - List hooks on a file or url
-        open, gui    - Open the specified file or url in Hook GUI
-        remove, rm   - Remove a hook between two files/urls
-        select       - Select from hooks on a file/url and open in default  
-                       application
+COMMANDS
+    clip, cp     - Copy Hook URL for file/url to clipboard
+    clone        - Clone all hooks from one file or url onto another
+    find, search - Search bookmarks
+    from         - Get a Hook URL for the frontmost window of an app
+    help         - Shows a list of commands or help for one command
+    link, ln     - Create bidirectional hooks between two or more 
+                   files/urls
+    list, ls     - List hooks on a file or url
+    open, gui    - Open the specified file or url in Hook GUI
+    remove, rm   - Remove a hook between two files/urls
+    scripts      - Shell completion examples
+    select       - Select from hooks on a file/url and open in default  
+                   application
+```
 
 Run `hook help COMMAND` on any of the commands for more details.
 
@@ -73,4 +81,222 @@ You can also open a file in the Hook GUI using `hook open file1.md`.
 Use `hook find` (or `hook search`) and a search string to find bookmarks containing that string in the title, path, or url. Use `hook find -n` to search bookmark names only. All of the options from `hook ls`/`hook list` (output format, files only, null separator, etc.) work with `find`/`search`. See `hook help find` for details.
 
 `hook find` with no search string will list all bookmarks. This can be used with the same output options as `hook ls`.
+
+### Shell completion
+
+Use `hook scripts [SHELL]` to output a completion script for your specified shell (currently `bash`, `zsh`, or `fish` are available). The comment at the top of the output will guide you to install and utilize the script.
  
+
+## Global Options
+### `--help`
+
+Show this message
+
+
+### `--version`
+
+Display the program version
+
+
+## Commands
+
+### `$ hook` <mark>`clip|cp`</mark> ` FILE_OR_URL`
+
+*Copy Hook URL for file/url to clipboard*
+
+> Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+> 
+> The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+> or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
+
+#### Options
+##### `-a` | `--app` APP_NAME
+
+Copy from application
+*Default Value:* `None`
+
+> 
+
+##### `-m`|`--markdown`
+
+Copy as Markdown
+
+
+
+* * * * * *
+### `$ hook` <mark>`clone`</mark> ` SOURCE TARGET`
+
+*Clone all hooks from one file or url onto another*
+
+> Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
+
+
+* * * * * *
+### `$ hook` <mark>`find|search`</mark> ` SEARCH_STRING`
+
+*Search bookmarks*
+
+> Search bookmark urls and names for a string and output in specified format (default "paths").
+> 
+> Run `hook find` with no search argument to list all bookmarks.
+
+#### Options
+##### `-o` | `--output_format` format
+
+Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
+*Default Value:* `paths`
+
+> 
+
+##### `-f`|`--files_only`
+
+Output only bookmarks with file paths (exclude e.g. emails)
+
+
+##### `-n`|`--names_only`
+
+Search only bookmark names
+
+
+##### `--null`
+
+Separate results with NULL separator, only applies with "paths" output for single file argument
+
+
+
+* * * * * *
+### `$ hook` <mark>`from`</mark> ` APPLICATION_NAME`
+
+*Get a Hook URL for the frontmost window of an app*
+
+> Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
+> for the active document, note, task, etc., returning a Hook URL.
+> 
+> Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
+
+#### Options
+##### `-c`|`--copy`
+
+Copy to clipboard
+
+
+##### `-m`|`--markdown`
+
+Output as Markdown
+
+
+
+* * * * * *
+### `$ hook` <mark>`help`</mark> ` command`
+
+*Shows a list of commands or help for one command*
+
+> Gets help for the application or its commands. Can also list the commands in a way helpful to creating a bash-style completion function
+
+#### Options
+##### `-c`
+
+List commands one per line, to assist with shell completion
+
+
+
+* * * * * *
+### `$ hook` <mark>`link|ln`</mark> ` SOURCE [SOURCE...] TARGET`
+
+*Create bidirectional hooks between two or more files/urls*
+
+> If two files/urls are provided, links will be bi-directional.
+> If three or more are provided, `link` defaults to creating bi-directional
+> links between each file and the last file in the list. Use `-a` to create
+> bi-directional links between every file in the list.
+> 
+> If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+> to be combined with one or more file/url arguments.
+
+#### Options
+##### `-a`|`--all`
+
+Link every listed file or url to every other
+
+
+##### `-p`|`--paste`
+
+Paste URL from clipboard
+
+
+
+* * * * * *
+### `$ hook` <mark>`list|ls`</mark> ` FILE_OR_URL [FILE_OR_URL...]`
+
+*List hooks on a file or url*
+
+> Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
+> 
+> Run `hook list` with no file/url argument to list all bookmarks.
+
+#### Options
+##### `-o` | `--output_format` format
+
+Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
+*Default Value:* `paths`
+
+> 
+
+##### `-f`|`--files_only`
+
+Output only bookmarks with file paths (exclude e.g. emails)
+
+
+##### `--null`
+
+Separate results with NULL separator, only applies with "paths" output for single file argument
+
+
+
+* * * * * *
+### `$ hook` <mark>`open|gui`</mark> ` FILE_OR_URL`
+
+*Open the specified file or url in Hook GUI*
+
+> Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+
+
+* * * * * *
+### `$ hook` <mark>`remove|rm`</mark> ` ITEM_1 ITEM_2`
+
+*Remove a hook between two files/urls*
+
+> Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
+> 
+> If --all isn't specified, exactly two arguments (Files/URLs) are required.
+
+#### Options
+##### `-a`|`--all`
+
+Remove ALL links on files, requires confirmation
+
+
+
+* * * * * *
+### `$ hook` <mark>`scripts`</mark> ` SHELL`
+
+*Shell completion examples*
+
+> Output completion script example for the specified shell (bash, zsh, fish)
+
+
+* * * * * *
+### `$ hook` <mark>`select`</mark> ` FILE_OR_URL`
+
+*Select from hooks on a file/url and open in default application*
+
+> If the target file/URL has hooked items, a menu will be provided. Selecting a file
+> from this menu will open the item using the default application assigned to the
+> filetype by macOS.
+
+
+* * * * * *
+### [Default Command] help
+
+Documentation generated 2020-09-09 06:56
+

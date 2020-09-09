@@ -157,13 +157,13 @@
 
         <div class="method-description">
           
-          
+          <p>Get all known bookmarks. Return array of bookmark hashes.</p>
           
           
 
           
           <div class="method-source-code" id="all_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 119</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_bookmarks</span>
   <span class="ruby-string">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;Hook&quot;
@@ -202,13 +202,13 @@
 
         <div class="method-description">
           
-          
+          <p>Get a <a href="Hook.html"><code>Hook</code></a> bookmark for file or URL. Return bookmark hash.</p>
           
           
 
           
           <div class="method-source-code" id="bookmark_for-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 29</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
@@ -244,13 +244,13 @@
 
         <div class="method-description">
           
-          
+          <p>Get a bookmark from the foreground document of specified app.</p>
           
           
 
           
           <div class="method-source-code" id="bookmark_from_app-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 63</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_from_app</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;System Events&quot; to set front_app to name of first application process whose frontmost is true
@@ -295,13 +295,13 @@
 
         <div class="method-description">
           
-          
+          <p>Create a bookmark for specified file/url and copy to the clipboard.</p>
           
           
 
           
           <div class="method-source-code" id="clip_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 157</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clip_bookmark</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-identifier">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">copy_bookmark</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>], <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>], <span class="ruby-identifier">opts</span>)
@@ -329,13 +329,13 @@
 
         <div class="method-description">
           
-          
+          <p>Copy all hooks from source file to target file</p>
           
           
 
           
           <div class="method-source-code" id="clone_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 223</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_hooks</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">valid_hook</span>
   <span class="ruby-identifier">source</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">valid_hook</span>
@@ -380,13 +380,13 @@
 
         <div class="method-description">
           
-          
+          <p>Create a bookmark from specified title and url and copy to the clipboard.</p>
           
           
 
           
           <div class="method-source-code" id="copy_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 162</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">copy_bookmark</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;No URL found&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;No title&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>
@@ -417,13 +417,13 @@
 
         <div class="method-description">
           
-          
+          <p>Delete all hooked files/urls from target file</p>
           
           
 
           
           <div class="method-source-code" id="delete_all_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 245</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Are you sure you want to delete ALL hooks from #{url} (y/N)? &quot;</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-constant">STDIN</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">strip</span>
@@ -464,13 +464,13 @@
 
         <div class="method-description">
           
-          
+          <p>Delete hooks between two files/urls</p>
           
           
 
           
           <div class="method-source-code" id="delete_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 263</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_hooks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">urls</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:valid_hook</span>).<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">url</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span> }
   <span class="ruby-identifier">output</span> = []
@@ -522,7 +522,7 @@
 
         <div class="method-description">
           
-          <p>Create a single regex for validation of an array by first char or full match</p>
+          <p>Create a single regex for validation of an array by first char or full match.</p>
           
           
 
@@ -557,13 +557,13 @@
 
         <div class="method-description">
           
-          
+          <p>Get bookmarks hooked to file or URL. Return array of bookmark hashes.</p>
           
           
 
           
           <div class="method-source-code" id="get_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 42</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
@@ -607,13 +607,13 @@
 
         <div class="method-description">
           
-          
+          <p>Create bi-directional links between every file/url in the list of arguments</p>
           
           
 
           
           <div class="method-source-code" id="link_all-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 292</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 310</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_all</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">source</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">valid_hook</span>
@@ -654,13 +654,13 @@
 
         <div class="method-description">
           
-          
+          <p>Link 2 or more files/urls with bi-directional hooks.</p>
           
           
 
           
           <div class="method-source-code" id="link_files-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 201</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_files</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">target</span>.<span class="ruby-identifier">valid_hook!</span>
@@ -705,13 +705,13 @@
 
         <div class="method-description">
           
-          
+          <p>Get a list of all hooks on a file/url.</p>
           
           
 
           
           <div class="method-source-code" id="linked_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 310</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 329</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linked_bookmarks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">result</span> = []
 
@@ -780,13 +780,13 @@
 
         <div class="method-description">
           
-          
+          <p>Open the <a href="Hook.html"><code>Hook</code></a> GUI for browsing/performing actions on a file or url</p>
           
           
 
           
           <div class="method-source-code" id="open_gui-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 182</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_gui</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
   tell application &quot;Hook&quot;
@@ -818,13 +818,13 @@
 
         <div class="method-description">
           
-          
+          <p>Select from a menu of available hooks and open using macOS `open`.</p>
           
           
 
           
           <div class="method-source-code" id="open_linked-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 191</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_linked</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">empty?</span>
@@ -857,13 +857,13 @@
 
         <div class="method-description">
           
-          
+          <p>Output an array of hooks in the given format.</p>
           
           
 
           
           <div class="method-source-code" id="output_array-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 356</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 376</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_array</span>(<span class="ruby-identifier">hooks_arr</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:files_only</span>]
@@ -922,13 +922,13 @@
 
         <div class="method-description">
           
-          
+          <p>Search bookmarks, using both names and addresses unless options contain “:names_only”. Return results as formatted list.</p>
           
           
 
           
           <div class="method-source-code" id="search_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 135</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_bookmarks</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">search_name</span>(<span class="ruby-identifier">search</span>)
@@ -973,13 +973,13 @@
 
         <div class="method-description">
           
-          
+          <p>Search boomark names/titles. Return array of bookmark hashes.</p>
           
           
 
           
           <div class="method-source-code" id="search_name-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 85</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_name</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -1019,13 +1019,13 @@
 
         <div class="method-description">
           
-          
+          <p>Search bookmark paths and addresses. Return array of bookmark hashes.</p>
           
           
 
           
           <div class="method-source-code" id="search_path_or_address-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_path_or_address</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -1065,13 +1065,13 @@
 
         <div class="method-description">
           
-          
+          <p>Generate a menu of available hooks for selecting a hook to operate on.</p>
           
           
 
           
           <div class="method-source-code" id="select_hook-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 170</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_hook</span>(<span class="ruby-identifier">marks</span>)
   <span class="ruby-identifier">intpad</span> = <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
   <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mark</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
@@ -1106,7 +1106,7 @@
 
         <div class="method-description">
           
-          <p>Check if fmt fully matches or matches the first character of available options return full valid format or nil</p>
+          <p>Check if format fully matches or matches the first character of available options. Return full valid format or nil</p>
           
           
 

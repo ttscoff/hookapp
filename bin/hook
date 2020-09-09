@@ -23,9 +23,9 @@ class App
 
   desc 'List hooks on a file or url'
   long_desc %{
-    Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
+Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
 
-    Run `hook list` with no file/url argument to list all bookmarks.}
+Run `hook list` with no file/url argument to list all bookmarks.}
 
   arg_name 'FILE_OR_URL [FILE_OR_URL...]'
   command %i[list ls] do |c|
@@ -57,7 +57,7 @@ class App
   desc 'Shell completion examples'
   valid_shells = %w[bash zsh fish]
   long_desc %{
-    Output completion script example for the specified shell (#{valid_shells.join(', ')})
+Output completion script example for the specified shell (#{valid_shells.join(', ')})
   }
   arg_name 'SHELL'
   command %i[scripts] do |c|
@@ -82,9 +82,10 @@ class App
 
 
   desc 'Search bookmarks'
-  long_desc %{Search bookmark urls and names for a string and output in specified format (default "paths").
+  long_desc %{
+Search bookmark urls and names for a string and output in specified format (default "paths").
 
-    Run `hook find` with no search argument to list all bookmarks.}
+Run `hook find` with no search argument to list all bookmarks.}
   arg_name 'SEARCH_STRING'
   command %i[find search] do |c|
     c.desc 'Output only bookmarks with file paths (exclude e.g. emails)'
@@ -117,13 +118,13 @@ class App
 
   desc 'Create bidirectional hooks between two or more files/urls'
   long_desc %{
-    If two files/urls are provided, links will be bi-directional.
-    If three or more are provided, `link` defaults to creating bi-directional
-    links between each file and the last file in the list. Use `-a` to create
-    bi-directional links between every file in the list.
+If two files/urls are provided, links will be bi-directional.
+If three or more are provided, `link` defaults to creating bi-directional
+links between each file and the last file in the list. Use `-a` to create
+bi-directional links between every file in the list.
 
-    If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
-    to be combined with one or more file/url arguments.
+If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+to be combined with one or more file/url arguments.
   }
   arg_name 'SOURCE [SOURCE...] TARGET'
   command %i[link ln] do |c|
@@ -152,10 +153,10 @@ class App
 
   desc 'Copy Hook URL for file/url to clipboard'
   long_desc %{
-    Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
 
-    The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
-    or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
+The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
   }
   arg_name 'FILE_OR_URL'
   command %i[clip cp] do |c|
@@ -178,10 +179,10 @@ class App
 
   desc 'Get a Hook URL for the frontmost window of an app'
   long_desc %{
-    Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
-    for the active document, note, task, etc., returning a Hook URL.
+Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
+for the active document, note, task, etc., returning a Hook URL.
 
-      Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
+Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
   }
   arg_name 'APPLICATION_NAME'
   command %i[from] do |c|
@@ -200,14 +201,14 @@ class App
 
   desc 'Remove a hook between two files/urls'
   long_desc %{
-    Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
+Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
 
-    If --all isn't specified, exactly two arguments (Files/URLs) are required.
+If --all isn't specified, exactly two arguments (Files/URLs) are required.
   }
   arg_name 'ITEM_1 ITEM_2'
   command %i[remove rm] do |c|
     c.desc 'Remove ALL links on files, requires confirmation'
-    c.switch %i[a all]
+    c.switch %i[a all], { negatable: false, default_value: false }
 
     c.action do |_global_options, options, args|
       result = hooker.delete_hooks(args, { all: options[:a] })
@@ -217,7 +218,7 @@ class App
 
   desc 'Clone all hooks from one file or url onto another'
   long_desc %{
-    Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
+Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
   }
   arg_name 'SOURCE TARGET'
   command %i[clone] do |c|
@@ -231,9 +232,9 @@ class App
 
   desc 'Select from hooks on a file/url and open in default application'
   long_desc %{
-    If the target file/URL has hooked items, a menu will be provided. Selecting a file
-    from this menu will open the item using the default application assigned to the
-    filetype by macOS.
+If the target file/URL has hooked items, a menu will be provided. Selecting a file
+from this menu will open the item using the default application assigned to the
+filetype by macOS.
   }
   arg_name 'FILE_OR_URL'
   command %i[select] do |c|
@@ -246,7 +247,7 @@ class App
 
   desc 'Open the specified file or url in Hook GUI'
   long_desc %{
-    Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
   }
   arg_name 'FILE_OR_URL'
   command %i[open gui] do |c|

@@ -21,8 +21,8 @@ Copy Hook URL for file/url to clipboard
 
 Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
 
-    The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
-    or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
+The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 ===== Options
 ===== -a|--app APP_NAME
 
@@ -45,7 +45,7 @@ Search bookmarks
 
 Search bookmark urls and names for a string and output in specified format (default "paths").
 
-    Run `hook find` with no search argument to list all bookmarks.
+Run `hook find` with no search argument to list all bookmarks.
 ===== Options
 ===== -o|--output_format format
 
@@ -73,9 +73,9 @@ Separate results with NULL separator, only applies with "paths" output for singl
 Get a Hook URL for the frontmost window of an app
 
 Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
-    for the active document, note, task, etc., returning a Hook URL.
+for the active document, note, task, etc., returning a Hook URL.
 
-      Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
+Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 ===== Options
 ===== -c|--copy
 Copy to clipboard
@@ -101,12 +101,12 @@ List commands one per line, to assist with shell completion
 Create bidirectional hooks between two or more files/urls
 
 If two files/urls are provided, links will be bi-directional.
-    If three or more are provided, `link` defaults to creating bi-directional
-    links between each file and the last file in the list. Use `-a` to create
-    bi-directional links between every file in the list.
+If three or more are provided, `link` defaults to creating bi-directional
+links between each file and the last file in the list. Use `-a` to create
+bi-directional links between every file in the list.
 
-    If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
-    to be combined with one or more file/url arguments.
+If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+to be combined with one or more file/url arguments.
 ===== Options
 ===== -a|--all
 Link every listed file or url to every other
@@ -123,7 +123,7 @@ List hooks on a file or url
 
 Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
 
-    Run `hook list` with no file/url argument to list all bookmarks.
+Run `hook list` with no file/url argument to list all bookmarks.
 ===== Options
 ===== -o|--output_format format
 
@@ -151,9 +151,9 @@ Remove a hook between two files/urls
 
 Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
 
-    If --all isn't specified, exactly two arguments (Files/URLs) are required.
+If --all isn't specified, exactly two arguments (Files/URLs) are required.
 ===== Options
-===== -a|--[no-]all
+===== -a|--all
 Remove ALL links on files, requires confirmation
 
 
@@ -166,6 +166,6 @@ Output completion script example for the specified shell (bash, zsh, fish)
 Select from hooks on a file/url and open in default application
 
 If the target file/URL has hooked items, a menu will be provided. Selecting a file
-    from this menu will open the item using the default application assigned to the
-    filetype by macOS.
+from this menu will open the item using the default application assigned to the
+filetype by macOS.
 [Default Command] help

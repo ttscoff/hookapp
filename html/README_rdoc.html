@@ -96,7 +96,7 @@
     <li><a href="#label-Command-3A+open-7Cgui++FILE_OR_URL">Command: <code>open|gui  FILE_OR_URL</code></a>
     <li><a href="#label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">Command: <code>remove|rm  ITEM_1 ITEM_2</code></a>
     <li><a href="#label-Options">Options</a>
-    <li><a href="#label-a-7C--all">-<a href="no-">a|–</a>all</a>
+    <li><a href="#label-a-7C--all">-a|–all</a>
     <li><a href="#label-Command-3A+scripts++SHELL">Command: <code>scripts  SHELL</code></a>
     <li><a href="#label-Command-3A+select++FILE_OR_URL">Command: <code>select  FILE_OR_URL</code></a>
   </ul>
@@ -147,8 +147,7 @@
 
 <p>Creates a bookmark for the specified file or URL and copies its <a href="Hook.html"><code>Hook</code></a> URL to the clipboard.</p>
 
-<pre>The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
-or to paste into another app as a link. Use the -m flag to copy a full Markdown link.</pre>
+<p>The copied <a href="Hook.html"><code>Hook</code></a> URL can be used to link to other files (use `hook link –paste FILE/URL), or to paste into another app as a link. Use the -m flag to copy a full Markdown link.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -176,7 +175,7 @@ or to paste into another app as a link. Use the -m flag to copy a full Markdown 
 
 <p>Search bookmark urls and names for a string and output in specified format (default “paths”).</p>
 
-<pre>Run `hook find` with no search argument to list all bookmarks.</pre>
+<p>Run `hook find` with no search argument to list all bookmarks.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -204,11 +203,9 @@ or to paste into another app as a link. Use the -m flag to copy a full Markdown 
 
 <p>Get a <a href="Hook.html"><code>Hook</code></a> URL for the frontmost window of an app</p>
 
-<p>Specify an application by name (without &#39;.app&#39;) to bring that app to the foreground and create a bookmark</p>
+<p>Specify an application by name (without &#39;.app&#39;) to bring that app to the foreground and create a bookmark for the active document, note, task, etc., returning a <a href="Hook.html"><code>Hook</code></a> URL.</p>
 
-<pre>for the active document, note, task, etc., returning a Hook URL.
-
-  Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.</pre>
+<p>Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -236,14 +233,9 @@ or to paste into another app as a link. Use the -m flag to copy a full Markdown 
 
 <p>Create bidirectional hooks between two or more files/urls</p>
 
-<p>If two files/urls are provided, links will be bi-directional.</p>
+<p>If two files/urls are provided, links will be bi-directional. If three or more are provided, `link` defaults to creating bi-directional links between each file and the last file in the list. Use `-a` to create bi-directional links between every file in the list.</p>
 
-<pre>If three or more are provided, `link` defaults to creating bi-directional
-links between each file and the last file in the list. Use `-a` to create
-bi-directional links between every file in the list.
-
-If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
-to be combined with one or more file/url arguments.</pre>
+<p>If using `–paste`, the URL/hook link in the clipboard will be used as one argument, to be combined with one or more file/url arguments.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -261,7 +253,7 @@ to be combined with one or more file/url arguments.</pre>
 
 <p>Output a list of all hooks attached to given url(s) or file(s) in the specified format (default “paths”).</p>
 
-<pre>Run `hook list` with no file/url argument to list all bookmarks.</pre>
+<p>Run `hook list` with no file/url argument to list all bookmarks.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -293,11 +285,11 @@ to be combined with one or more file/url arguments.</pre>
 
 <p>Remove a hook between two files or URLs. If you use –all, all hooks on a given file will be removed.</p>
 
-<pre>If --all isn&#39;t specified, exactly two arguments (Files/URLs) are required.</pre>
+<p>If –all isn&#39;t specified, exactly two arguments (Files/URLs) are required.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
-<h5 id="label-a-7C--all">-<a href="no-">a|–</a>all<span><a href="#label-a-7C--all">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="label-a-7C--all">-a|–all<span><a href="#label-a-7C--all">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
 <p>Remove ALL links on files, requires confirmation</p>
 
@@ -311,10 +303,7 @@ to be combined with one or more file/url arguments.</pre>
 
 <p>Select from hooks on a file/url and open in default application</p>
 
-<p>If the target file/URL has hooked items, a menu will be provided. Selecting a file</p>
-
-<pre>from this menu will open the item using the default application assigned to the
-filetype by macOS.</pre>
+<p>If the target file/URL has hooked items, a menu will be provided. Selecting a file from this menu will open the item using the default application assigned to the filetype by macOS.</p>
 <dl class="rdoc-list label-list"><dt>Default Command
 <dd>
 <p>help</p>

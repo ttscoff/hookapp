@@ -3,16 +3,16 @@
 # Hook.app functions
 module HookApp
   # Create a single regex for validation of an
-  # array by first char or full match
+  # array by first char or full match.
   def format_regex(options)
     fmt_rx_array = []
     options.map {|fmt| fmt_rx_array.push(fmt.sub(/^(.)(.*?)$/, '\1(\2)?')) }
     Regexp.new("^(#{fmt_rx_array.join('|')})$",'i')
   end
 
-  # Check if fmt fully matches or matches the first
-  # character of available options
-  # return full valid format or nil
+  # Check if format fully matches or matches the first
+  # character of available options.
+  # Return full valid format or nil
   def validate_format(fmt, options)
     valid_format_rx = options.map { |format| format.sub(/^(.)(.*)$/, '^\1(\2)?$') }
     valid_format = nil
@@ -26,6 +26,7 @@ module HookApp
     valid_format
   end
 
+  # Get a Hook bookmark for file or URL. Return bookmark hash.
   def bookmark_for(url)
     url.valid_hook!
     raise "Invalid target: #{url}" unless url
@@ -39,6 +40,7 @@ module HookApp
     mark.split_hook
   end
 
+  # Get bookmarks hooked to file or URL. Return array of bookmark hashes.
   def get_hooks(url)
     url.valid_hook!
     raise "Invalid target: #{url}" unless url
@@ -60,6 +62,7 @@ module HookApp
     hooks.split_hooks
   end
 
+  # Get a bookmark from the foreground document of specified app.
   def bookmark_from_app(app, opts)
     mark = `osascript <<'APPLESCRIPT'
       tell application "System Events" to set front_app to name of first application process whose frontmost is true
@@ -82,6 +85,7 @@ module HookApp
     end
   end
 
+  # Search boomark names/titles. Return array of bookmark hashes.
   def search_name(search)
     `osascript <<'APPLESCRIPT'
       set searchString to "#{search.strip}"
@@ -99,6 +103,7 @@ module HookApp
     APPLESCRIPT`.strip.split_hooks
   end
 
+  # Search bookmark paths and addresses. Return array of bookmark hashes.
   def search_path_or_address(search)
     `osascript <<'APPLESCRIPT'
       set searchString to "#{search.strip}"
@@ -116,6 +121,7 @@ module HookApp
     APPLESCRIPT`.strip.split_hooks
   end
 
+  # Get all known bookmarks. Return array of bookmark hashes.
   def all_bookmarks
     `osascript <<'APPLESCRIPT'
       tell application "Hook"
@@ -132,6 +138,8 @@ module HookApp
     APPLESCRIPT`.strip.split_hooks
   end
 
+  # Search bookmarks, using both names and addresses unless options contain ":names_only".
+  # Return results as formatted list.
   def search_bookmarks(search, opts)
     unless search.nil? || search.empty?
       result = search_name(search)
@@ -154,11 +162,13 @@ module HookApp
     end
   end
 
+  # Create a bookmark for specified file/url and copy to the clipboard.
   def clip_bookmark(url, opts)
     mark = bookmark_for(url)
     copy_bookmark(mark[:name], mark[:url], opts)
   end
 
+  # Create a bookmark from specified title and url and copy to the clipboard.
   def copy_bookmark(title, url, opts)
     raise "No URL found" if url.empty?
     title = title.empty? ? 'No title' : title
@@ -167,6 +177,7 @@ module HookApp
     %(Copied #{opts[:markdown] ? 'Markdown link' : 'Hook URL'} for '#{title}' to clipboard)
   end
 
+  # Generate a menu of available hooks for selecting a hook to operate on.
   def select_hook(marks)
     intpad = marks.length.to_s.length + 1
     marks.each_with_index do |mark, i|
@@ -179,6 +190,7 @@ module HookApp
     marks[sel - 1]
   end
 
+  # Open the Hook GUI for browsing/performing actions on a file or url
   def open_gui(url)
     `osascript <<'APPLESCRIPT'
     tell application "Hook"
@@ -188,6 +200,7 @@ module HookApp
     APPLESCRIPT`
   end
 
+  # Select from a menu of available hooks and open using macOS `open`.
   def open_linked(url)
     marks = get_hooks(url)
     if marks.empty?
@@ -198,6 +211,7 @@ module HookApp
     end
   end
 
+  # Link 2 or more files/urls with bi-directional hooks.
   def link_files(args)
     target = args.pop
     target.valid_hook!
@@ -220,6 +234,7 @@ module HookApp
     "Linked #{args.length} files to #{target}"
   end
 
+  # Copy all hooks from source file to target file
   def clone_hooks(args)
     target = args.pop.valid_hook
     source = args[0].valid_hook
@@ -242,6 +257,7 @@ module HookApp
     end
   end
 
+  # Delete all hooked files/urls from target file
   def delete_all_hooks(url)
     STDERR.print "Are you sure you want to delete ALL hooks from #{url} (y/N)? "
     res = STDIN.gets.strip
@@ -260,6 +276,7 @@ module HookApp
     end
   end
 
+  # Delete hooks between two files/urls
   def delete_hooks(args, opts)
     urls = args.map(&:valid_hook).delete_if { |url| !url }
     output = []
@@ -289,6 +306,7 @@ module HookApp
     end
   end
 
+  # Create bi-directional links between every file/url in the list of arguments
   def link_all(args)
     args.each do |file|
       source = file.valid_hook
@@ -307,6 +325,7 @@ module HookApp
     "Linked #{args.length} files to each other"
   end
 
+  # Get a list of all hooks on a file/url.
   def linked_bookmarks(args, opts)
     result = []
 
@@ -353,6 +372,7 @@ module HookApp
     result.join(separator)
   end
 
+  # Output an array of hooks in the given format.
   def output_array(hooks_arr, opts)
     if !hooks_arr.empty?
       hooks_arr.reject! { |h| h[:path].nil? || h[:path] == '' } if opts[:files_only]
