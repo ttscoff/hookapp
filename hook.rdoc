@@ -2,7 +2,7 @@
 
 Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-v2.0.2
+v2.0.3
 
 === Global Options
 === --help
@@ -141,6 +141,11 @@ Output only bookmarks with file paths (exclude e.g. emails)
 Separate results with NULL separator, only applies with "paths" output for single file argument
 
 
+
+===== -s|--[no-]select
+Generate a menu to select hook(s) for opening
+
+This option is a shortcut to `hook select` and overrides any other arguments.
 
 ==== Command: <tt>open|gui  FILE_OR_URL</tt>
 Open the specified file or url in Hook GUI

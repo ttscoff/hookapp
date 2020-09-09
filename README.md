@@ -4,7 +4,7 @@ CLI interface for Hook.app (macOS)
 
 > Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-*v2.0.2*
+*v2.0.3*
 
 ## Installation
 
@@ -241,6 +241,12 @@ Output only bookmarks with file paths (exclude e.g. emails)
 
 Separate results with NULL separator, only applies with "paths" output for single file argument
 
+##### `-s`|`--[no-]select`
+
+Generate a menu to select hook(s) for opening
+
+> This option is a shortcut to `hook select` and overrides any other arguments.
+
 * * * * * *
 
 ### `$ hook` <mark>`open|gui`</mark> ` FILE_OR_URL`
@@ -287,5 +293,5 @@ Remove ALL links on files, requires confirmation
 
 #### [Default Command] help
 
-Documentation generated 2020-09-09 10:26
+Documentation generated 2020-09-09 12:24
 
