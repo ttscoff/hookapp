@@ -1,4 +1,4 @@
-# Hook CLI
+# hook CLI
 
 CLI interface for Hook.app (macOS)
 
@@ -88,15 +88,14 @@ Use `hook scripts [SHELL]` to output a completion script for your specified shel
  
 
 ## Global Options
+
 ### `--help`
 
 Show this message
 
-
 ### `--version`
 
 Display the program version
-
 
 ## Commands
 
@@ -110,28 +109,25 @@ Display the program version
 > or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 
 #### Options
+
 ##### `-a` | `--app` APP_NAME
 
 Copy from application
-*Default Value:* `None`
-
-> 
 
 ##### `-m`|`--markdown`
 
 Copy as Markdown
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`clone`</mark> ` SOURCE TARGET`
 
 *Clone all hooks from one file or url onto another*
 
 > Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
 
-
 * * * * * *
+
 ### `$ hook` <mark>`find|search`</mark> ` SEARCH_STRING`
 
 *Search bookmarks*
@@ -141,30 +137,27 @@ Copy as Markdown
 > Run `hook find` with no search argument to list all bookmarks.
 
 #### Options
+
 ##### `-o` | `--output_format` format
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
-*Default Value:* `paths`
 
-> 
+*Default Value:* `paths`
 
 ##### `-f`|`--files_only`
 
 Output only bookmarks with file paths (exclude e.g. emails)
 
-
 ##### `-n`|`--names_only`
 
 Search only bookmark names
-
 
 ##### `--null`
 
 Separate results with NULL separator, only applies with "paths" output for single file argument
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`from`</mark> ` APPLICATION_NAME`
 
 *Get a Hook URL for the frontmost window of an app*
@@ -175,18 +168,17 @@ Separate results with NULL separator, only applies with "paths" output for singl
 > Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 
 #### Options
+
 ##### `-c`|`--copy`
 
 Copy to clipboard
-
 
 ##### `-m`|`--markdown`
 
 Output as Markdown
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`help`</mark> ` command`
 
 *Shows a list of commands or help for one command*
@@ -194,13 +186,13 @@ Output as Markdown
 > Gets help for the application or its commands. Can also list the commands in a way helpful to creating a bash-style completion function
 
 #### Options
+
 ##### `-c`
 
 List commands one per line, to assist with shell completion
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`link|ln`</mark> ` SOURCE [SOURCE...] TARGET`
 
 *Create bidirectional hooks between two or more files/urls*
@@ -214,18 +206,17 @@ List commands one per line, to assist with shell completion
 > to be combined with one or more file/url arguments.
 
 #### Options
+
 ##### `-a`|`--all`
 
 Link every listed file or url to every other
-
 
 ##### `-p`|`--paste`
 
 Paste URL from clipboard
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`list|ls`</mark> ` FILE_OR_URL [FILE_OR_URL...]`
 
 *List hooks on a file or url*
@@ -235,33 +226,31 @@ Paste URL from clipboard
 > Run `hook list` with no file/url argument to list all bookmarks.
 
 #### Options
+
 ##### `-o` | `--output_format` format
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
-*Default Value:* `paths`
 
-> 
+*Default Value:* `paths`
 
 ##### `-f`|`--files_only`
 
 Output only bookmarks with file paths (exclude e.g. emails)
 
-
 ##### `--null`
 
 Separate results with NULL separator, only applies with "paths" output for single file argument
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`open|gui`</mark> ` FILE_OR_URL`
 
 *Open the specified file or url in Hook GUI*
 
 > Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
 
-
 * * * * * *
+
 ### `$ hook` <mark>`remove|rm`</mark> ` ITEM_1 ITEM_2`
 
 *Remove a hook between two files/urls*
@@ -271,32 +260,32 @@ Separate results with NULL separator, only applies with "paths" output for singl
 > If --all isn't specified, exactly two arguments (Files/URLs) are required.
 
 #### Options
+
 ##### `-a`|`--all`
 
 Remove ALL links on files, requires confirmation
 
-
-
 * * * * * *
+
 ### `$ hook` <mark>`scripts`</mark> ` SHELL`
 
 *Shell completion examples*
 
 > Output completion script example for the specified shell (bash, zsh, fish)
 
-
 * * * * * *
+
 ### `$ hook` <mark>`select`</mark> ` FILE_OR_URL`
 
 *Select from hooks on a file/url and open in default application*
 
-> If the target file/URL has hooked items, a menu will be provided. Selecting a file
-> from this menu will open the item using the default application assigned to the
-> filetype by macOS.
-
+> If the target file/URL has hooked items, a menu will be provided. Selecting one or more files
+> from this menu will open the item(s) using the default application assigned to the
+> filetype by macOS. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.
 
 * * * * * *
-### [Default Command] help
 
-Documentation generated 2020-09-09 06:56
+#### [Default Command] help
+
+Documentation generated 2020-09-09 10:26
 

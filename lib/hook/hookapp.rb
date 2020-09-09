@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'shellwords'
+
 # Hook.app functions
 module HookApp
   # Create a single regex for validation of an
@@ -31,12 +33,22 @@ module HookApp
     url.valid_hook!
     raise "Invalid target: #{url}" unless url
 
-    mark = `osascript <<'APPLESCRIPT'
-      tell application "Hook"
-        set _hook to make bookmark with data "#{url}"
-        return name of _hook & "||" & address of _hook & "||" & path of _hook
-      end tell
-    APPLESCRIPT`.strip
+    begin
+      mark = `osascript <<'APPLESCRIPT'
+        tell application "Hook"
+          set _hook to make bookmark with data "#{url}"
+          if _hook is missing value
+            return ""
+          else
+            return name of _hook & "||" & address of _hook & "||" & path of _hook
+          end if
+        end tell
+      APPLESCRIPT`.strip
+    rescue p => e
+      raise e
+    end
+
+    raise "Error getting bookmark for #{url}" if mark.empty?
     mark.split_hook
   end
 
@@ -48,6 +60,9 @@ module HookApp
     hooks = `osascript <<'APPLESCRIPT'
       tell application "Hook"
         set _mark to make bookmark with data "#{url}"
+        if _mark is missing value
+          return ""
+        end if
         set _hooks to hooked bookmarks of _mark
         set _out to {}
         repeat with _hook in _hooks
@@ -177,27 +192,73 @@ module HookApp
     %(Copied #{opts[:markdown] ? 'Markdown link' : 'Hook URL'} for '#{title}' to clipboard)
   end
 
-  # Generate a menu of available hooks for selecting a hook to operate on.
+  # Generate a menu of available hooks for selecting one or more hooks to operate on.
+  # Revamped to use `fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts.
+  # Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.
   def select_hook(marks)
-    intpad = marks.length.to_s.length + 1
-    marks.each_with_index do |mark, i|
-      STDERR.printf "%#{intpad}d) %s\n", i + 1, mark[:name]
-    end
-    STDERR.print 'Open which bookmark: '
-    sel = STDIN.gets.strip.to_i
-    raise 'Invalid selection' unless sel.positive? && sel <= marks.length
+    # intpad = marks.length.to_s.length + 1
+    # marks.each_with_index do |mark, i|
+    #   STDERR.printf "%#{intpad}d) %s\n", i + 1, mark[:name]
+    # end
+    # STDERR.print 'Open which bookmark: '
+    # sel = STDIN.gets.strip.to_i
+    # raise 'Invalid selection' unless sel.positive? && sel <= marks.length
 
-    marks[sel - 1]
+    # marks[sel - 1]
+
+    options = marks.map {|mark|
+      if mark[:name]
+        id = mark[:name]
+      elsif mark[:path]
+        id = mark[:path]
+      elsif mark[:url]
+        id = mark[:url]
+      else
+        return false
+      end
+
+      "#{id}\t#{mark[:path]}\t#{mark[:url]}"
+    }.delete_if { |mark| !mark }
+
+    raise "Error processing available hooks" if options.empty?
+
+    args = ['--layout=reverse-list',
+            '--prompt="esc: cancel, tab: multi-select, return: open > "',
+            '--multi',
+            '--tabstop=4',
+            '--delimiter="\t"',
+            '--with-nth=1',
+            '--height=60%',
+            '--min-height=10'
+          ]
+
+    sel = `echo #{Shellwords.escape(options.join("\n"))} | lib/helpers/fuzzyfilefinder #{args.join(' ')}`.chomp
+    res = sel.split(/\n/).map { |s|
+      ps = s.split(/\t/)
+      { name: ps[0], path: ps[1], url: ps[2] }
+    }
+
+    if res.size == 0
+      raise 'Cancelled (empty response)'
+    end
+
+    res
   end
 
   # Open the Hook GUI for browsing/performing actions on a file or url
   def open_gui(url)
-    `osascript <<'APPLESCRIPT'
+    result = `osascript <<'APPLESCRIPT'
     tell application "Hook"
       set _mark to make bookmark with data "#{url.valid_hook}"
-      invoke on _mark
+      if _mark is missing value
+        return "Failed to create bookmark for #{url}"
+      else
+        invoke on _mark
+        return ""
+      end if
     end tell
-    APPLESCRIPT`
+    APPLESCRIPT`.strip
+    raise result unless result.empty?
   end
 
   # Select from a menu of available hooks and open using macOS `open`.
@@ -207,7 +268,9 @@ module HookApp
       warn "No hooks found for #{url}"
     else
       res = select_hook(marks)
-      `open '#{res[:url]}'`
+      res.each {|mark|
+        `open '#{mark[:url]}'`
+      }
     end
   end
 

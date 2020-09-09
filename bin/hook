@@ -232,10 +232,10 @@ Copy all the files and urls that the first file is hooked to onto another file. 
 
   desc 'Select from hooks on a file/url and open in default application'
   long_desc %{
-If the target file/URL has hooked items, a menu will be provided. Selecting a file
-from this menu will open the item using the default application assigned to the
-filetype by macOS.
-  }
+If the target file/URL has hooked items, a menu will be provided. Selecting one or more files
+from this menu will open the item(s) using the default application assigned to the
+filetype by macOS. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.
+}
   arg_name 'FILE_OR_URL'
   command %i[select] do |c|
     c.action do |_global_options, _options, args|

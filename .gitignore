@@ -1,3 +1,4 @@
 *.test
 pkg
 vendor
+*.bak

@@ -163,7 +163,7 @@
 
           
           <div class="method-source-code" id="all_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 125</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_bookmarks</span>
   <span class="ruby-string">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;Hook&quot;
@@ -208,17 +208,27 @@
 
           
           <div class="method-source-code" id="bookmark_for-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 30</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
 
-  <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
-    tell application &quot;Hook&quot;
-      set _hook to make bookmark with data &quot;#{url}&quot;
-      return name of _hook &amp; &quot;||&quot; &amp; address of _hook &amp; &quot;||&quot; &amp; path of _hook
-    end tell
-  APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
+      tell application &quot;Hook&quot;
+        set _hook to make bookmark with data &quot;#{url}&quot;
+        if _hook is missing value
+          return &quot;&quot;
+        else
+          return name of _hook &amp; &quot;||&quot; &amp; address of _hook &amp; &quot;||&quot; &amp; path of _hook
+        end if
+      end tell
+    APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error getting bookmark for #{url}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mark</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">mark</span>.<span class="ruby-identifier">split_hook</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -250,7 +260,7 @@
 
           
           <div class="method-source-code" id="bookmark_from_app-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_from_app</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;System Events&quot; to set front_app to name of first application process whose frontmost is true
@@ -301,7 +311,7 @@
 
           
           <div class="method-source-code" id="clip_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 166</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clip_bookmark</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-identifier">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">copy_bookmark</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>], <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>], <span class="ruby-identifier">opts</span>)
@@ -335,7 +345,7 @@
 
           
           <div class="method-source-code" id="clone_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 238</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 301</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_hooks</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">valid_hook</span>
   <span class="ruby-identifier">source</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">valid_hook</span>
@@ -386,7 +396,7 @@
 
           
           <div class="method-source-code" id="copy_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 172</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">copy_bookmark</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;No URL found&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;No title&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>
@@ -423,7 +433,7 @@
 
           
           <div class="method-source-code" id="delete_all_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 261</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Are you sure you want to delete ALL hooks from #{url} (y/N)? &quot;</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-constant">STDIN</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">strip</span>
@@ -470,7 +480,7 @@
 
           
           <div class="method-source-code" id="delete_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 280</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 343</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_hooks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">urls</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:valid_hook</span>).<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">url</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span> }
   <span class="ruby-identifier">output</span> = []
@@ -528,7 +538,7 @@
 
           
           <div class="method-source-code" id="format_regex-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 7</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_regex</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">fmt_rx_array</span> = []
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fmt</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fmt_rx_array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^(.)(.*?)$/</span>, <span class="ruby-string">&#39;\1(\2)?&#39;</span>)) }
@@ -563,7 +573,7 @@
 
           
           <div class="method-source-code" id="get_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 44</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
@@ -571,6 +581,9 @@
   <span class="ruby-identifier">hooks</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;Hook&quot;
       set _mark to make bookmark with data &quot;#{url}&quot;
+      if _mark is missing value
+        return &quot;&quot;
+      end if
       set _hooks to hooked bookmarks of _mark
       set _out to {}
       repeat with _hook in _hooks
@@ -613,7 +626,7 @@
 
           
           <div class="method-source-code" id="link_all-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 310</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 373</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_all</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">source</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">valid_hook</span>
@@ -660,7 +673,7 @@
 
           
           <div class="method-source-code" id="link_files-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 215</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_files</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">target</span>.<span class="ruby-identifier">valid_hook!</span>
@@ -711,7 +724,7 @@
 
           
           <div class="method-source-code" id="linked_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 329</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 392</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linked_bookmarks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">result</span> = []
 
@@ -786,14 +799,20 @@
 
           
           <div class="method-source-code" id="open_gui-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 194</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_gui</span>(<span class="ruby-identifier">url</span>)
-  <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
+  <span class="ruby-identifier">result</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
   tell application &quot;Hook&quot;
     set _mark to make bookmark with data &quot;#{url.valid_hook}&quot;
-    invoke on _mark
+    if _mark is missing value
+      return &quot;Failed to create bookmark for #{url}&quot;
+    else
+      invoke on _mark
+      return &quot;&quot;
+    end if
   end tell
-  APPLESCRIPT`</span>
+  APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -824,14 +843,16 @@
 
           
           <div class="method-source-code" id="open_linked-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 204</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_linked</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;No hooks found for #{url}&quot;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">res</span> = <span class="ruby-identifier">select_hook</span>(<span class="ruby-identifier">marks</span>)
-    <span class="ruby-node">`open &#39;#{res[:url]}&#39;`</span>
+    <span class="ruby-identifier">res</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">mark</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">`open &#39;#{mark[:url]}&#39;`</span>
+    }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -863,7 +884,7 @@
 
           
           <div class="method-source-code" id="output_array-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 376</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 439</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_array</span>(<span class="ruby-identifier">hooks_arr</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:files_only</span>]
@@ -928,7 +949,7 @@
 
           
           <div class="method-source-code" id="search_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 143</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_bookmarks</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">search_name</span>(<span class="ruby-identifier">search</span>)
@@ -979,7 +1000,7 @@
 
           
           <div class="method-source-code" id="search_name-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 89</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_name</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -1025,7 +1046,7 @@
 
           
           <div class="method-source-code" id="search_path_or_address-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_path_or_address</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -1065,23 +1086,61 @@
 
         <div class="method-description">
           
-          <p>Generate a menu of available hooks for selecting a hook to operate on.</p>
+          <p>Generate a menu of available hooks for selecting one or more hooks to operate on. Revamped to use `fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.</p>
           
           
 
           
           <div class="method-source-code" id="select_hook-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_hook</span>(<span class="ruby-identifier">marks</span>)
-  <span class="ruby-identifier">intpad</span> = <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mark</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">printf</span> <span class="ruby-node">&quot;%#{intpad}d) %s\n&quot;</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&#39;Open which bookmark: &#39;</span>
-  <span class="ruby-identifier">sel</span> = <span class="ruby-constant">STDIN</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Invalid selection&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">sel</span>.<span class="ruby-identifier">positive?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">sel</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-comment"># intpad = marks.length.to_s.length + 1</span>
+  <span class="ruby-comment"># marks.each_with_index do |mark, i|</span>
+  <span class="ruby-comment">#   STDERR.printf &quot;%#{intpad}d) %s\n&quot;, i + 1, mark[:name]</span>
+  <span class="ruby-comment"># end</span>
+  <span class="ruby-comment"># STDERR.print &#39;Open which bookmark: &#39;</span>
+  <span class="ruby-comment"># sel = STDIN.gets.strip.to_i</span>
+  <span class="ruby-comment"># raise &#39;Invalid selection&#39; unless sel.positive? &amp;&amp; sel &lt;= marks.length</span>
 
-  <span class="ruby-identifier">marks</span>[<span class="ruby-identifier">sel</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+  <span class="ruby-comment"># marks[sel - 1]</span>
+
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">mark</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>]
+      <span class="ruby-identifier">id</span> = <span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>]
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">mark</span>[<span class="ruby-value">:path</span>]
+      <span class="ruby-identifier">id</span> = <span class="ruby-identifier">mark</span>[<span class="ruby-value">:path</span>]
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>]
+      <span class="ruby-identifier">id</span> = <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-node">&quot;#{id}\t#{mark[:path]}\t#{mark[:url]}&quot;</span>
+  }.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mark</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">mark</span> }
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Error processing available hooks&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">args</span> = [<span class="ruby-string">&#39;--layout=reverse-list&#39;</span>,
+          <span class="ruby-string">&#39;--prompt=&quot;esc: cancel, tab: multi-select, return: open &gt; &quot;&#39;</span>,
+          <span class="ruby-string">&#39;--multi&#39;</span>,
+          <span class="ruby-string">&#39;--tabstop=4&#39;</span>,
+          <span class="ruby-string">&#39;--delimiter=&quot;\t&quot;&#39;</span>,
+          <span class="ruby-string">&#39;--with-nth=1&#39;</span>,
+          <span class="ruby-string">&#39;--height=60%&#39;</span>,
+          <span class="ruby-string">&#39;--min-height=10&#39;</span>
+        ]
+
+  <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(options.join(&quot;\n&quot;))} | lib/helpers/fuzzyfilefinder #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-identifier">res</span> = <span class="ruby-identifier">sel</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">ps</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
+    { <span class="ruby-value">name:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">0</span>], <span class="ruby-value">path:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">1</span>], <span class="ruby-value">url:</span> <span class="ruby-identifier">ps</span>[<span class="ruby-value">2</span>] }
+  }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Cancelled (empty response)&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">res</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1112,7 +1171,7 @@
 
           
           <div class="method-source-code" id="validate_format-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 16</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">valid_format_rx</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span> <span class="ruby-identifier">format</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^(.)(.*)$/</span>, <span class="ruby-string">&#39;^\1(\2)?$&#39;</span>) }
   <span class="ruby-identifier">valid_format</span> = <span class="ruby-keyword">nil</span>

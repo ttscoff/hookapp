@@ -4,21 +4,21 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class HookApp::MarkdownDocumentListener - hookapp</title>
+<title>class GLI::Commands::MarkdownDocumentListener - hookapp</title>
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../";
-  var index_rel_prefix = "../";
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
 </script>
 
-<script src="../js/navigation.js" defer></script>
-<script src="../js/search.js" defer></script>
-<script src="../js/search_index.js" defer></script>
-<script src="../js/searcher.js" defer></script>
-<script src="../js/darkfish.js" defer></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
-<link href="../css/fonts.css" rel="stylesheet">
-<link href="../css/rdoc.css" rel="stylesheet">
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
 
 
 
@@ -28,13 +28,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../index.html" rel="home">Home</a>
+    <a href="../../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -111,13 +111,15 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-HookApp::MarkdownDocumentListener">
-  <h1 id="class-HookApp::MarkdownDocumentListener" class="class">
-    class HookApp::MarkdownDocumentListener
+<main role="main" aria-labelledby="class-GLI::Commands::MarkdownDocumentListener">
+  <h1 id="class-GLI::Commands::MarkdownDocumentListener" class="class">
+    class GLI::Commands::MarkdownDocumentListener
   </h1>
 
   <section class="description">
     
+<p>DocumentListener class for <a href="../../GLI.html"><code>GLI</code></a> documentation generator</p>
+
   </section>
 
   
@@ -141,7 +143,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(global_options, options, arguments, app)</span>
+            class="method-args">(_global_options, _options, _arguments, app)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -156,9 +158,14 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">global_options</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">arguments</span>, <span class="ruby-identifier">app</span>)
-  <span class="ruby-ivar">@io</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;README.md&quot;</span>,<span class="ruby-string">&#39;w&#39;</span>)
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">_global_options</span>, <span class="ruby-identifier">_options</span>, <span class="ruby-identifier">_arguments</span>, <span class="ruby-identifier">app</span>)
+  <span class="ruby-ivar">@exe</span> = <span class="ruby-identifier">app</span>.<span class="ruby-identifier">exe_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&#39;README.md&#39;</span>) <span class="ruby-comment"># Back up existing README</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-string">&#39;README.md&#39;</span>, <span class="ruby-string">&#39;README.bak&#39;</span>)
+    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Backing up existing README.md to README.bak&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@io</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;README.md&#39;</span>,<span class="ruby-string">&#39;w&#39;</span>)
   <span class="ruby-ivar">@nest</span> = <span class="ruby-string">&#39;#&#39;</span>
   <span class="ruby-ivar">@arg_name_formatter</span> = <span class="ruby-constant">GLI</span><span class="ruby-operator">::</span><span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">HelpModules</span><span class="ruby-operator">::</span><span class="ruby-constant">ArgNameFormatter</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -199,7 +206,7 @@
 
           
           <div class="method-source-code" id="beginning-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 13</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">beginning</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -216,7 +223,7 @@
         
         <div class="method-heading">
           <span class="method-name">command</span><span
-            class="method-args">(name,aliases,desc,long_desc,arg_name,arg_options)</span>
+            class="method-args">(name, aliases, desc, long_desc, arg_name, arg_options)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -231,16 +238,16 @@
 
           
           <div class="method-source-code" id="command-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 94</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">command</span>(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">aliases</span>,<span class="ruby-identifier">desc</span>,<span class="ruby-identifier">long_desc</span>,<span class="ruby-identifier">arg_name</span>,<span class="ruby-identifier">arg_options</span>)
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">command</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">aliases</span>, <span class="ruby-identifier">desc</span>, <span class="ruby-identifier">long_desc</span>, <span class="ruby-identifier">arg_name</span>, <span class="ruby-identifier">arg_options</span>)
   <span class="ruby-identifier">arg_name_fmt</span> = <span class="ruby-ivar">@arg_name_formatter</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">arg_name</span>, <span class="ruby-identifier">arg_options</span>, [])
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@nest}# `$ hook` &lt;mark&gt;`#{([name] + aliases).join(&#39;|&#39;)}`&lt;/mark&gt; `#{arg_name_fmt}`&quot;</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">header</span>(<span class="ruby-node">&quot;`$ #{@exe}` &lt;mark&gt;`#{([name] + aliases).join(&#39;|&#39;)}`&lt;/mark&gt; `#{arg_name_fmt}`&quot;</span>, <span class="ruby-value">1</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;*#{String(desc).strip}*&quot;</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-identifier">cmd_desc</span> = <span class="ruby-constant">String</span>(<span class="ruby-identifier">long_desc</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;&gt; #{_}&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{cmd_desc}\n\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd_desc</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@nest</span> = <span class="ruby-node">&quot;#{@nest}#&quot;</span>
+  <span class="ruby-identifier">increment_nest</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -271,11 +278,11 @@
 
           
           <div class="method-source-code" id="commands-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">commands</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@nest}# Commands&quot;</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">header</span>(<span class="ruby-string">&quot;Commands&quot;</span>, <span class="ruby-value">1</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
-  <span class="ruby-ivar">@nest</span> = <span class="ruby-node">&quot;#{@nest}#&quot;</span>
+  <span class="ruby-identifier">increment_nest</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -306,9 +313,9 @@
 
           
           <div class="method-source-code" id="default_command-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 112</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">default_command</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;### [Default Command] #{name}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#### [Default Command] #{name}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -339,10 +346,10 @@
 
           
           <div class="method-source-code" id="end_command-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 106</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">end_command</span>(<span class="ruby-identifier">_name</span>)
-  <span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\#$/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;\n* * * * * *\n&quot;</span>
+  <span class="ruby-identifier">decrement_nest</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;* * * * * *\n\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -373,9 +380,9 @@
 
           
           <div class="method-source-code" id="end_commands-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 116</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">end_commands</span>
-  <span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\#$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-identifier">decrement_nest</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -406,7 +413,7 @@
 
           
           <div class="method-source-code" id="end_options-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">end_options</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -438,7 +445,7 @@
 
           
           <div class="method-source-code" id="ending-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 17</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ending</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Documentation generated #{Time.now.strftime(&#39;%Y-%m-%d %H:%M&#39;)}&quot;</span>
@@ -474,17 +481,17 @@
 
           
           <div class="method-source-code" id="flag-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flag</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">aliases</span>, <span class="ruby-identifier">desc</span>, <span class="ruby-identifier">long_desc</span>, <span class="ruby-identifier">default_value</span>, <span class="ruby-identifier">arg_name</span>, <span class="ruby-identifier">must_match</span>, <span class="ruby-identifier">_type</span>)
   <span class="ruby-identifier">invocations</span> = ([<span class="ruby-identifier">name</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">Array</span>(<span class="ruby-identifier">aliases</span>)).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;`&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">add_dashes</span>(<span class="ruby-identifier">_</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;`&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; | &#39;</span>)
   <span class="ruby-identifier">usage</span> = <span class="ruby-node">&quot;#{invocations} #{arg_name || &#39;arg&#39;}&quot;</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@nest}## #{usage}&quot;</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">header</span>(<span class="ruby-identifier">usage</span>, <span class="ruby-value">2</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">String</span>(<span class="ruby-identifier">desc</span>).<span class="ruby-identifier">strip</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;*Default Value:* `#{default_value || &#39;None&#39;}`&quot;</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;*Must Match:* `#{must_match.to_s}`&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">must_match</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;&gt; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">String</span>(<span class="ruby-identifier">long_desc</span>).<span class="ruby-identifier">strip</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\n*Default Value:* `#{default_value || &#39;None&#39;}`\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">default_value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\n*Must Match:* `#{must_match.to_s}`\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">must_match</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">cmd_desc</span> = <span class="ruby-constant">String</span>(<span class="ruby-identifier">long_desc</span>).<span class="ruby-identifier">strip</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt; #{cmd_desc}\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd_desc</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -516,13 +523,14 @@
 
           
           <div class="method-source-code" id="options-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@nest</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;## Global Options&quot;</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@nest}# Options&quot;</span>
+    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">header</span>(<span class="ruby-string">&quot;Options&quot;</span>, <span class="ruby-value">1</span>)
   <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -553,9 +561,9 @@
 
           
           <div class="method-source-code" id="program_desc-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 25</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">program_desc</span>(<span class="ruby-identifier">desc</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# Hook CLI&quot;</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# #{@exe} CLI&quot;</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">desc</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
@@ -589,7 +597,7 @@
 
           
           <div class="method-source-code" id="program_long_desc-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 32</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">program_long_desc</span>(<span class="ruby-identifier">desc</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt; #{desc}&quot;</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
@@ -623,19 +631,18 @@
 
           
           <div class="method-source-code" id="switch-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">switch</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">aliases</span>, <span class="ruby-identifier">desc</span>, <span class="ruby-identifier">long_desc</span>, <span class="ruby-identifier">negatable</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">negatable</span>
     <span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;[no-]#{name}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
     <span class="ruby-identifier">aliases</span> = <span class="ruby-identifier">aliases</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">_</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;[no-]#{_}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">_</span> }
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">invocations</span> = ([<span class="ruby-identifier">name</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">aliases</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;`&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">add_dashes</span>(<span class="ruby-identifier">_</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;`&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{@nest}## #{invocations}&quot;</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">header</span>(<span class="ruby-node">&quot;#{invocations}&quot;</span>, <span class="ruby-value">2</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">String</span>(<span class="ruby-identifier">desc</span>).<span class="ruby-identifier">strip</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
   <span class="ruby-identifier">cmd_desc</span> = <span class="ruby-constant">String</span>(<span class="ruby-identifier">long_desc</span>).<span class="ruby-identifier">strip</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt; #{cmd_desc}\n\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd_desc</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\n&gt; #{cmd_desc}\n&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cmd_desc</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -667,13 +674,15 @@
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/hook/markdown_document_listener.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>(<span class="ruby-identifier">version</span>)
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;*v#{version}*&quot;</span>
   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
-  <span class="ruby-comment"># Hacking in the basics file</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&#39;BASICS.md&#39;</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
+  <span class="ruby-comment"># Hacking in the overview file</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-string">&#39;OVERVIEW.md&#39;</span>)
+    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&#39;OVERVIEW.md&#39;</span>)
+    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">puts</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
