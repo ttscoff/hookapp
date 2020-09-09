@@ -12,7 +12,7 @@ module GLI
           FileUtils.mv('README.md', 'README.bak')
           $stderr.puts "Backing up existing README.md to README.bak"
         end
-        @io = File.new('README.md','w')
+        @io = File.new('README.md', 'w')
         @nest = '#'
         @arg_name_formatter = GLI::Commands::HelpModules::ArgNameFormatter.new
       end
