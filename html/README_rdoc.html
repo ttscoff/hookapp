@@ -97,6 +97,7 @@
     <li><a href="#label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">Command: <code>remove|rm  ITEM_1 ITEM_2</code></a>
     <li><a href="#label-Options">Options</a>
     <li><a href="#label-a-7C--all">-<a href="no-">a|–</a>all</a>
+    <li><a href="#label-Command-3A+scripts++SHELL">Command: <code>scripts  SHELL</code></a>
     <li><a href="#label-Command-3A+select++FILE_OR_URL">Command: <code>select  FILE_OR_URL</code></a>
   </ul>
 </div>
@@ -126,7 +127,7 @@
 
 <p>Hook.app is a productivity tool for macOS &lt;<a href="https://hookproductivity.com">hookproductivity.com</a>/&gt;. This gem includes a `hook` binary that allows interaction with the features of Hook.app.</p>
 
-<p>v2.0.1</p>
+<p>v2.0.2</p>
 
 <h3 id="label-Global+Options">Global Options<span><a href="#label-Global+Options">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -143,6 +144,11 @@
 <h4 id="label-Command-3A+clip-7Ccp++FILE_OR_URL">Command: <code>clip|cp  FILE_OR_URL</code><span><a href="#label-Command-3A+clip-7Ccp++FILE_OR_URL">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Copy <a href="Hook.html"><code>Hook</code></a> URL for file/url to clipboard</p>
+
+<p>Creates a bookmark for the specified file or URL and copies its <a href="Hook.html"><code>Hook</code></a> URL to the clipboard.</p>
+
+<pre>The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+or to paste into another app as a link. Use the -m flag to copy a full Markdown link.</pre>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -161,6 +167,8 @@
 <h4 id="label-Command-3A+clone++SOURCE+TARGET">Command: <code>clone  SOURCE TARGET</code><span><a href="#label-Command-3A+clone++SOURCE+TARGET">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Clone all hooks from one file or url onto another</p>
+
+<p>Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.</p>
 
 <h4 id="label-Command-3A+find-7Csearch++SEARCH_STRING">Command: <code>find|search  SEARCH_STRING</code><span><a href="#label-Command-3A+find-7Csearch++SEARCH_STRING">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
@@ -196,6 +204,12 @@
 
 <p>Get a <a href="Hook.html"><code>Hook</code></a> URL for the frontmost window of an app</p>
 
+<p>Specify an application by name (without &#39;.app&#39;) to bring that app to the foreground and create a bookmark</p>
+
+<pre>for the active document, note, task, etc., returning a Hook URL.
+
+  Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.</pre>
+
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
 <h5 id="label-c-7C--copy">-c|–copy<span><a href="#label-c-7C--copy">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -221,6 +235,15 @@
 <h4 id="label-Command-3A+link-7Cln++SOURCE+-5BSOURCE...-5D+TARGET">Command: <code>link|ln  SOURCE [SOURCE...] TARGET</code><span><a href="#label-Command-3A+link-7Cln++SOURCE+-5BSOURCE...-5D+TARGET">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Create bidirectional hooks between two or more files/urls</p>
+
+<p>If two files/urls are provided, links will be bi-directional.</p>
+
+<pre>If three or more are provided, `link` defaults to creating bi-directional
+links between each file and the last file in the list. Use `-a` to create
+bi-directional links between every file in the list.
+
+If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+to be combined with one or more file/url arguments.</pre>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -262,9 +285,15 @@
 
 <p>Open the specified file or url in <a href="Hook.html"><code>Hook</code></a> GUI</p>
 
+<p>Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.</p>
+
 <h4 id="label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">Command: <code>remove|rm  ITEM_1 ITEM_2</code><span><a href="#label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Remove a hook between two files/urls</p>
+
+<p>Remove a hook between two files or URLs. If you use –all, all hooks on a given file will be removed.</p>
+
+<pre>If --all isn&#39;t specified, exactly two arguments (Files/URLs) are required.</pre>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -272,9 +301,20 @@
 
 <p>Remove ALL links on files, requires confirmation</p>
 
+<h4 id="label-Command-3A+scripts++SHELL">Command: <code>scripts  SHELL</code><span><a href="#label-Command-3A+scripts++SHELL">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>Shell completion examples</p>
+
+<p>Output completion script example for the specified shell (bash, zsh, fish)</p>
+
 <h4 id="label-Command-3A+select++FILE_OR_URL">Command: <code>select  FILE_OR_URL</code><span><a href="#label-Command-3A+select++FILE_OR_URL">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Select from hooks on a file/url and open in default application</p>
+
+<p>If the target file/URL has hooked items, a menu will be provided. Selecting a file</p>
+
+<pre>from this menu will open the item using the default application assigned to the
+filetype by macOS.</pre>
 <dl class="rdoc-list label-list"><dt>Default Command
 <dd>
 <p>help</p>

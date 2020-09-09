@@ -2,7 +2,7 @@
 
 Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-v2.0.1
+v2.0.2
 
 === Global Options
 === --help
@@ -19,7 +19,10 @@ Display the program version
 ==== Command: <tt>clip|cp  FILE_OR_URL</tt>
 Copy Hook URL for file/url to clipboard
 
+Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
 
+    The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+    or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 ===== Options
 ===== -a|--app APP_NAME
 
@@ -36,7 +39,7 @@ Copy as Markdown
 ==== Command: <tt>clone  SOURCE TARGET</tt>
 Clone all hooks from one file or url onto another
 
-
+Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
 ==== Command: <tt>find|search  SEARCH_STRING</tt>
 Search bookmarks
 
@@ -69,7 +72,10 @@ Separate results with NULL separator, only applies with "paths" output for singl
 ==== Command: <tt>from  APPLICATION_NAME</tt>
 Get a Hook URL for the frontmost window of an app
 
+Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
+    for the active document, note, task, etc., returning a Hook URL.
 
+      Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 ===== Options
 ===== -c|--copy
 Copy to clipboard
@@ -94,7 +100,13 @@ List commands one per line, to assist with shell completion
 ==== Command: <tt>link|ln  SOURCE [SOURCE...] TARGET</tt>
 Create bidirectional hooks between two or more files/urls
 
+If two files/urls are provided, links will be bi-directional.
+    If three or more are provided, `link` defaults to creating bi-directional
+    links between each file and the last file in the list. Use `-a` to create
+    bi-directional links between every file in the list.
 
+    If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+    to be combined with one or more file/url arguments.
 ===== Options
 ===== -a|--all
 Link every listed file or url to every other
@@ -133,19 +145,27 @@ Separate results with NULL separator, only applies with "paths" output for singl
 ==== Command: <tt>open|gui  FILE_OR_URL</tt>
 Open the specified file or url in Hook GUI
 
-
+Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
 ==== Command: <tt>remove|rm  ITEM_1 ITEM_2</tt>
 Remove a hook between two files/urls
 
+Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
 
+    If --all isn't specified, exactly two arguments (Files/URLs) are required.
 ===== Options
 ===== -a|--[no-]all
 Remove ALL links on files, requires confirmation
 
 
 
+==== Command: <tt>scripts  SHELL</tt>
+Shell completion examples
+
+Output completion script example for the specified shell (bash, zsh, fish)
 ==== Command: <tt>select  FILE_OR_URL</tt>
 Select from hooks on a file/url and open in default application
 
-
+If the target file/URL has hooked items, a menu will be provided. Selecting a file
+    from this menu will open the item using the default application assigned to the
+    filetype by macOS.
 [Default Command] help
