@@ -71,4 +71,6 @@ You can also open a file in the Hook GUI using `hook open file1.md`.
 ### Searching hooks
 
 Use `hook find` (or `hook search`) and a search string to find bookmarks containing that string in the title, path, or url. Use `hook find -n` to search bookmark names only. All of the options from `hook ls`/`hook list` (output format, files only, null separator, etc.) work with `find`/`search`. See `hook help find` for details.
+
+`hook find` with no search string will list all bookmarks. This can be used with the same output options as `hook ls`.
  

@@ -108,11 +108,31 @@ module HookApp
     APPLESCRIPT`.strip.split_hooks
   end
 
+  def all_bookmarks
+    `osascript <<'APPLESCRIPT'
+      tell application "Hook"
+        set _marks to every bookmark
+        set _out to {}
+        repeat with _hook in _marks
+          set _out to _out & (name of _hook & "||" & address of _hook & "||" & path of _hook)
+        end repeat
+        set {astid, AppleScript's text item delimiters} to {AppleScript's text item delimiters, "^^"}
+        set _output to _out as string
+        set AppleScript's text item delimiters to astid
+        return _output
+      end tell
+    APPLESCRIPT`.strip.split_hooks
+  end
+
   def search_bookmarks(search, opts)
-    result = search_name(search)
-    unless opts[:names_only]
-      more_results = search_path_or_address(search)
-      result = result.concat(more_results).uniq
+    unless search.nil? || search.empty?
+      result = search_name(search)
+      unless opts[:names_only]
+        more_results = search_path_or_address(search)
+        result = result.concat(more_results).uniq
+      end
+    else
+      result = all_bookmarks
     end
 
     separator = opts[:format] == 'paths' && opts[:null_separator] ? "\0" : "\n"
