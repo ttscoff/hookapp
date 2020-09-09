@@ -1,4 +1,4 @@
-# Source this script from ~/.bash_profile
+# Source this script from ~/.zshrc
 _hook_targets()
 {
     local cmds cur ff

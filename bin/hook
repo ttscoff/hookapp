@@ -52,6 +52,35 @@ class App
     end
   end
 
+  # Shell completion scripts are located in lib/completion/ and named "hook_completion" with
+  # the full shell name as the extension, e.g. "hook_completion.bash".
+  desc 'Shell completion examples'
+  valid_shells = %w[bash zsh fish]
+  long_desc %{
+    Output completion script example for the specified shell (#{valid_shells.join(', ')})
+  }
+  arg_name 'SHELL'
+  command %i[scripts] do |c|
+    c.action do |_global_options, _options, args|
+      if args.length > 1
+        exit_now!("Invalid number of arguments, (expected 1)", 5)
+      elsif args.nil? || args.empty?
+        exit_now!("Specify a shell (#{valid_shells.join(', ')})", 0)
+      else
+        if valid_shells.include?(args[0])
+          base_dir = File.expand_path(File.join(File.dirname(__FILE__), '../lib/completion'))
+          completion = File.join(base_dir, "hook_completion.#{args[0]}")
+          script = IO.read(completion)
+          $stdout.puts script
+        else
+          exit_now!("Invalid shell name, must be one of #{valid_shells.join(', ')}", 1)
+        end
+      end
+    end
+  end
+
+
+
   desc 'Search bookmarks'
   long_desc %{Search bookmark urls and names for a string and output in specified format (default "paths").
 
@@ -87,6 +116,15 @@ class App
   end
 
   desc 'Create bidirectional hooks between two or more files/urls'
+  long_desc %{
+    If two files/urls are provided, links will be bi-directional.
+    If three or more are provided, `link` defaults to creating bi-directional
+    links between each file and the last file in the list. Use `-a` to create
+    bi-directional links between every file in the list.
+
+    If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
+    to be combined with one or more file/url arguments.
+  }
   arg_name 'SOURCE [SOURCE...] TARGET'
   command %i[link ln] do |c|
     c.desc 'Link every listed file or url to every other'
@@ -113,6 +151,12 @@ class App
   end
 
   desc 'Copy Hook URL for file/url to clipboard'
+  long_desc %{
+    Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+
+    The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+    or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
+  }
   arg_name 'FILE_OR_URL'
   command %i[clip cp] do |c|
     c.desc 'Copy as Markdown'
@@ -133,6 +177,12 @@ class App
   end
 
   desc 'Get a Hook URL for the frontmost window of an app'
+  long_desc %{
+    Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
+    for the active document, note, task, etc., returning a Hook URL.
+
+      Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
+  }
   arg_name 'APPLICATION_NAME'
   command %i[from] do |c|
     c.desc 'Output as Markdown'
@@ -149,6 +199,11 @@ class App
   end
 
   desc 'Remove a hook between two files/urls'
+  long_desc %{
+    Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
+
+    If --all isn't specified, exactly two arguments (Files/URLs) are required.
+  }
   arg_name 'ITEM_1 ITEM_2'
   command %i[remove rm] do |c|
     c.desc 'Remove ALL links on files, requires confirmation'
@@ -161,6 +216,9 @@ class App
   end
 
   desc 'Clone all hooks from one file or url onto another'
+  long_desc %{
+    Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
+  }
   arg_name 'SOURCE TARGET'
   command %i[clone] do |c|
     c.action do |_global_options, _options, args|
@@ -172,6 +230,11 @@ class App
   end
 
   desc 'Select from hooks on a file/url and open in default application'
+  long_desc %{
+    If the target file/URL has hooked items, a menu will be provided. Selecting a file
+    from this menu will open the item using the default application assigned to the
+    filetype by macOS.
+  }
   arg_name 'FILE_OR_URL'
   command %i[select] do |c|
     c.action do |_global_options, _options, args|
@@ -182,6 +245,9 @@ class App
   end
 
   desc 'Open the specified file or url in Hook GUI'
+  long_desc %{
+    Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+  }
   arg_name 'FILE_OR_URL'
   command %i[open gui] do |c|
     c.action do |_global_options, _options, args|

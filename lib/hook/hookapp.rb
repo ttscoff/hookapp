@@ -286,7 +286,6 @@ module HookApp
       "Hook removed between #{source} and #{target}"
     else
       raise 'Invalid number of URLs or files specified'
-
     end
   end
 

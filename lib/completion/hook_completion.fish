@@ -1,3 +1,4 @@
+# Save this script in ~/.config/fish/completions/hook.fish
 function __fish_hook_needs_command
 	# Figure out if the current invocation already has a command.
 
