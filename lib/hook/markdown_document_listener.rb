@@ -22,6 +22,14 @@ module GLI
 
       # Called when processing has completed
       def ending
+        if File.exist?('CREDITS.md')
+          @io.puts IO.read('CREDITS.md')
+          @io.puts
+        end
+        if File.exist?('LICENSE.md')
+          @io.puts IO.read('LICENSE.md')
+          @io.puts
+        end
         @io.puts
         @io.puts "Documentation generated #{Time.now.strftime('%Y-%m-%d %H:%M')}"
         @io.puts
