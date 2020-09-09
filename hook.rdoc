@@ -1,6 +1,8 @@
 == hook - CLI interface for Hook.app (macOS)
 
-v0.0.5
+Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+
+v2.0.1
 
 === Global Options
 === --help
@@ -33,6 +35,35 @@ Copy as Markdown
 
 ==== Command: <tt>clone  SOURCE TARGET</tt>
 Clone all hooks from one file or url onto another
+
+
+==== Command: <tt>find|search  SEARCH_STRING</tt>
+Search bookmarks
+
+Search bookmark urls and names for a string and output in specified format (default "paths").
+
+    Run `hook find` with no search argument to list all bookmarks.
+===== Options
+===== -o|--output_format format
+
+Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
+
+[Default Value] paths
+
+
+===== -f|--files_only
+Output only bookmarks with file paths (exclude e.g. emails)
+
+
+
+===== -n|--names_only
+Search only bookmark names
+
+
+
+===== --null
+Separate results with NULL separator, only applies with "paths" output for single file argument
+
 
 
 ==== Command: <tt>from  APPLICATION_NAME</tt>
@@ -78,7 +109,9 @@ Paste URL from clipboard
 ==== Command: <tt>list|ls  FILE_OR_URL [FILE_OR_URL...]</tt>
 List hooks on a file or url
 
+Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
 
+    Run `hook list` with no file/url argument to list all bookmarks.
 ===== Options
 ===== -o|--output_format format
 
@@ -115,3 +148,4 @@ Remove ALL links on files, requires confirmation
 Select from hooks on a file/url and open in default application
 
 
+[Default Command] help

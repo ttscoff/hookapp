@@ -2,6 +2,14 @@
 
 # Hook.app functions
 module HookApp
+  # Create a single regex for validation of an
+  # array by first char or full match
+  def format_regex(options)
+    fmt_rx_array = []
+    options.map {|fmt| fmt_rx_array.push(fmt.sub(/^(.)(.*?)$/, '\1(\2)?')) }
+    Regexp.new("^(#{fmt_rx_array.join('|')})$",'i')
+  end
+
   # Check if fmt fully matches or matches the first
   # character of available options
   # return full valid format or nil
@@ -305,37 +313,42 @@ module HookApp
 
     separator = args.length == 1 && opts[:format] == 'paths' && opts[:null_separator] ? "\0" : "\n"
 
-    args.each do |url|
-      source_mark = bookmark_for(url)
-      filename = source_mark[:name]
-
-      case opts[:format]
-      when /^m/
-        filename = "[#{source_mark[:name]}](#{source_mark[:url]})"
-        filename += " <file://#{CGI.escape(source_mark[:path])}>" if source_mark[:path]
-      when /^p/
-        filename = "File: #{source_mark[:name]}"
-        filename += " (#{source_mark[:path]})" if source_mark[:path]
-      when /^h/
-        filename = "File: #{source_mark[:name]}"
-        filename += " (#{source_mark[:url]})" if source_mark[:url]
-      else
-        filename = "Bookmarks attached to #{source_mark[:path] || source_mark[:url]}"
-      end
-
-      hooks_arr = get_hooks(url)
-
-      output = output_array(hooks_arr, opts)
-      result.push({ file: filename, links: output.join(separator) })
-    end
-
-    if result.length > 1 || opts[:format] == 'verbose'
-      result.map! do |res|
-        "#{res[:file]}\n\n#{res[:links]}\n"
-      end
+    if args.nil? || args.empty?
+      result = output_array(all_bookmarks, opts)
     else
-      result.map! do |res|
-        res[:links]
+      args.each do |url|
+        source_mark = bookmark_for(url)
+        filename = source_mark[:name]
+
+        case opts[:format]
+        when /^m/
+          filename = "[#{source_mark[:name]}](#{source_mark[:url]})"
+          filename += " <file://#{CGI.escape(source_mark[:path])}>" if source_mark[:path]
+        when /^p/
+          filename = "File: #{source_mark[:name]}"
+          filename += " (#{source_mark[:path]})" if source_mark[:path]
+        when /^h/
+          filename = "File: #{source_mark[:name]}"
+          filename += " (#{source_mark[:url]})" if source_mark[:url]
+        else
+          filename = "Bookmarks attached to #{source_mark[:path] || source_mark[:url]}"
+        end
+
+        hooks_arr = get_hooks(url)
+
+        output = output_array(hooks_arr, opts)
+        result.push({ file: filename, links: output.join(separator) })
+      end
+
+
+      if result.length > 1 || opts[:format] == 'verbose'
+        result.map! do |res|
+          "#{res[:file]}\n\n#{res[:links]}\n"
+        end
+      else
+        result.map! do |res|
+          res[:links]
+        end
       end
     end
     result.join(separator)
