@@ -1,3 +1,12 @@
+#### 2.0.3
+
+- Incorporate `fzf` for selecting and filtering hooks
+- Improve documentation
+- Add `scripts` command to output completion scripts for various shells7
+- If no search is provided to `hook find`, list all hooks
+- If no file is provided to `hook ls`, list all hooks
+
+
 #### 2.0.0
 
 - Revamped to use Hook 2.0 AppleScript syntax
