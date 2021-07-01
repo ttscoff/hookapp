@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'hook/version.rb'
+require 'hook/version'
 require 'shellwords'
 require 'cgi'
-require 'hook/string.rb'
-require 'hook/hookapp.rb'
-require 'hook/hooker.rb'
+require 'hook/string'
+require 'hook/hookapp'
+require 'hook/hooker'
 require 'hook/markdown_document_listener'
