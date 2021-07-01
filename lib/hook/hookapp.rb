@@ -3,7 +3,7 @@
 require 'shellwords'
 require 'uri'
 # Hook.app functions
-module HookApp
+class HookApp
   # Create a single regex for validation of an
   # array by first char or full match.
   def format_regex(options)
