@@ -19,7 +19,7 @@ class App
   subcommand_option_handling :normal
   arguments :strict
 
-  hooker = nil
+  hookapp = nil
 
   desc 'List hooks on a file or url'
   long_desc %{
@@ -46,12 +46,12 @@ Run `hook list` with no file/url argument to list all bookmarks.}
 
     c.action do |_global_options, options, args|
       if options[:s]
-        return hooker.open_linked(args[0])
+        return hookapp.open_linked(args[0])
       end
-      valid_format = hooker.validate_format(options[:o], valid_formats)
+      valid_format = hookapp.validate_format(options[:o], valid_formats)
       exit_now!("Invalid output format: \"#{options[:o]}\"", 6) unless valid_format
 
-      result = hooker.linked_bookmarks(args, { files_only: options[:f],
+      result = hookapp.linked_bookmarks(args, { files_only: options[:f],
                                                format: valid_format,
                                                null_separator: options[:null] })
 
@@ -111,10 +111,10 @@ Run `hook find` with no search argument to list all bookmarks.}
     c.switch %i[n names_only], { negatable: false, default_value: false }
 
     c.action do |_global_options, options, args|
-      valid_format = hooker.validate_format(options[:o], valid_formats)
+      valid_format = hookapp.validate_format(options[:o], valid_formats)
       exit_now!("Invalid output format: \"#{options[:o]}\"", 6) unless valid_format
 
-      result = hooker.search_bookmarks(args.join(" "), { files_only: options[:f],
+      result = hookapp.search_bookmarks(args.join(" "), { files_only: options[:f],
                                                format: valid_format,
                                                null_separator: options[:null],
                                                names_only: options[:n] })
@@ -151,9 +151,9 @@ to be combined with one or more file/url arguments.
         exit_now!('Wrong number of arguments. At least 2 files must be specified, or one file with --paste', 5)
       end
       if options[:a]
-        puts hooker.link_all(args)
+        puts hookapp.link_all(args)
       else
-        puts hooker.link_files(args)
+        puts hookapp.link_files(args)
       end
     end
   end
@@ -177,9 +177,9 @@ or to paste into another app as a link. Use the -m flag to copy a full Markdown 
       exit_now!('Wrong number of arguments. Requires a path/url or -a APP_NAME', 5) if args.length != 1 && !options[:a]
 
       if options[:a]
-        puts hooker.bookmark_from_app(options[:a], { copy: true, markdown: options[:m] })
+        puts hookapp.bookmark_from_app(options[:a], { copy: true, markdown: options[:m] })
       else
-        puts hooker.clip_bookmark(args[0], { markdown: options[:m] })
+        puts hookapp.clip_bookmark(args[0], { markdown: options[:m] })
       end
     end
   end
@@ -202,7 +202,7 @@ Use -m to get the response as Markdown, and/or -c to copy the result directly to
     c.action do |_global_options, options, args|
       exit_now!("Wrong number of arguments (1 expected, #{args.length} given)", 5) if args.length != 1
 
-      puts hooker.bookmark_from_app(args[0], { copy: options[:c], markdown: options[:m] })
+      puts hookapp.bookmark_from_app(args[0], { copy: options[:c], markdown: options[:m] })
     end
   end
 
@@ -218,7 +218,7 @@ If --all isn't specified, exactly two arguments (Files/URLs) are required.
     c.switch %i[a all], { negatable: false, default_value: false }
 
     c.action do |_global_options, options, args|
-      result = hooker.delete_hooks(args, { all: options[:a] })
+      result = hookapp.delete_hooks(args, { all: options[:a] })
       puts result
     end
   end
@@ -232,7 +232,7 @@ Copy all the files and urls that the first file is hooked to onto another file. 
     c.action do |_global_options, _options, args|
       exit_now!("Wrong number of arguments. Two file paths or urls required (#{args.length} given)", 5) if args.length != 2
 
-      result = hooker.clone_hooks(args)
+      result = hookapp.clone_hooks(args)
       puts result
     end
   end
@@ -248,7 +248,7 @@ filetype by macOS. Allows multiple selections with tab key, and type-ahead fuzzy
     c.action do |_global_options, _options, args|
       exit_now!("Wrong number of arguments. One file path or url required (#{args.length} given)", 5) if args.length != 1
 
-      hooker.open_linked(args[0])
+      hookapp.open_linked(args[0])
     end
   end
 
@@ -261,7 +261,7 @@ Opens Hook.app on the specified file/URL for browsing and performing actions. Ex
     c.action do |_global_options, _options, args|
       exit_now!("Wrong number of arguments. One file path or url required (#{args.length} given)", 5) if args.length != 1
 
-      hooker.open_gui(args[0])
+      hookapp.open_gui(args[0])
     end
   end
 
@@ -271,7 +271,7 @@ Opens Hook.app on the specified file/URL for browsing and performing actions. Ex
     # chosen command
     # Use skips_pre before a command to skip this block
     # on that command only
-    hooker = Hooker.new
+    hookapp = HookApp.new
     true
   end
 
