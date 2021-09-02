@@ -18,6 +18,6 @@ Gem::Specification.new do |s|
   s.executables << 'hook'
   s.add_development_dependency('aruba', '~> 0.14.14')
   s.add_development_dependency('rake', '~> 13.0.1')
-  s.add_development_dependency('rdoc', '~> 6.1.2')
+  s.add_development_dependency('rdoc', '~> 6.3.2')
   s.add_runtime_dependency('gli', '2.19.0')
 end
