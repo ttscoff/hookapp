@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module HookApp - hookapp</title>
+<title>class HookApp - hookapp</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -21,9 +21,7 @@
 <link href="./css/rdoc.css" rel="stylesheet">
 
 
-
-
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -60,65 +58,50 @@
   <div id="class-metadata">
     
     
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Object
+</div>
+
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-all_bookmarks">#all_bookmarks</a>
-    
     <li ><a href="#method-i-bookmark_for">#bookmark_for</a>
-    
     <li ><a href="#method-i-bookmark_from_app">#bookmark_from_app</a>
-    
     <li ><a href="#method-i-clip_bookmark">#clip_bookmark</a>
-    
     <li ><a href="#method-i-clone_hooks">#clone_hooks</a>
-    
     <li ><a href="#method-i-copy_bookmark">#copy_bookmark</a>
-    
     <li ><a href="#method-i-delete_all_hooks">#delete_all_hooks</a>
-    
     <li ><a href="#method-i-delete_hooks">#delete_hooks</a>
-    
     <li ><a href="#method-i-format_regex">#format_regex</a>
-    
     <li ><a href="#method-i-get_hooks">#get_hooks</a>
-    
     <li ><a href="#method-i-link_all">#link_all</a>
-    
     <li ><a href="#method-i-link_files">#link_files</a>
-    
     <li ><a href="#method-i-linked_bookmarks">#linked_bookmarks</a>
-    
     <li ><a href="#method-i-open_gui">#open_gui</a>
-    
     <li ><a href="#method-i-open_linked">#open_linked</a>
-    
     <li ><a href="#method-i-output_array">#output_array</a>
-    
     <li ><a href="#method-i-search_bookmarks">#search_bookmarks</a>
-    
     <li ><a href="#method-i-search_name">#search_name</a>
-    
     <li ><a href="#method-i-search_path_or_address">#search_path_or_address</a>
-    
     <li ><a href="#method-i-select_hook">#select_hook</a>
-    
     <li ><a href="#method-i-validate_format">#validate_format</a>
-    
   </ul>
 </div>
 
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-HookApp">
-  <h1 id="module-HookApp" class="module">
-    module HookApp
+<main role="main" aria-labelledby="class-HookApp">
+  <h1 id="class-HookApp" class="class">
+    class HookApp
   </h1>
 
   <section class="description">
@@ -127,41 +110,27 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-all_bookmarks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">all_bookmarks</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get all known bookmarks. Return array of bookmark hashes.</p>
-          
-          
 
-          
           <div class="method-source-code" id="all_bookmarks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_bookmarks</span>
@@ -180,33 +149,21 @@
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-bookmark_for" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">bookmark_for</span><span
             class="method-args">(url)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get a <a href="Hook.html"><code>Hook</code></a> bookmark for file or URL. Return bookmark hash.</p>
-          
-          
 
-          
           <div class="method-source-code" id="bookmark_for-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_for</span>(<span class="ruby-identifier">url</span>)
@@ -232,33 +189,21 @@
   <span class="ruby-identifier">mark</span>.<span class="ruby-identifier">split_hook</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-bookmark_from_app" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">bookmark_from_app</span><span
             class="method-args">(app, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get a bookmark from the foreground document of specified app.</p>
-          
-          
 
-          
           <div class="method-source-code" id="bookmark_from_app-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_from_app</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">opts</span>)
@@ -283,33 +228,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-clip_bookmark" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">clip_bookmark</span><span
             class="method-args">(url, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create a bookmark for specified file/url and copy to the clipboard.</p>
-          
-          
 
-          
           <div class="method-source-code" id="clip_bookmark-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clip_bookmark</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
@@ -317,33 +250,21 @@
   <span class="ruby-identifier">copy_bookmark</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>], <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>], <span class="ruby-identifier">opts</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-clone_hooks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">clone_hooks</span><span
             class="method-args">(args)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Copy all hooks from source file to target file</p>
-          
-          
 
-          
           <div class="method-source-code" id="clone_hooks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_hooks</span>(<span class="ruby-identifier">args</span>)
@@ -368,33 +289,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-copy_bookmark" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">copy_bookmark</span><span
             class="method-args">(title, url, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create a bookmark from specified title and url and copy to the clipboard.</p>
-          
-          
 
-          
           <div class="method-source-code" id="copy_bookmark-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">copy_bookmark</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
@@ -405,33 +314,21 @@
   <span class="ruby-node">%(Copied #{opts[:markdown] ? &#39;Markdown link&#39; : &#39;Hook URL&#39;} for &#39;#{title}&#39; to clipboard)</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delete_all_hooks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">delete_all_hooks</span><span
             class="method-args">(url)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Delete all hooked files/urls from target file</p>
-          
-          
 
-          
           <div class="method-source-code" id="delete_all_hooks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 337</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all_hooks</span>(<span class="ruby-identifier">url</span>)
@@ -452,33 +349,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-delete_hooks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">delete_hooks</span><span
             class="method-args">(args, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Delete hooks between two files/urls</p>
-          
-          
 
-          
           <div class="method-source-code" id="delete_hooks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 356</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_hooks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
@@ -510,33 +395,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-format_regex" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">format_regex</span><span
             class="method-args">(options)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create a single regex for validation of an array by first char or full match.</p>
-          
-          
 
-          
           <div class="method-source-code" id="format_regex-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_regex</span>(<span class="ruby-identifier">options</span>)
@@ -545,33 +418,21 @@
   <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;^(#{fmt_rx_array.join(&#39;|&#39;)})$&quot;</span>,<span class="ruby-string">&#39;i&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-get_hooks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">get_hooks</span><span
             class="method-args">(url)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get bookmarks hooked to file or URL. Return array of bookmark hashes.</p>
-          
-          
 
-          
           <div class="method-source-code" id="get_hooks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_hooks</span>(<span class="ruby-identifier">url</span>)
@@ -598,33 +459,21 @@
   <span class="ruby-identifier">hooks</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-link_all" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">link_all</span><span
             class="method-args">(args)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create bi-directional links between every file/url in the list of arguments</p>
-          
-          
 
-          
           <div class="method-source-code" id="link_all-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 386</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_all</span>(<span class="ruby-identifier">args</span>)
@@ -645,33 +494,21 @@
   <span class="ruby-node">&quot;Linked #{args.length} files to each other&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-link_files" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">link_files</span><span
             class="method-args">(args)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Link 2 or more files/urls with bi-directional hooks.</p>
-          
-          
 
-          
           <div class="method-source-code" id="link_files-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 291</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_files</span>(<span class="ruby-identifier">args</span>)
@@ -696,33 +533,21 @@
   <span class="ruby-node">&quot;Linked #{args.length} files to #{target}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-linked_bookmarks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">linked_bookmarks</span><span
             class="method-args">(args, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Get a list of all hooks on a file/url.</p>
-          
-          
 
-          
           <div class="method-source-code" id="linked_bookmarks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 405</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linked_bookmarks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
@@ -771,33 +596,21 @@
   <span class="ruby-identifier">result</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">separator</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-open_gui" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">open_gui</span><span
             class="method-args">(url)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Open the <a href="Hook.html"><code>Hook</code></a> GUI for browsing/performing actions on a file or url</p>
-          
-          
 
-          
           <div class="method-source-code" id="open_gui-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_gui</span>(<span class="ruby-identifier">url</span>)
@@ -815,33 +628,21 @@
   <span class="ruby-identifier">raise</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-open_linked" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">open_linked</span><span
             class="method-args">(url)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Select from a menu of available hooks and open using macOS `open`.</p>
-          
-          
 
-          
           <div class="method-source-code" id="open_linked-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_linked</span>(<span class="ruby-identifier">url</span>)
@@ -856,33 +657,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-output_array" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">output_array</span><span
             class="method-args">(hooks_arr, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Output an array of hooks in the given format.</p>
-          
-          
 
-          
           <div class="method-source-code" id="output_array-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 452</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_array</span>(<span class="ruby-identifier">hooks_arr</span>, <span class="ruby-identifier">opts</span>)
@@ -921,33 +710,21 @@
   <span class="ruby-identifier">output</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-search_bookmarks" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">search_bookmarks</span><span
             class="method-args">(search, opts)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Search bookmarks, using both names and addresses unless options contain “:names_only”. Return results as formatted list.</p>
-          
-          
 
-          
           <div class="method-source-code" id="search_bookmarks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_bookmarks</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">opts</span>)
@@ -972,33 +749,21 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-search_name" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">search_name</span><span
             class="method-args">(search)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Search boomark names/titles. Return array of bookmark hashes.</p>
-          
-          
 
-          
           <div class="method-source-code" id="search_name-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_name</span>(<span class="ruby-identifier">search</span>)
@@ -1018,33 +783,21 @@
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-search_path_or_address" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">search_path_or_address</span><span
             class="method-args">(search)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Search bookmark paths and addresses. Return array of bookmark hashes.</p>
-          
-          
 
-          
           <div class="method-source-code" id="search_path_or_address-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_path_or_address</span>(<span class="ruby-identifier">search</span>)
@@ -1064,33 +817,21 @@
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-select_hook" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">select_hook</span><span
             class="method-args">(marks)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Generate a menu of available hooks for selecting one or more hooks to operate on. Revamped to use `fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.</p>
-          
-          
 
-          
           <div class="method-source-code" id="select_hook-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_hook</span>(<span class="ruby-identifier">marks</span>)
@@ -1156,33 +897,21 @@
   <span class="ruby-identifier">res</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-validate_format" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">validate_format</span><span
             class="method-args">(fmt, options)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Check if format fully matches or matches the first character of available options. Return full valid format or nil</p>
-          
-          
 
-          
           <div class="method-source-code" id="validate_format-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">options</span>)
@@ -1198,25 +927,20 @@
   <span class="ruby-identifier">valid_format</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
