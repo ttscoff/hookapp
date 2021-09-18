@@ -3,6 +3,7 @@
 require 'hook/version'
 require 'shellwords'
 require 'cgi'
+require 'gli'
 require 'hook/string'
 require 'hook/hookapp'
 require 'hook/hooker'
