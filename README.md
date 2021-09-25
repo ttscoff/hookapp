@@ -2,9 +2,10 @@
 
 CLI interface for Hook.app (macOS)
 
-> Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+> Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+    This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-*v2.0.3*
+*v2.0.7*
 
 ## Installation
 
@@ -257,6 +258,24 @@ Generate a menu to select hook(s) for opening
 
 * * * * * *
 
+### `$ hook` <mark>`percent`</mark> ` STRING`
+
+*Percent encode/decode a string*
+
+> Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.
+
+#### Commands
+
+##### `$ hook` <mark>`decode`</mark> ` STRING`
+
+*decode a percent-encoded string*
+
+##### `$ hook` <mark>`encode`</mark> ` STRING`
+
+*percent encode a string*
+
+* * * * * *
+
 ### `$ hook` <mark>`remove|rm`</mark> ` ITEM_1 ITEM_2`
 
 *Remove a hook between two files/urls*
@@ -270,6 +289,10 @@ Generate a menu to select hook(s) for opening
 ##### `-a`|`--all`
 
 Remove ALL links on files, requires confirmation
+
+##### `-f`|`--force`
+
+
 
 * * * * * *
 
@@ -325,5 +348,5 @@ This software is licensed under the MIT License.
 	THE SOFTWARE.
 
 
-Documentation generated 2021-09-18 12:29
+Documentation generated 2021-09-25 07:37
 
