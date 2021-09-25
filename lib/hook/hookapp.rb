@@ -171,9 +171,9 @@ class HookApp
     output = output_array(result, opts)
 
     if opts[:format] =~ /^v/
-      "Search results for: #{search}\n---------\n" + output.join("\n")
+      "Search results for: #{search}\n---------\n" + output.join("\n") if output
     else
-      output.join(separator)
+      output.join(separator) if output
     end
   end
 
@@ -334,10 +334,13 @@ class HookApp
   end
 
   # Delete all hooked files/urls from target file
-  def delete_all_hooks(url)
-    STDERR.print "Are you sure you want to delete ALL hooks from #{url} (y/N)? "
-    res = STDIN.gets.strip
-    if res =~ /^y/i
+  def delete_all_hooks(url, force: false)
+    unless force
+      STDERR.print "Are you sure you want to delete ALL hooks from #{url} (y/N)? "
+      res = STDIN.gets.strip
+    end
+
+    if res =~ /^y/i || force
       get_hooks(url).each do |hook|
         `osascript <<'APPLESCRIPT'
           tell application "Hook"
@@ -360,7 +363,7 @@ class HookApp
       urls.each_with_index do |url, i|
         raise "Invalid target: #{args[i]}" unless url
 
-        output.push(delete_all_hooks(url))
+        output.push(delete_all_hooks(url, force: opts[:force]))
       end
       return output.join("\n")
     end
@@ -431,7 +434,7 @@ class HookApp
         hooks_arr = get_hooks(url)
 
         output = output_array(hooks_arr, opts)
-        result.push({ file: filename, links: output.join(separator) })
+        result.push({ file: filename, links: output.join(separator) }) if output
       end
 
 
@@ -479,11 +482,27 @@ class HookApp
         end
       end
     else
-      output = ['No bookmarks']
+      warn 'No bookmarks'
     end
 
     output
   end
+
+  def encode(string)
+    result = `osascript <<'APPLESCRIPT'
+tell application "Hook"
+  percent encode "#{string.escape_quotes}"
+end tell
+APPLESCRIPT`.strip.gsub(/'/,'%27')
+    print result
+  end
+
+  def decode(string)
+    result = `osascript <<'APPLESCRIPT'
+tell application "Hook"
+  percent decode "#{string.escape_quotes}"
+end tell
+APPLESCRIPT`.strip
+    print result
+  end
 end
-
-

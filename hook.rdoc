@@ -1,8 +1,9 @@
 == hook - CLI interface for Hook.app (macOS)
 
-Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+    This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-v2.0.3
+v2.0.6
 
 === Global Options
 === --help
@@ -151,6 +152,19 @@ This option is a shortcut to `hook select` and overrides any other arguments.
 Open the specified file or url in Hook GUI
 
 Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+==== Command: <tt>percent  STRING</tt>
+Percent encode/decode a string
+
+Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.
+===== Commands
+====== Command: <tt>decode  STRING</tt>
+decode a percent-encoded string
+
+
+====== Command: <tt>encode  STRING</tt>
+percent encode a string
+
+
 ==== Command: <tt>remove|rm  ITEM_1 ITEM_2</tt>
 Remove a hook between two files/urls
 
@@ -160,6 +174,11 @@ If --all isn't specified, exactly two arguments (Files/URLs) are required.
 ===== Options
 ===== -a|--all
 Remove ALL links on files, requires confirmation
+
+
+
+===== -f|--force
+
 
 
 

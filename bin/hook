@@ -2,13 +2,15 @@
 # frozen_string_literal: true
 
 require 'hook'
+require 'shellwords'
 
 # Main class for GLI app
 class App
   extend GLI::App
 
   program_desc 'CLI interface for Hook.app (macOS)'
-  program_long_desc 'Hook.app is a productivity tool for macOS <https://hookproductivity.com/>. This gem includes a `hook` binary that allows interaction with the features of Hook.app.'
+  program_long_desc 'Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+    This gem includes a `hook` binary that allows interaction with the features of Hook.app.'
   default_command 'help'
   autocomplete_commands = true
   synopsis_format(:terminal)
@@ -19,6 +21,7 @@ class App
   arguments :strict
 
   hookapp = nil
+  stdin = nil
 
   desc 'List hooks on a file or url'
   long_desc %{
@@ -215,9 +218,10 @@ If --all isn't specified, exactly two arguments (Files/URLs) are required.
   command %i[remove rm] do |c|
     c.desc 'Remove ALL links on files, requires confirmation'
     c.switch %i[a all], { negatable: false, default_value: false }
+    c.switch %i[f force], { negatable: false, default_value: false }
 
     c.action do |_global_options, options, args|
-      result = hookapp.delete_hooks(args, { all: options[:a] })
+      result = hookapp.delete_hooks(args, { all: options[:all], force: options[:force] })
       puts result
     end
   end
@@ -264,12 +268,55 @@ Opens Hook.app on the specified file/URL for browsing and performing actions. Ex
     end
   end
 
+  desc 'Percent encode/decode a string'
+  long_desc %{Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.}
+  arg_name 'STRING'
+  command :percent do |c|
+    c.desc 'percent encode a string'
+    c.arg_name 'STRING'
+    c.command :encode do |enc|
+      enc.action do |_global_options, _options, args|
+        if stdin
+          string = stdin
+        else
+          exit_now!('no string provided') unless args.size.positive?
+
+          string = args.join(' ').strip
+        end
+
+        print hookapp.encode(string)
+      end
+    end
+
+    c.desc 'decode a percent-encoded string'
+    c.arg_name 'STRING'
+    c.command :decode do |dec|
+      dec.action do |_global_options, _options, args|
+        if stdin
+          string = stdin
+        else
+          exit_now! ('no string provided') unless args.size.positive?
+
+          string = args.join(' ').strip
+        end
+
+        print hookapp.decode(string)
+      end
+    end
+
+    # c.default_command :encode
+  end
+
   pre do |global, _command, _options, _args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the
     # chosen command
     # Use skips_pre before a command to skip this block
     # on that command only
+    if !STDIN.tty?
+      stdin = STDIN.read.strip
+    end
+
     hookapp = HookApp.new
     true
   end

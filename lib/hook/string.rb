@@ -57,4 +57,8 @@ class String
 
     true
   end
+
+  def escape_quotes
+    gsub(/"/, '\\"')
+  end
 end
