@@ -48,16 +48,17 @@ Run `hook list` with no file/url argument to list all bookmarks.)
 
     c.action do |_global_options, options, args|
       if options[:s]
-        return hookapp.open_linked(args[0])
+        hookapp.open_linked(args[0])
+      else
+        valid_format = hookapp.validate_format(options[:o], valid_formats)
+        help_now!("Invalid output format: \"#{options[:o]}\"", 6) unless valid_format
+
+        result = hookapp.linked_bookmarks(args, { files_only: options[:f],
+                                                 format: valid_format,
+                                                 null_separator: options[:null] })
+
+        puts result
       end
-      valid_format = hookapp.validate_format(options[:o], valid_formats)
-      help_now!("Invalid output format: \"#{options[:o]}\"", 6) unless valid_format
-
-      result = hookapp.linked_bookmarks(args, { files_only: options[:f],
-                                               format: valid_format,
-                                               null_separator: options[:null] })
-
-      puts result
     end
   end
 

@@ -1,3 +1,8 @@
+#### 2.0.7
+
+- Bug fixes
+- New tests
+
 #### 2.0.3
 
 - Incorporate `fzf` for selecting and filtering hooks
