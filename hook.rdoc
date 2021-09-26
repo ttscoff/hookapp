@@ -1,7 +1,8 @@
 == hook - CLI interface for Hook.app (macOS)
 
 Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
-    This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+
+This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
 v2.0.7
 
@@ -22,7 +23,7 @@ Copy Hook URL for file/url to clipboard
 
 Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
 
-The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL`,
 or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 ===== Options
 ===== -a|--app APP_NAME
@@ -40,15 +41,17 @@ Copy as Markdown
 ==== Command: <tt>clone  SOURCE TARGET</tt>
 Clone all hooks from one file or url onto another
 
-Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
-==== Command: <tt>find|search  SEARCH_STRING</tt>
+Copy all the files and urls that the first file is hooked to onto another file.
+
+Exactly two arguments (SOURCE, TARGET) required.
+==== Command: <tt>find|search  [SEARCH_STRING]</tt>
 Search bookmarks
 
 Search bookmark urls and names for a string and output in specified format (default "paths").
 
 Run `hook find` with no search argument to list all bookmarks.
 ===== Options
-===== -o|--output_format format
+===== -o|--output_format FORMAT
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
 
@@ -98,7 +101,7 @@ List commands one per line, to assist with shell completion
 
 
 
-==== Command: <tt>link|ln  SOURCE [SOURCE...] TARGET</tt>
+==== Command: <tt>link|ln  SOURCE... TARGET</tt>
 Create bidirectional hooks between two or more files/urls
 
 If two files/urls are provided, links will be bi-directional.
@@ -119,14 +122,14 @@ Paste URL from clipboard
 
 
 
-==== Command: <tt>list|ls  FILE_OR_URL [FILE_OR_URL...]</tt>
+==== Command: <tt>list|ls  [FILE_OR_URL]...</tt>
 List hooks on a file or url
 
 Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
 
 Run `hook list` with no file/url argument to list all bookmarks.
 ===== Options
-===== -o|--output_format format
+===== -o|--output_format FORMAT
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
 
@@ -151,7 +154,9 @@ This option is a shortcut to `hook select` and overrides any other arguments.
 ==== Command: <tt>open|gui  FILE_OR_URL</tt>
 Open the specified file or url in Hook GUI
 
-Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+Opens Hook.app on the specified file/URL for browsing and performing actions.
+
+Exactly one argument (File/URL) required.
 ==== Command: <tt>percent  STRING</tt>
 Percent encode/decode a string
 
@@ -165,7 +170,7 @@ decode a percent-encoded string
 percent encode a string
 
 
-==== Command: <tt>remove|rm  ITEM_1 ITEM_2</tt>
+==== Command: <tt>remove|rm  FILE_OR_URL...</tt>
 Remove a hook between two files/urls
 
 Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.

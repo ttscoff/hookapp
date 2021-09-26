@@ -94,7 +94,7 @@
 
 <p>Hook.app is a productivity tool for macOS &lt;<a href="https://hookproductivity.com">hookproductivity.com</a>/&gt;.</p>
 
-<pre>This gem includes a `hook` binary that allows interaction with the features of Hook.app.</pre>
+<p>This gem includes a `hook` binary that allows interaction with the features of Hook.app.</p>
 
 <p>v2.0.7</p>
 
@@ -116,7 +116,7 @@
 
 <p>Creates a bookmark for the specified file or URL and copies its <a href="Hook.html"><code>Hook</code></a> URL to the clipboard.</p>
 
-<p>The copied <a href="Hook.html"><code>Hook</code></a> URL can be used to link to other files (use `hook link –paste FILE/URL), or to paste into another app as a link. Use the -m flag to copy a full Markdown link.</p>
+<p>The copied <a href="Hook.html"><code>Hook</code></a> URL can be used to link to other files (use `hook link –paste FILE/URL`, or to paste into another app as a link. Use the -m flag to copy a full Markdown link.</p>
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
@@ -136,9 +136,11 @@
 
 <p>Clone all hooks from one file or url onto another</p>
 
-<p>Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.</p>
+<p>Copy all the files and urls that the first file is hooked to onto another file.</p>
 
-<h4 id="label-Command-3A+find-7Csearch++SEARCH_STRING">Command: <code>find|search  SEARCH_STRING</code><span><a href="#label-Command-3A+find-7Csearch++SEARCH_STRING">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<p>Exactly two arguments (SOURCE, TARGET) required.</p>
+
+<h4 id="label-Command-3A+find-7Csearch++-5BSEARCH_STRING-5D">Command: <code>find|search  [SEARCH_STRING]</code><span><a href="#label-Command-3A+find-7Csearch++-5BSEARCH_STRING-5D">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Search bookmarks</p>
 
@@ -148,7 +150,7 @@
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
-<h5 id="label-o-7C--output_format+format">-o|–output_format format<span><a href="#label-o-7C--output_format+format">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="label-o-7C--output_format+FORMAT">-o|–output_format FORMAT<span><a href="#label-o-7C--output_format+FORMAT">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
 <p>Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]</p>
 <dl class="rdoc-list label-list"><dt>Default Value
@@ -198,7 +200,7 @@
 
 <p>List commands one per line, to assist with shell completion</p>
 
-<h4 id="label-Command-3A+link-7Cln++SOURCE+-5BSOURCE...-5D+TARGET">Command: <code>link|ln  SOURCE [SOURCE...] TARGET</code><span><a href="#label-Command-3A+link-7Cln++SOURCE+-5BSOURCE...-5D+TARGET">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="label-Command-3A+link-7Cln++SOURCE...+TARGET">Command: <code>link|ln  SOURCE... TARGET</code><span><a href="#label-Command-3A+link-7Cln++SOURCE...+TARGET">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Create bidirectional hooks between two or more files/urls</p>
 
@@ -216,7 +218,7 @@
 
 <p>Paste URL from clipboard</p>
 
-<h4 id="label-Command-3A+list-7Cls++FILE_OR_URL+-5BFILE_OR_URL...-5D">Command: <code>list|ls  FILE_OR_URL [FILE_OR_URL...]</code><span><a href="#label-Command-3A+list-7Cls++FILE_OR_URL+-5BFILE_OR_URL...-5D">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="label-Command-3A+list-7Cls++-5BFILE_OR_URL-5D...">Command: <code>list|ls  [FILE_OR_URL]...</code><span><a href="#label-Command-3A+list-7Cls++-5BFILE_OR_URL-5D...">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>List hooks on a file or url</p>
 
@@ -226,7 +228,7 @@
 
 <h5 id="label-Options">Options<span><a href="#label-Options">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
-<h5 id="label-o-7C--output_format+format">-o|–output_format format<span><a href="#label-o-7C--output_format+format">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="label-o-7C--output_format+FORMAT">-o|–output_format FORMAT<span><a href="#label-o-7C--output_format+FORMAT">&para;</a> <a href="#top">&uarr;</a></span></h5>
 
 <p>Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]</p>
 <dl class="rdoc-list label-list"><dt>Default Value
@@ -252,7 +254,9 @@
 
 <p>Open the specified file or url in <a href="Hook.html"><code>Hook</code></a> GUI</p>
 
-<p>Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.</p>
+<p>Opens Hook.app on the specified file/URL for browsing and performing actions.</p>
+
+<p>Exactly one argument (File/URL) required.</p>
 
 <h4 id="label-Command-3A+percent++STRING">Command: <code>percent  STRING</code><span><a href="#label-Command-3A+percent++STRING">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
@@ -270,7 +274,7 @@
 
 <p>percent encode a string</p>
 
-<h4 id="label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">Command: <code>remove|rm  ITEM_1 ITEM_2</code><span><a href="#label-Command-3A+remove-7Crm++ITEM_1+ITEM_2">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="label-Command-3A+remove-7Crm++FILE_OR_URL...">Command: <code>remove|rm  FILE_OR_URL...</code><span><a href="#label-Command-3A+remove-7Crm++FILE_OR_URL...">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <p>Remove a hook between two files/urls</p>
 
