@@ -3,7 +3,8 @@
 CLI interface for Hook.app (macOS)
 
 > Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
-    This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+
+This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
 *v2.0.7*
 
@@ -100,13 +101,13 @@ Display the program version
 
 ## Commands
 
-### `$ hook` <mark>`clip|cp`</mark> ` FILE_OR_URL`
+### `$ hook` <mark>`clip|cp`</mark> `FILE_OR_URL`
 
 *Copy Hook URL for file/url to clipboard*
 
 > Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
 > 
-> The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL),
+> The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL`,
 > or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 
 #### Options
@@ -121,15 +122,17 @@ Copy as Markdown
 
 * * * * * *
 
-### `$ hook` <mark>`clone`</mark> ` SOURCE TARGET`
+### `$ hook` <mark>`clone`</mark> `SOURCE TARGET`
 
 *Clone all hooks from one file or url onto another*
 
-> Copy all the files and urls that the first file is hooked to onto another file. Exactly two arguments (SOURCE, TARGET) required.
+> Copy all the files and urls that the first file is hooked to onto another file.
+> 
+> Exactly two arguments (SOURCE, TARGET) required.
 
 * * * * * *
 
-### `$ hook` <mark>`find|search`</mark> ` SEARCH_STRING`
+### `$ hook` <mark>`find|search`</mark> `[SEARCH_STRING]`
 
 *Search bookmarks*
 
@@ -139,7 +142,7 @@ Copy as Markdown
 
 #### Options
 
-##### `-o` | `--output_format` format
+##### `-o` | `--output_format` FORMAT
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
 
@@ -159,7 +162,7 @@ Separate results with NULL separator, only applies with "paths" output for singl
 
 * * * * * *
 
-### `$ hook` <mark>`from`</mark> ` APPLICATION_NAME`
+### `$ hook` <mark>`from`</mark> `APPLICATION_NAME`
 
 *Get a Hook URL for the frontmost window of an app*
 
@@ -180,7 +183,7 @@ Output as Markdown
 
 * * * * * *
 
-### `$ hook` <mark>`help`</mark> ` command`
+### `$ hook` <mark>`help`</mark> `command`
 
 *Shows a list of commands or help for one command*
 
@@ -194,7 +197,7 @@ List commands one per line, to assist with shell completion
 
 * * * * * *
 
-### `$ hook` <mark>`link|ln`</mark> ` SOURCE [SOURCE...] TARGET`
+### `$ hook` <mark>`link|ln`</mark> `SOURCE... TARGET`
 
 *Create bidirectional hooks between two or more files/urls*
 
@@ -218,7 +221,7 @@ Paste URL from clipboard
 
 * * * * * *
 
-### `$ hook` <mark>`list|ls`</mark> ` FILE_OR_URL [FILE_OR_URL...]`
+### `$ hook` <mark>`list|ls`</mark> `[FILE_OR_URL]...`
 
 *List hooks on a file or url*
 
@@ -228,7 +231,7 @@ Paste URL from clipboard
 
 #### Options
 
-##### `-o` | `--output_format` format
+##### `-o` | `--output_format` FORMAT
 
 Output format [(h)ooks, (p)aths, (m)arkdown, (v)erbose]
 
@@ -250,15 +253,17 @@ Generate a menu to select hook(s) for opening
 
 * * * * * *
 
-### `$ hook` <mark>`open|gui`</mark> ` FILE_OR_URL`
+### `$ hook` <mark>`open|gui`</mark> `FILE_OR_URL`
 
 *Open the specified file or url in Hook GUI*
 
-> Opens Hook.app on the specified file/URL for browsing and performing actions. Exactly one argument (File/URL) required.
+> Opens Hook.app on the specified file/URL for browsing and performing actions.
+> 
+> Exactly one argument (File/URL) required.
 
 * * * * * *
 
-### `$ hook` <mark>`percent`</mark> ` STRING`
+### `$ hook` <mark>`percent`</mark> `STRING`
 
 *Percent encode/decode a string*
 
@@ -266,17 +271,17 @@ Generate a menu to select hook(s) for opening
 
 #### Commands
 
-##### `$ hook` <mark>`decode`</mark> ` STRING`
+##### `$ hook` <mark>`percent decode`</mark> `STRING`
 
 *decode a percent-encoded string*
 
-##### `$ hook` <mark>`encode`</mark> ` STRING`
+##### `$ hook` <mark>`percent encode`</mark> `STRING`
 
 *percent encode a string*
 
 * * * * * *
 
-### `$ hook` <mark>`remove|rm`</mark> ` ITEM_1 ITEM_2`
+### `$ hook` <mark>`remove|rm`</mark> `FILE_OR_URL...`
 
 *Remove a hook between two files/urls*
 
@@ -296,7 +301,7 @@ Remove ALL links on files, requires confirmation
 
 * * * * * *
 
-### `$ hook` <mark>`scripts`</mark> ` SHELL`
+### `$ hook` <mark>`scripts`</mark> `SHELL`
 
 *Shell completion examples*
 
@@ -304,7 +309,7 @@ Remove ALL links on files, requires confirmation
 
 * * * * * *
 
-### `$ hook` <mark>`select`</mark> ` FILE_OR_URL`
+### `$ hook` <mark>`select`</mark> `FILE_OR_URL`
 
 *Select from hooks on a file/url and open in default application*
 
@@ -315,6 +320,11 @@ Remove ALL links on files, requires confirmation
 * * * * * *
 
 #### [Default Command] help
+## Authors
+
+- Brett Terpstra <me@brettterpstra.com>
+- Josh Nichols <joshua.nichols@gmail.com>
+
 ## Credits
 
 HookApp embeds [Fuzzy Finder](https://github.com/junegunn/fzf) under the [MIT License](https://github.com/junegunn/fzf/blob/master/LICENSE)
@@ -348,5 +358,5 @@ This software is licensed under the MIT License.
 	THE SOFTWARE.
 
 
-Documentation generated 2021-09-25 07:37
+Documentation generated 2021-09-26 07:50
 

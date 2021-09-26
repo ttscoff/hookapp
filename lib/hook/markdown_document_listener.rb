@@ -15,6 +15,7 @@ module GLI
         @io = File.new('README.md', 'w')
         @nest = '#'
         @arg_name_formatter = GLI::Commands::HelpModules::ArgNameFormatter.new
+        @parent_command = []
       end
 
       def beginning
@@ -26,6 +27,12 @@ module GLI
           @io.puts IO.read('CREDITS.md')
           @io.puts
         end
+
+        if File.exist?('AUTHORS.md')
+          @io.puts IO.read('AUTHORS.md')
+          @io.puts
+        end
+
         if File.exist?('LICENSE.md')
           @io.puts IO.read('LICENSE.md')
           @io.puts
@@ -89,7 +96,7 @@ module GLI
           name = "[no-]#{name}" if name.to_s.length > 1
           aliases = aliases.map { |_|  _.to_s.length > 1 ? "[no-]#{_}" : _ }
         end
-        invocations = ([name] + aliases).map { |_| "`" + add_dashes(_) + "`" }.join('|')
+        invocations = ([name] + aliases).map { |_| "`" + add_dashes(_).strip + "`" }.join('|')
         @io.puts header("#{invocations}", 2)
         @io.puts
         @io.puts String(desc).strip
@@ -109,8 +116,10 @@ module GLI
 
       # Gives you a command in the current context and creates a new context of this command
       def command(name, aliases, desc, long_desc, arg_name, arg_options)
+        @parent_command.push ([name] + aliases).join('|')
         arg_name_fmt = @arg_name_formatter.format(arg_name, arg_options, [])
-        @io.puts header("`$ #{@exe}` <mark>`#{([name] + aliases).join('|')}`</mark> `#{arg_name_fmt}`", 1)
+        arg_name_fmt = " `#{arg_name_fmt.strip}`" if arg_name_fmt
+        @io.puts header("`$ #{@exe}` <mark>`#{@parent_command.join(' ')}`</mark>#{arg_name_fmt}", 1)
         @io.puts
         @io.puts "*#{String(desc).strip}*"
         @io.puts
@@ -121,6 +130,7 @@ module GLI
 
       # Ends a command, and "pops" you back up one context
       def end_command(_name)
+        @parent_command.pop
         decrement_nest
         @io.puts "* * * * * *\n\n" unless @nest.size > 2
       end

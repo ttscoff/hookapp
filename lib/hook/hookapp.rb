@@ -233,7 +233,8 @@ class HookApp
     raise "Error processing available hooks" if options.empty?
 
     args = ['--layout=reverse-list',
-            '--header="esc: cancel, tab: multi-select, return: open > "',
+            '--header="esc: cancel, tab: multi-select, ctrl-a: select all, return: open"',
+            '--bind ctrl-a:select-all',
             '--prompt="  Select hooks > "',
             '--multi',
             '--tabstop=4',
@@ -246,16 +247,12 @@ class HookApp
     fzf = File.join(File.dirname(__FILE__), '../helpers/fuzzyfilefinder')
 
     sel = `echo #{Shellwords.escape(options.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
-    res = sel.split(/\n/).map { |s|
+    res = sel.split(/\n/).map do |s|
       ps = s.split(/\t/)
       { name: ps[0], path: ps[1], url: ps[2] }
-    }
-
-    if res.size == 0
-      raise 'Cancelled (empty response)'
     end
 
-    res
+    res || []
   end
 
   # Open the Hook GUI for browsing/performing actions on a file or url
@@ -281,9 +278,11 @@ class HookApp
       warn "No hooks found for #{url}"
     else
       res = select_hook(marks)
-      res.each {|mark|
-        `open '#{mark[:url]}'`
-      }
+      unless res.empty?
+        res.each {|mark|
+          `open '#{mark[:url]}'`
+        }
+      end
     end
   end
 
