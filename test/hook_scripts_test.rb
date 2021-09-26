@@ -1,7 +1,7 @@
 require 'hook-helpers'
 require 'test_helper'
 
-class EncodeTest < Test::Unit::TestCase
+class ScriptsTest < Test::Unit::TestCase
   include HookHelpers
 
   def setup
