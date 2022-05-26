@@ -19,6 +19,6 @@ class ClipTest < Test::Unit::TestCase
     `echo -n | pbcopy`
     hook('clip', file)
     clipboard = `pbpaste`.strip
-    assert_match(/^hook:.*?#{File.basename(file)}$/, clipboard, 'Clipboard should contain link to first file')
+    assert_match(/^hook:.*?#{File.basename(file).sub(/\./, '(%2E|\.)')}$/, clipboard, 'Clipboard should contain link to first file')
   end
 end

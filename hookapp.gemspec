@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 13.0.1')
   s.add_development_dependency('rdoc', '~> 6.3.2')
   s.add_runtime_dependency('gli', '~> 2.20.1')
+  s.add_runtime_dependency('tty-which', '~> 0.5', '>= 0.5.0')
 end

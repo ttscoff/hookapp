@@ -4,6 +4,8 @@ require 'shellwords'
 require 'uri'
 # Hook.app functions
 class HookApp
+  include Hook::Prompt
+
   # Create a single regex for validation of an
   # array by first char or full match.
   def format_regex(options)
@@ -243,8 +245,6 @@ class HookApp
             '--height=60%',
             '--min-height=10'
           ]
-
-    fzf = File.join(File.dirname(__FILE__), '../helpers/fuzzyfilefinder')
 
     sel = `echo #{Shellwords.escape(options.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
     res = sel.split(/\n/).map do |s|
