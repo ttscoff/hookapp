@@ -1,3 +1,7 @@
+#### 2.0.9
+
+- Fix fzf integration across platforms
+
 #### 2.0.8
 
 - Bug fixes
