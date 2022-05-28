@@ -1,3 +1,7 @@
+#### 2.0.10
+
+- Fix permissions issues when installed using sudo
+
 #### 2.0.9
 
 - Fix fzf integration across platforms

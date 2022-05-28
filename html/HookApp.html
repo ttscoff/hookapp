@@ -65,6 +65,14 @@
 </div>
 
     
+<div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+    <li><a class="include" href="Hook/Prompt.html">Hook::Prompt</a>
+  </ul>
+</div>
+
     
     
 <!-- Method Quickref -->
@@ -134,7 +142,7 @@
           <p>Get all known bookmarks. Return array of bookmark hashes.</p>
 
           <div class="method-source-code" id="all_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_bookmarks</span>
   <span class="ruby-string">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;Hook&quot;
@@ -167,7 +175,7 @@
           <p>Get a <a href="Hook.html"><code>Hook</code></a> bookmark for file or URL. Return bookmark hash.</p>
 
           <div class="method-source-code" id="bookmark_for-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 32</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
@@ -207,7 +215,7 @@
           <p>Get a bookmark from the foreground document of specified app.</p>
 
           <div class="method-source-code" id="bookmark_from_app-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 81</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_from_app</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;System Events&quot; to set front_app to name of first application process whose frontmost is true
@@ -246,7 +254,7 @@
           <p>Create a bookmark for specified file/url and copy to the clipboard.</p>
 
           <div class="method-source-code" id="clip_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clip_bookmark</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-identifier">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">copy_bookmark</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>], <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>], <span class="ruby-identifier">opts</span>)
@@ -307,7 +315,7 @@
           <p>Create a bookmark from specified title and url and copy to the clipboard.</p>
 
           <div class="method-source-code" id="copy_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 187</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">copy_bookmark</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;No URL found&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;No title&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>
@@ -468,7 +476,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Create a single regex for validation of an array by first char or full match.</p>
 
           <div class="method-source-code" id="format_regex-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 9</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_regex</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">fmt_rx_array</span> = []
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fmt</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fmt_rx_array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">fmt</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^(.)(.*?)$/</span>, <span class="ruby-string">&#39;\1(\2)?&#39;</span>)) }
@@ -491,7 +499,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Get bookmarks hooked to file or URL. Return array of bookmark hashes.</p>
 
           <div class="method-source-code" id="get_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 56</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
@@ -785,7 +793,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Search bookmarks, using both names and addresses unless options contain “:names_only”. Return results as formatted list.</p>
 
           <div class="method-source-code" id="search_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 158</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_bookmarks</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">search_name</span>(<span class="ruby-identifier">search</span>)
@@ -824,7 +832,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Search boomark names/titles. Return array of bookmark hashes.</p>
 
           <div class="method-source-code" id="search_name-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 104</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_name</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -858,7 +866,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Search bookmark paths and addresses. Return array of bookmark hashes.</p>
 
           <div class="method-source-code" id="search_path_or_address-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 122</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_path_or_address</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -892,7 +900,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Generate a menu of available hooks for selecting one or more hooks to operate on. Revamped to use `fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.</p>
 
           <div class="method-source-code" id="select_hook-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 198</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_hook</span>(<span class="ruby-identifier">marks</span>)
   <span class="ruby-comment"># intpad = marks.length.to_s.length + 1</span>
   <span class="ruby-comment"># marks.each_with_index do |mark, i|</span>
@@ -942,8 +950,6 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <span class="ruby-string">&#39;--min-height=10&#39;</span>
         ]
 
-  <span class="ruby-identifier">fzf</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-string">&#39;../helpers/fuzzyfilefinder&#39;</span>)
-
   <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(options.join(&quot;\n&quot;))} | &#39;#{fzf}&#39; #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>
   <span class="ruby-identifier">res</span> = <span class="ruby-identifier">sel</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">ps</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
@@ -969,7 +975,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
           <p>Check if format fully matches or matches the first character of available options. Return full valid format or nil</p>
 
           <div class="method-source-code" id="validate_format-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 18</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">valid_format_rx</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span> <span class="ruby-identifier">format</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^(.)(.*)$/</span>, <span class="ruby-string">&#39;^\1(\2)?$&#39;</span>) }
   <span class="ruby-identifier">valid_format</span> = <span class="ruby-keyword">nil</span>
@@ -996,7 +1002,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.2.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.3.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
