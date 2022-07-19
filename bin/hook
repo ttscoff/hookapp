@@ -242,6 +242,15 @@ filetype by macOS. Allows multiple selections with tab key, and type-ahead fuzzy
     end
   end
 
+  desc 'Browse hooks'
+  long_desc 'Select a file to see its hooks, navigate through descendents'
+  arg_name 'PATH_OR_GLOB'
+  command %i[browse] do |c|
+    c.action do |_, _, args|
+      hookapp.browse_bookmarks(args)
+    end
+  end
+
   desc 'Open the specified file or url in Hook GUI'
   long_desc 'Opens Hook.app on the specified file/URL for browsing and performing actions.
 

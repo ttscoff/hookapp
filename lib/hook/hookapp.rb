@@ -243,16 +243,39 @@ class HookApp
             '--delimiter="\t"',
             '--with-nth=1,4',
             '--height=60%',
-            '--min-height=10'
-          ]
+            '--min-height=10']
 
     sel = `echo #{Shellwords.escape(options.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
+
     res = sel.split(/\n/).map do |s|
       ps = s.split(/\t/)
       { name: ps[0], path: ps[1], url: ps[2] }
     end
 
     res || []
+  end
+
+  def browse_bookmarks(glob)
+    root = if glob.is_a?(Array)
+             glob.count.positive? ? glob : Dir.glob('**/*')
+           elsif glob && File.exist?(glob)
+             hooks = get_hooks(glob)
+             return select_hook(hooks) unless hooks.empty? || File.directory?(glob)
+
+             Dir.glob([File.expand_path(glob), '**/*'])
+           else
+             Dir.glob(glob.nil? || glob.empty? ? '**/*' : glob)
+           end
+
+    args = ['--layout=reverse-list',
+            '--header="esc: cancel, return: open"',
+            '--prompt="  Select file > "',
+            %(--preview='hook ls {1}'),
+            '--height=60%',
+            '--min-height=10']
+
+    sel = `echo #{Shellwords.escape(root.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
+    return open_linked(sel)
   end
 
   # Open the Hook GUI for browsing/performing actions on a file or url

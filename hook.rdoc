@@ -4,7 +4,7 @@ Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
 
 This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-v2.0.9
+v2.0.10
 
 === Global Options
 === --help
@@ -18,6 +18,10 @@ Display the program version
 
 
 === Commands
+==== Command: <tt>browse  PATH_OR_GLOB</tt>
+Browse hooks
+
+Select a file to see its hooks, navigate through descendents
 ==== Command: <tt>clip|cp  FILE_OR_URL</tt>
 Copy Hook URL for file/url to clipboard
 
