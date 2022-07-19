@@ -270,7 +270,7 @@ class HookApp
     args = ['--layout=reverse-list',
             '--header="esc: cancel, return: open"',
             '--prompt="  Select file > "',
-            %(--preview='hook ls {1}'),
+            %(--preview='hook ls "{2}"'),
             '--height=60%',
             '--min-height=10']
 
