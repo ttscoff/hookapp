@@ -1,3 +1,5 @@
+template: gem
+
 # hookapp
 
 Hook.app CLI

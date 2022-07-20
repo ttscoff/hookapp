@@ -208,7 +208,7 @@ class HookApp
 
     # marks[sel - 1]
 
-    options = marks.map {|mark|
+    options = marks.map do |mark|
       if mark[:name]
         id = mark[:name]
       elsif mark[:path]
@@ -224,15 +224,17 @@ class HookApp
       elsif mark[:url]
         url = URI.parse(mark[:url])
         id = mark[:url]
-        loc = url.scheme + " - " + url.hostname
+        loc = "#{url.scheme} - #{url.hostname}"
       else
-        loc = ""
+        loc = ''
       end
 
       "#{id}\t#{mark[:path]}\t#{mark[:url]}\t#{loc}"
-    }.delete_if { |mark| !mark }
+    end
 
-    raise "Error processing available hooks" if options.empty?
+    options.delete_if(&:!)
+
+    raise 'Error processing available hooks' if options.empty?
 
     args = ['--layout=reverse-list',
             '--header="esc: cancel, tab: multi-select, ctrl-a: select all, return: open"',
@@ -256,26 +258,59 @@ class HookApp
   end
 
   def browse_bookmarks(glob)
+    glob_all = '**/*'
     root = if glob.is_a?(Array)
-             glob.count.positive? ? glob : Dir.glob('**/*')
+             glob.count.positive? ? glob : Dir.glob(glob_all)
            elsif glob && File.exist?(glob)
              hooks = get_hooks(glob)
              return select_hook(hooks) unless hooks.empty? || File.directory?(glob)
 
-             Dir.glob([File.expand_path(glob), '**/*'])
+             Dir.glob([File.expand_path(glob), glob_all])
            else
-             Dir.glob(glob.nil? || glob.empty? ? '**/*' : glob)
+             Dir.glob(glob.nil? || glob.empty? ? glob_all : glob)
            end
 
     args = ['--layout=reverse-list',
-            '--header="esc: cancel, return: open"',
+            '--header="esc: cancel, return: browse"',
             '--prompt="  Select file > "',
-            %(--preview='hook ls "{2}"'),
+            %(--preview='hook ls {}'),
             '--height=60%',
             '--min-height=10']
 
-    sel = `echo #{Shellwords.escape(root.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
-    return open_linked(sel)
+    sel = `echo #{Shellwords.escape(root.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp.split("\n")
+
+    if sel.count == 1
+      marks = get_hooks(sel[0])
+      if marks.count.positive?
+        browse_linked(sel[0])
+      else
+        browse_bookmarks(glob)
+      end
+    else
+      open_linked(sel)
+    end
+  end
+
+  def act_on(url)
+    menu_items = ['Open in default app']
+    return open_linked(url) unless File.exist?(url)
+
+    marks = get_hooks(url)
+    menu_items << 'Browse file' if marks.count.positive?
+
+    args = ['--prompt="Choose action > "',
+            '--layout=reverse-list',
+            '--height=60%',
+            "--min-height=#{menu_items.count + 1}"]
+    sel = `echo #{Shellwords.escape(menu_items.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp
+    return if sel.nil? || sel.empty?
+
+    case sel
+    when /Browse file/
+      browse_linked(url)
+    else
+      `open '#{url}'`
+    end
   end
 
   # Open the Hook GUI for browsing/performing actions on a file or url
@@ -301,10 +336,19 @@ class HookApp
       warn "No hooks found for #{url}"
     else
       res = select_hook(marks)
+      res.each { |mark| `open '#{mark[:url]}'` } unless res.empty?
+    end
+  end
+
+  # Select from a menu of available hooks and open using macOS `open`.
+  def browse_linked(url)
+    marks = get_hooks(url)
+    if marks.empty?
+      warn "No hooks found for #{url}"
+    else
+      res = select_hook(marks)
       unless res.empty?
-        res.each {|mark|
-          `open '#{mark[:url]}'`
-        }
+        res.each { |mark| mark[:path] ? act_on(mark[:path]) : `open '#{mark[:url]}'` }
       end
     end
   end
