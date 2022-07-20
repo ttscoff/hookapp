@@ -4,7 +4,7 @@ Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
 
 This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-v2.0.11
+v2.0.15
 
 === Global Options
 === --help
