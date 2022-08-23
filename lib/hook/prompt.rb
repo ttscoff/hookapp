@@ -7,7 +7,7 @@ module Hook
     ##
     def clear_screen(msg = nil)
       puts "\e[H\e[2J" if $stdout.tty?
-      puts msg if msg.good?
+      puts msg unless msg.nil?
     end
 
     ##

@@ -224,7 +224,7 @@ class HookApp
       elsif mark[:url]
         url = URI.parse(mark[:url])
         id = mark[:url]
-        loc = "#{url.scheme} - #{url.hostname}"
+        loc = "#{url.scheme} + ' - ' + url.hostname"
       else
         loc = ''
       end
@@ -273,7 +273,7 @@ class HookApp
     args = ['--layout=reverse-list',
             '--header="esc: cancel, return: browse"',
             '--prompt="  Select file > "',
-            %(--preview='hook ls {}'),
+            %(--preview='hook ls -o m {}'),
             '--height=60%',
             '--min-height=10']
 
