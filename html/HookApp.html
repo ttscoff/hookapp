@@ -313,7 +313,7 @@
   <span class="ruby-identifier">args</span> = [<span class="ruby-string">&#39;--layout=reverse-list&#39;</span>,
           <span class="ruby-string">&#39;--header=&quot;esc: cancel, return: browse&quot;&#39;</span>,
           <span class="ruby-string">&#39;--prompt=&quot;  Select file &gt; &quot;&#39;</span>,
-          <span class="ruby-string">%(--preview=&#39;hook ls {}&#39;)</span>,
+          <span class="ruby-string">%(--preview=&#39;hook ls -o m {}&#39;)</span>,
           <span class="ruby-string">&#39;--height=60%&#39;</span>,
           <span class="ruby-string">&#39;--min-height=10&#39;</span>]
 
@@ -1046,7 +1046,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>]
       <span class="ruby-identifier">url</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>])
       <span class="ruby-identifier">id</span> = <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>]
-      <span class="ruby-identifier">loc</span> = <span class="ruby-node">&quot;#{url.scheme} - #{url.hostname}&quot;</span>
+      <span class="ruby-identifier">loc</span> = <span class="ruby-node">&quot;#{url.scheme} + &#39; - &#39; + url.hostname&quot;</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">loc</span> = <span class="ruby-string">&#39;&#39;</span>
     <span class="ruby-keyword">end</span>

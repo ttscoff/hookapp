@@ -6,7 +6,7 @@ CLI interface for Hook.app (macOS)
 
 This gem includes a `hook` binary that allows interaction with the features of Hook.app.
 
-*v2.0.15*
+*v2.0.16*
 
 ## Installation
 
@@ -366,5 +366,5 @@ This software is licensed under the MIT License.
 	THE SOFTWARE.
 
 
-Documentation generated 2022-07-20 08:03
+Documentation generated 2022-08-23 09:39
 

@@ -1,3 +1,7 @@
+#### 2.0.16
+
+- Change fzf preview to Markdown listing
+
 #### 2.0.10
 
 - Fix permissions issues when installed using sudo
