@@ -1,10 +1,10 @@
-Tue, 23 Aug 2022 09:40:48 -0500
+Thu, 10 Nov 2022 09:20:50 -0600
 README.rdoc	Tue, 07 Jul 2020 16:57:07 -0500
-lib/hook.rb	Thu, 26 May 2022 08:20:27 -0500
-lib/hook/hookapp.rb	Tue, 23 Aug 2022 09:37:26 -0500
+lib/hook.rb	Thu, 10 Nov 2022 09:16:41 -0600
+lib/hook/hookapp.rb	Thu, 10 Nov 2022 09:18:33 -0600
 lib/hook/hooker.rb	Sun, 31 Oct 2021 07:54:46 -0500
 lib/hook/markdown_document_listener.rb	Sun, 26 Sep 2021 07:45:59 -0500
 lib/hook/prompt.rb	Tue, 23 Aug 2022 06:17:15 -0500
 lib/hook/string.rb	Sun, 31 Oct 2021 07:03:15 -0500
-lib/hook/version.rb	Tue, 23 Aug 2022 09:38:49 -0500
+lib/hook/version.rb	Thu, 10 Nov 2022 09:19:48 -0600
 bin/hook	Tue, 19 Jul 2022 14:11:16 -0500
