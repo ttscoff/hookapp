@@ -37,7 +37,7 @@ class HookApp
 
     begin
       mark = `osascript <<'APPLESCRIPT'
-        tell application "Hook"
+        tell application "#{HOOK_APP}"
           set _hook to make bookmark with data "#{url}"
           if _hook is missing value
             return ""
@@ -60,7 +60,7 @@ class HookApp
     raise "Invalid target: #{url}" unless url
 
     hooks = `osascript <<'APPLESCRIPT'
-      tell application "Hook"
+      tell application "#{HOOK_APP}"
         set _mark to make bookmark with data "#{url}"
         if _mark is missing value
           return ""
@@ -85,7 +85,7 @@ class HookApp
       tell application "System Events" to set front_app to name of first application process whose frontmost is true
       tell application "#{app}" to activate
       delay 2
-      tell application "Hook"
+      tell application "#{HOOK_APP}"
         set _hook to (bookmark from active window)
         set _output to (name of _hook & "||" & address of _hook & "||" & path of _hook)
       end tell
@@ -106,7 +106,7 @@ class HookApp
   def search_name(search)
     `osascript <<'APPLESCRIPT'
       set searchString to "#{search.strip}"
-      tell application "Hook"
+      tell application "#{HOOK_APP}"
         set _marks to every bookmark whose name contains searchString
         set _out to {}
         repeat with _hook in _marks
@@ -124,7 +124,7 @@ class HookApp
   def search_path_or_address(search)
     `osascript <<'APPLESCRIPT'
       set searchString to "#{search.strip}"
-      tell application "Hook"
+      tell application "#{HOOK_APP}"
         set _marks to every bookmark whose path contains searchString or address contains searchString
         set _out to {}
         repeat with _hook in _marks
@@ -141,7 +141,7 @@ class HookApp
   # Get all known bookmarks. Return array of bookmark hashes.
   def all_bookmarks
     `osascript <<'APPLESCRIPT'
-      tell application "Hook"
+      tell application "#{HOOK_APP}"
         set _marks to every bookmark
         set _out to {}
         repeat with _hook in _marks
@@ -316,7 +316,7 @@ class HookApp
   # Open the Hook GUI for browsing/performing actions on a file or url
   def open_gui(url)
     result = `osascript <<'APPLESCRIPT'
-    tell application "Hook"
+    tell application "#{HOOK_APP}"
       set _mark to make bookmark with data "#{url.valid_hook}"
       if _mark is missing value
         return "Failed to create bookmark for #{url}"
@@ -365,7 +365,7 @@ class HookApp
 
       puts "Linking #{file} and #{target}..."
       `osascript <<'APPLESCRIPT'
-        tell application "Hook"
+        tell application "#{HOOK_APP}"
           set _mark1 to make bookmark with data "#{file}"
           set _mark2 to make bookmark with data "#{target}"
           hook _mark1 and _mark2
@@ -385,7 +385,7 @@ class HookApp
       hooks = get_hooks(source)
       hooks.each do |hook|
         `osascript <<'APPLESCRIPT'
-          tell application "Hook"
+          tell application "#{HOOK_APP}"
             set _mark1 to make bookmark with data "#{hook[:url]}"
             set _mark2 to make bookmark with data "#{target}"
             hook _mark1 and _mark2
@@ -409,7 +409,7 @@ class HookApp
     if res =~ /^y/i || force
       get_hooks(url).each do |hook|
         `osascript <<'APPLESCRIPT'
-          tell application "Hook"
+          tell application "#{HOOK_APP}"
             set _mark1 to make bookmark with data "#{hook[:url]}"
             set _mark2 to make bookmark with data "#{url}"
             unhook _mark1 and _mark2
@@ -438,7 +438,7 @@ class HookApp
       source = urls[0]
       target = urls[1]
       `osascript <<'APPLESCRIPT'
-        tell application "Hook"
+        tell application "#{HOOK_APP}"
           set _mark1 to make bookmark with data "#{source}"
           set _mark2 to make bookmark with data "#{target}"
           unhook _mark1 and _mark2
@@ -458,7 +458,7 @@ class HookApp
       link_to = args.dup.map(&:valid_hook).reject { |url| url == source }
       link_to.each do |url|
         `osascript <<'APPLESCRIPT'
-          tell application "Hook"
+          tell application "#{HOOK_APP}"
             set _mark1 to make bookmark with data "#{source}"
             set _mark2 to make bookmark with data "#{url}"
             hook _mark1 and _mark2
@@ -556,7 +556,7 @@ class HookApp
 
   def encode(string)
     result = `osascript <<'APPLESCRIPT'
-tell application "Hook"
+tell application "#{HOOK_APP}"
   percent encode "#{string.escape_quotes}"
 end tell
 APPLESCRIPT`.strip.gsub(/'/,'%27')
@@ -565,7 +565,7 @@ APPLESCRIPT`.strip.gsub(/'/,'%27')
 
   def decode(string)
     result = `osascript <<'APPLESCRIPT'
-tell application "Hook"
+tell application "#{HOOK_APP}"
   percent decode "#{string.escape_quotes}"
 end tell
 APPLESCRIPT`.strip

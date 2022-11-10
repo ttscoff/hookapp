@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+HOOK_APP = "Hookmark"
 
 require 'hook/version'
 require 'tty-which'
