@@ -8,10 +8,10 @@ require 'shellwords'
 class App
   extend GLI::App
 
-  program_desc 'CLI interface for Hook.app (macOS)'
-  program_long_desc 'Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+  program_desc 'CLI interface for Hookmark (macOS)'
+  program_long_desc 'Hookmark is a productivity tool for macOS <https://hookproductivity.com/>.
 
-This gem includes a `hook` binary that allows interaction with the features of Hook.app.'
+This gem includes a `hook` binary that allows interaction with the features of Hookmark.'
   default_command 'help'
   autocomplete_commands = true
   synopsis_format(:terminal)
@@ -155,10 +155,10 @@ to be combined with one or more file/url arguments.
     end
   end
 
-  desc 'Copy Hook URL for file/url to clipboard'
-  long_desc %{Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+  desc 'Copy Hookmark URL for file/url to clipboard'
+  long_desc %{Creates a bookmark for the specified file or URL and copies its Hookmark URL to the clipboard.
 
-The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL`,
+The copied Hookmark URL can be used to link to other files (use `hook link --paste FILE/URL`,
 or to paste into another app as a link. Use the -m flag to copy a full Markdown link.}
   arg_name 'FILE_OR_URL'
   command %i[clip cp] do |c|
@@ -179,9 +179,9 @@ or to paste into another app as a link. Use the -m flag to copy a full Markdown 
     end
   end
 
-  desc 'Get a Hook URL for the frontmost window of an app'
+  desc 'Get a Hookmark URL for the frontmost window of an app'
   long_desc %(Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
-for the active document, note, task, etc., returning a Hook URL.
+for the active document, note, task, etc., returning a Hookmark URL.
 
 Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.)
   arg_name 'APPLICATION_NAME'
@@ -251,8 +251,8 @@ filetype by macOS. Allows multiple selections with tab key, and type-ahead fuzzy
     end
   end
 
-  desc 'Open the specified file or url in Hook GUI'
-  long_desc 'Opens Hook.app on the specified file/URL for browsing and performing actions.
+  desc 'Open the specified file or url in Hookmark GUI'
+  long_desc 'Opens Hookmark on the specified file/URL for browsing and performing actions.
 
 Exactly one argument (File/URL) required.'
   arg_name 'FILE_OR_URL'
@@ -268,7 +268,7 @@ Exactly one argument (File/URL) required.'
   end
 
   desc 'Percent encode/decode a string'
-  long_desc %(Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.)
+  long_desc %(Use encode or decode to apply Hookmark's url encoding to a string argument. Use '-' to read input from STDIN.)
   arg_name 'STRING'
   command :percent do |c|
     c.desc 'percent encode a string'

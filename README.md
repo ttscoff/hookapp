@@ -1,10 +1,10 @@
-# hook CLI
+# Hookmark CLI
 
-CLI interface for Hook.app (macOS)
+CLI interface for Hookmark (macOS)
 
 > Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
 
-This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+This gem includes a `hook` binary that allows interaction with the features of Hookmark.app.
 
 *v2.1.0*
 
@@ -20,7 +20,7 @@ Run `hook help` for usage.
 
 ```nohighlight
 NAME
-    hook - CLI interface for Hook.app (macOS)
+    hook - CLI interface for Hookmark (macOS)
 
 SYNOPSIS
     hook [global options] command [command options] [arguments...]
@@ -41,7 +41,7 @@ COMMANDS
     link, ln     - Create bidirectional hooks between two or more 
                    files/urls
     list, ls     - List hooks on a file or url
-    open, gui    - Open the specified file or url in Hook GUI
+    open, gui    - Open the specified file or url in Hookmark GUI
     remove, rm   - Remove a hook between two files/urls
     scripts      - Shell completion examples
     select       - Select from hooks on a file/url and open in default  
@@ -56,7 +56,7 @@ Run `hook help COMMAND` on any of the commands for more details.
 
 The `link` command always creates bidirectional hooks. Give it two or more files or urls and it will create links between them. By default it links all files to the last file in the list. Add the `--all` flag to link all files to every other file in the list. This can be abbreviated as `hook ln -a file1.md file2.pdf "https://brettterpstra.com"`.
 
-Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hook URL to the clipboard (aliased as `cp`), and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
+Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hookmark URL to the clipboard (aliased as `cp`), and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
 
 You can also clone all of the links on one file to another, great for adding a new file to a group that's fully crosslinked. Just use `hook clone file1.md file2.pdf`.
 
@@ -76,7 +76,7 @@ The `--output_format=paths` option (abbr. `-o p`) combined with the `--files_onl
 
 You can open a hooked file or URL by running `hook select file1.md`. This will display a menu of all the hooks on `file1.md`, and entering the number of a selection will open that file in its default application.
 
-You can also open a file in the Hook GUI using `hook open file1.md`.
+You can also open a file in the Hookmark GUI using `hook open file1.md`.
 
 ### Searching hooks
 
@@ -111,11 +111,11 @@ Display the program version
 
 ### `$ hook` <mark>`clip|cp`</mark> `FILE_OR_URL`
 
-*Copy Hook URL for file/url to clipboard*
+*Copy Hookmark URL for file/url to clipboard*
 
-> Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+> Creates a bookmark for the specified file or URL and copies its Hookmark URL to the clipboard.
 > 
-> The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL`,
+> The copied Hookmark URL can be used to link to other files (use `hook link --paste FILE/URL`,
 > or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 
 #### Options
@@ -172,10 +172,10 @@ Separate results with NULL separator, only applies with "paths" output for singl
 
 ### `$ hook` <mark>`from`</mark> `APPLICATION_NAME`
 
-*Get a Hook URL for the frontmost window of an app*
+*Get a Hookmark URL for the frontmost window of an app*
 
 > Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
-> for the active document, note, task, etc., returning a Hook URL.
+> for the active document, note, task, etc., returning a Hookmark URL.
 > 
 > Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 
@@ -263,9 +263,9 @@ Generate a menu to select hook(s) for opening
 
 ### `$ hook` <mark>`open|gui`</mark> `FILE_OR_URL`
 
-*Open the specified file or url in Hook GUI*
+*Open the specified file or url in Hookmark GUI*
 
-> Opens Hook.app on the specified file/URL for browsing and performing actions.
+> Opens Hookmark.app on the specified file/URL for browsing and performing actions.
 > 
 > Exactly one argument (File/URL) required.
 
@@ -275,7 +275,7 @@ Generate a menu to select hook(s) for opening
 
 *Percent encode/decode a string*
 
-> Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.
+> Use encode or decode to apply Hookmark's url encoding to a string argument. Use '-' to read input from STDIN.
 
 #### Commands
 
