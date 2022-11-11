@@ -1,12 +1,12 @@
-# Hookmark CLI
+# hook CLI
 
 CLI interface for Hookmark (macOS)
 
-> Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+> Hookmark is a productivity tool for macOS <https://hookproductivity.com/>.
 
-This gem includes a `hook` binary that allows interaction with the features of Hookmark.app.
+This gem includes a `hook` binary that allows interaction with the features of Hookmark.
 
-*v2.1.0*
+*v2.1.1*
 
 ## Installation
 
@@ -33,10 +33,10 @@ GLOBAL OPTIONS
     --version - Display the program version
 
 COMMANDS
-    clip, cp     - Copy Hook URL for file/url to clipboard
+    clip, cp     - Copy Hookmark URL for file/url to clipboard
     clone        - Clone all hooks from one file or url onto another
     find, search - Search bookmarks
-    from         - Get a Hook URL for the frontmost window of an app
+    from         - Get a Hookmark URL for the frontmost window of an app
     help         - Shows a list of commands or help for one command
     link, ln     - Create bidirectional hooks between two or more 
                    files/urls
@@ -265,7 +265,7 @@ Generate a menu to select hook(s) for opening
 
 *Open the specified file or url in Hookmark GUI*
 
-> Opens Hookmark.app on the specified file/URL for browsing and performing actions.
+> Opens Hookmark on the specified file/URL for browsing and performing actions.
 > 
 > Exactly one argument (File/URL) required.
 
@@ -366,5 +366,5 @@ This software is licensed under the MIT License.
 	THE SOFTWARE.
 
 
-Documentation generated 2022-11-10 09:20
+Documentation generated 2022-11-11 09:50
 

@@ -1,10 +1,10 @@
-== hook - CLI interface for Hook.app (macOS)
+== hook - CLI interface for Hookmark (macOS)
 
-Hook.app is a productivity tool for macOS <https://hookproductivity.com/>.
+Hookmark is a productivity tool for macOS <https://hookproductivity.com/>.
 
-This gem includes a `hook` binary that allows interaction with the features of Hook.app.
+This gem includes a `hook` binary that allows interaction with the features of Hookmark.
 
-v2.1.0
+v2.1.1
 
 === Global Options
 === --help
@@ -23,11 +23,11 @@ Browse hooks
 
 Select a file to see its hooks, navigate through descendents
 ==== Command: <tt>clip|cp  FILE_OR_URL</tt>
-Copy Hook URL for file/url to clipboard
+Copy Hookmark URL for file/url to clipboard
 
-Creates a bookmark for the specified file or URL and copies its Hook URL to the clipboard.
+Creates a bookmark for the specified file or URL and copies its Hookmark URL to the clipboard.
 
-The copied Hook URL can be used to link to other files (use `hook link --paste FILE/URL`,
+The copied Hookmark URL can be used to link to other files (use `hook link --paste FILE/URL`,
 or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 ===== Options
 ===== -a|--app APP_NAME
@@ -78,10 +78,10 @@ Separate results with NULL separator, only applies with "paths" output for singl
 
 
 ==== Command: <tt>from  APPLICATION_NAME</tt>
-Get a Hook URL for the frontmost window of an app
+Get a Hookmark URL for the frontmost window of an app
 
 Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
-for the active document, note, task, etc., returning a Hook URL.
+for the active document, note, task, etc., returning a Hookmark URL.
 
 Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 ===== Options
@@ -156,15 +156,15 @@ Generate a menu to select hook(s) for opening
 This option is a shortcut to `hook select` and overrides any other arguments.
 
 ==== Command: <tt>open|gui  FILE_OR_URL</tt>
-Open the specified file or url in Hook GUI
+Open the specified file or url in Hookmark GUI
 
-Opens Hook.app on the specified file/URL for browsing and performing actions.
+Opens Hookmark on the specified file/URL for browsing and performing actions.
 
 Exactly one argument (File/URL) required.
 ==== Command: <tt>percent  STRING</tt>
 Percent encode/decode a string
 
-Use encode or decode to apply Hook's url encoding to a string argument. Use '-' to read input from STDIN.
+Use encode or decode to apply Hookmark's url encoding to a string argument. Use '-' to read input from STDIN.
 ===== Commands
 ====== Command: <tt>decode  STRING</tt>
 decode a percent-encoded string

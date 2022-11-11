@@ -1,6 +1,6 @@
 = hookapp
 
-A CLI for Hook.app on macOS.
+A CLI for Hookmark on macOS.
 
 :include:hook.rdoc
 
