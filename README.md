@@ -20,7 +20,7 @@ Run `hook help` for usage.
 
 ```nohighlight
 NAME
-    hook - CLI interface for Hookmark (macOS)
+    hook - CLI interface for Hook.app (macOS)
 
 SYNOPSIS
     hook [global options] command [command options] [arguments...]
@@ -33,15 +33,15 @@ GLOBAL OPTIONS
     --version - Display the program version
 
 COMMANDS
-    clip, cp     - Copy Hookmark URL for file/url to clipboard
+    clip, cp     - Copy Hook URL for file/url to clipboard
     clone        - Clone all hooks from one file or url onto another
     find, search - Search bookmarks
-    from         - Get a Hookmark URL for the frontmost window of an app
+    from         - Get a Hook URL for the frontmost window of an app
     help         - Shows a list of commands or help for one command
     link, ln     - Create bidirectional hooks between two or more 
                    files/urls
     list, ls     - List hooks on a file or url
-    open, gui    - Open the specified file or url in Hookmark GUI
+    open, gui    - Open the specified file or url in Hook GUI
     remove, rm   - Remove a hook between two files/urls
     scripts      - Shell completion examples
     select       - Select from hooks on a file/url and open in default  
@@ -56,7 +56,7 @@ Run `hook help COMMAND` on any of the commands for more details.
 
 The `link` command always creates bidirectional hooks. Give it two or more files or urls and it will create links between them. By default it links all files to the last file in the list. Add the `--all` flag to link all files to every other file in the list. This can be abbreviated as `hook ln -a file1.md file2.pdf "https://brettterpstra.com"`.
 
-Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hookmark URL to the clipboard (aliased as `cp`), and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
+Similar to the way you would use the GUI, you can use `hook clip file1.md` to copy a Hook URL to the clipboard (aliased as `cp`), and then use `hook ln -p file2.pdf` to create a link from the clipboard to `file2.pdf`.
 
 You can also clone all of the links on one file to another, great for adding a new file to a group that's fully crosslinked. Just use `hook clone file1.md file2.pdf`.
 
@@ -76,7 +76,7 @@ The `--output_format=paths` option (abbr. `-o p`) combined with the `--files_onl
 
 You can open a hooked file or URL by running `hook select file1.md`. This will display a menu of all the hooks on `file1.md`, and entering the number of a selection will open that file in its default application.
 
-You can also open a file in the Hookmark GUI using `hook open file1.md`.
+You can also open a file in the Hook GUI using `hook open file1.md`.
 
 ### Searching hooks
 
@@ -366,5 +366,5 @@ This software is licensed under the MIT License.
 	THE SOFTWARE.
 
 
-Documentation generated 2022-11-11 09:50
+Documentation generated 2022-11-11 09:56
 
