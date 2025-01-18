@@ -50,7 +50,7 @@ GEM
     mime-types-data (3.2022.0105)
     multi_test (1.1.0)
     rake (13.0.6)
-    rdoc (6.3.3)
+    rdoc (6.3.4.1)
     rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
