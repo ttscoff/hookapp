@@ -57,7 +57,7 @@ GEM
     rspec-support (3.11.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
-    thor (1.2.1)
+    thor (1.4.0)
     tty-which (0.5.0)
 
 PLATFORMS
