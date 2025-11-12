@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>class HookApp - hookapp</title>
+
+  <meta name="keywords" content="ruby,class,HookApp">
+
+    <meta name="description" content="class HookApp: Hook.">
+
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -22,7 +28,12 @@
 
 
 <body id="top" role="document" class="class">
-<nav role="navigation">
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
@@ -41,7 +52,7 @@
     <div id="search-field-wrapper">
       <input id="search-field" role="combobox" aria-label="Search"
              aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
     </div>
 
@@ -54,17 +65,13 @@
   </div>
 
   
-
-  <div id="class-metadata">
-    
-    
-<div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  <p class="link"><a href="Object.html">Object</a>
+  
+  <div id="parent-class-section" class="nav-section">
+  <h3>Ancestors</h3>
+  <ul><li><a href="Object.html">Object</a><ul><li>BasicObject</li></ul></li></ul>
 </div>
 
-    
+  
 <div id="includes-section" class="nav-section">
   <h3>Included Modules</h3>
 
@@ -73,47 +80,57 @@
   </ul>
 </div>
 
-    
-    
-<!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
+  
+  
 
-  <ul class="link-list" role="directory">
-    <li ><a href="#method-i-act_on">#act_on</a>
-    <li ><a href="#method-i-all_bookmarks">#all_bookmarks</a>
-    <li ><a href="#method-i-bookmark_for">#bookmark_for</a>
-    <li ><a href="#method-i-bookmark_from_app">#bookmark_from_app</a>
-    <li ><a href="#method-i-browse_bookmarks">#browse_bookmarks</a>
-    <li ><a href="#method-i-browse_linked">#browse_linked</a>
-    <li ><a href="#method-i-clip_bookmark">#clip_bookmark</a>
-    <li ><a href="#method-i-clone_hooks">#clone_hooks</a>
-    <li ><a href="#method-i-copy_bookmark">#copy_bookmark</a>
-    <li ><a href="#method-i-decode">#decode</a>
-    <li ><a href="#method-i-delete_all_hooks">#delete_all_hooks</a>
-    <li ><a href="#method-i-delete_hooks">#delete_hooks</a>
-    <li ><a href="#method-i-encode">#encode</a>
-    <li ><a href="#method-i-format_regex">#format_regex</a>
-    <li ><a href="#method-i-get_hooks">#get_hooks</a>
-    <li ><a href="#method-i-link_all">#link_all</a>
-    <li ><a href="#method-i-link_files">#link_files</a>
-    <li ><a href="#method-i-linked_bookmarks">#linked_bookmarks</a>
-    <li ><a href="#method-i-open_gui">#open_gui</a>
-    <li ><a href="#method-i-open_linked">#open_linked</a>
-    <li ><a href="#method-i-output_array">#output_array</a>
-    <li ><a href="#method-i-search_bookmarks">#search_bookmarks</a>
-    <li ><a href="#method-i-search_name">#search_name</a>
-    <li ><a href="#method-i-search_path_or_address">#search_path_or_address</a>
-    <li ><a href="#method-i-select_hook">#select_hook</a>
-    <li ><a href="#method-i-validate_format">#validate_format</a>
-  </ul>
-</div>
 
+  <div class="nav-section">
+    <h3>Instance Methods</h3>
+    <ul class="link-list" role="directory">
+      <li ><a href="#method-i-act_on">act_on</a></li>
+      <li ><a href="#method-i-all_bookmarks">all_bookmarks</a></li>
+      <li ><a href="#method-i-bookmark_for">bookmark_for</a></li>
+      <li ><a href="#method-i-bookmark_from_app">bookmark_from_app</a></li>
+      <li ><a href="#method-i-browse_bookmarks">browse_bookmarks</a></li>
+      <li ><a href="#method-i-browse_linked">browse_linked</a></li>
+      <li ><a href="#method-i-clip_bookmark">clip_bookmark</a></li>
+      <li ><a href="#method-i-clone_hooks">clone_hooks</a></li>
+      <li ><a href="#method-i-copy_bookmark">copy_bookmark</a></li>
+      <li ><a href="#method-i-decode">decode</a></li>
+      <li ><a href="#method-i-delete_all_hooks">delete_all_hooks</a></li>
+      <li ><a href="#method-i-delete_hooks">delete_hooks</a></li>
+      <li ><a href="#method-i-encode">encode</a></li>
+      <li ><a href="#method-i-format_regex">format_regex</a></li>
+      <li ><a href="#method-i-get_hooks">get_hooks</a></li>
+      <li ><a href="#method-i-link_all">link_all</a></li>
+      <li ><a href="#method-i-link_files">link_files</a></li>
+      <li ><a href="#method-i-linked_bookmarks">linked_bookmarks</a></li>
+      <li ><a href="#method-i-open_gui">open_gui</a></li>
+      <li ><a href="#method-i-open_linked">open_linked</a></li>
+      <li ><a href="#method-i-output_array">output_array</a></li>
+      <li ><a href="#method-i-search_bookmarks">search_bookmarks</a></li>
+      <li ><a href="#method-i-search_name">search_name</a></li>
+      <li ><a href="#method-i-search_path_or_address">search_path_or_address</a></li>
+      <li ><a href="#method-i-select_hook">select_hook</a></li>
+      <li ><a href="#method-i-validate_format">validate_format</a></li>
+    </ul>
   </div>
+
+
+
+  <footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.14.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
 </nav>
 
 <main role="main" aria-labelledby="class-HookApp">
-  <h1 id="class-HookApp" class="class">
+  
+  
+
+  <h1 id="class-HookApp" class="anchor-link class">
     class HookApp
   </h1>
 
@@ -123,29 +140,36 @@
 
   </section>
 
-  <section id="5Buntitled-5D" class="documentation-section">
+  <section id="5Buntitled-5D" class="documentation-section anchor-link">
 
 
 
 
 
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section anchor-link">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-      <div id="method-i-act_on" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">act_on</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-act_on" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-act_on" title="Link to this method">
+                <span class="method-name">act_on</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="act_on-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 294</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">act_on</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">menu_items</span> = [<span class="ruby-string">&#39;Open in default app&#39;</span>]
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">open_linked</span>(<span class="ruby-identifier">url</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">url</span>)
@@ -168,23 +192,31 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          
         </div>
 
 
       </div>
 
-      <div id="method-i-all_bookmarks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">all_bookmarks</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-all_bookmarks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-all_bookmarks" title="Link to this method">
+                <span class="method-name">all_bookmarks</span>
+                <span class="method-args">()</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Get all known bookmarks. Return array of bookmark hashes.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="all_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 142</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_bookmarks</span>
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;#{HOOK_APP}&quot;
@@ -201,21 +233,29 @@
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Get all known bookmarks. Return array of bookmark hashes.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-bookmark_for" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">bookmark_for</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-bookmark_for" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-bookmark_for" title="Link to this method">
+                <span class="method-name">bookmark_for</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Get a <a href="Hook.html"><code>Hook</code></a> bookmark for file or URL. Return bookmark hash.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="bookmark_for-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_for</span>(<span class="ruby-identifier">url</span>)
@@ -241,23 +281,31 @@
   <span class="ruby-identifier">mark</span>.<span class="ruby-identifier">split_hook</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Get a <a href="Hook.html"><code>Hook</code></a> bookmark for file or URL. Return bookmark hash.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-bookmark_from_app" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">bookmark_from_app</span><span
-            class="method-args">(app, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-bookmark_from_app" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-bookmark_from_app" title="Link to this method">
+                <span class="method-name">bookmark_from_app</span>
+                <span class="method-args">(app, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Get a bookmark from the foreground document of specified app.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="bookmark_from_app-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 83</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bookmark_from_app</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;System Events&quot; to set front_app to name of first application process whose frontmost is true
@@ -280,23 +328,31 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Get a bookmark from the foreground document of specified app.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-browse_bookmarks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">browse_bookmarks</span><span
-            class="method-args">(glob)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-browse_bookmarks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-browse_bookmarks" title="Link to this method">
+                <span class="method-name">browse_bookmarks</span>
+                <span class="method-args">(glob)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="browse_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 260</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">browse_bookmarks</span>(<span class="ruby-identifier">glob</span>)
   <span class="ruby-identifier">glob_all</span> = <span class="ruby-string">&#39;**/*&#39;</span>
   <span class="ruby-identifier">root</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">glob</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
@@ -310,14 +366,14 @@
            <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-identifier">glob</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">glob</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">glob_all</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">glob</span>)
          <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">args</span> = [<span class="ruby-string">&#39;--layout=reverse-list&#39;</span>,
+         <span class="ruby-identifier">args</span> = [<span class="ruby-string">&#39;--layout=reverse-list&#39;</span>,
           <span class="ruby-string">&#39;--header=&quot;esc: cancel, return: browse&quot;&#39;</span>,
           <span class="ruby-string">&#39;--prompt=&quot;  Select file &gt; &quot;&#39;</span>,
           <span class="ruby-string">%(--preview=&#39;hook ls -o m {}&#39;)</span>,
           <span class="ruby-string">&#39;--height=60%&#39;</span>,
           <span class="ruby-string">&#39;--min-height=10&#39;</span>]
 
-  <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(root.join(&quot;\n&quot;))} | &#39;#{fzf}&#39; #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-identifier">sel</span> = <span class="ruby-node">`echo #{Shellwords.escape(root[0..300].join(&quot;\n&quot;))} | &#39;#{fzf}&#39; #{args.join(&#39; &#39;)}`</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sel</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
     <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">sel</span>[<span class="ruby-value">0</span>])
@@ -331,23 +387,31 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          
         </div>
 
 
       </div>
 
-      <div id="method-i-browse_linked" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">browse_linked</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-browse_linked" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-browse_linked" title="Link to this method">
+                <span class="method-name">browse_linked</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Select from a menu of available hooks and open using macOS `open`.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="browse_linked-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 344</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">browse_linked</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">empty?</span>
@@ -360,45 +424,61 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Select from a menu of available hooks and open using macOS ‘open`.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-clip_bookmark" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">clip_bookmark</span><span
-            class="method-args">(url, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-clip_bookmark" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-clip_bookmark" title="Link to this method">
+                <span class="method-name">clip_bookmark</span>
+                <span class="method-args">(url, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Create a bookmark for specified file/url and copy to the clipboard.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="clip_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 183</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clip_bookmark</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">mark</span> = <span class="ruby-identifier">bookmark_for</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">copy_bookmark</span>(<span class="ruby-identifier">mark</span>[<span class="ruby-value">:name</span>], <span class="ruby-identifier">mark</span>[<span class="ruby-value">:url</span>], <span class="ruby-identifier">opts</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Create a bookmark for specified file/url and copy to the clipboard.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-clone_hooks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">clone_hooks</span><span
-            class="method-args">(args)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-clone_hooks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-clone_hooks" title="Link to this method">
+                <span class="method-name">clone_hooks</span>
+                <span class="method-args">(args)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Copy all hooks from source file to target file</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="clone_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 380</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 384</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clone_hooks</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">valid_hook</span>
   <span class="ruby-identifier">source</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">valid_hook</span>
@@ -421,23 +501,31 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Copy all hooks from source file to target file</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-copy_bookmark" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">copy_bookmark</span><span
-            class="method-args">(title, url, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-copy_bookmark" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-copy_bookmark" title="Link to this method">
+                <span class="method-name">copy_bookmark</span>
+                <span class="method-args">(title, url, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Create a bookmark from specified title and url and copy to the clipboard.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="copy_bookmark-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 189</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">copy_bookmark</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;No URL found&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;No title&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>
@@ -446,23 +534,31 @@
   <span class="ruby-node">%(Copied #{opts[:markdown] ? &#39;Markdown link&#39; : &#39;Hook URL&#39;} for &#39;#{title}&#39; to clipboard)</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Create a bookmark from specified title and url and copy to the clipboard.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-decode" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">decode</span><span
-            class="method-args">(string)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-decode" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-decode" title="Link to this method">
+                <span class="method-name">decode</span>
+                <span class="method-args">(string)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="decode-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 566</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 570</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">decode</span>(<span class="ruby-identifier">string</span>)
     <span class="ruby-identifier">result</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
 tell application &quot;#{HOOK_APP}&quot;
@@ -472,23 +568,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
     <span class="ruby-identifier">print</span> <span class="ruby-identifier">result</span>
   <span class="ruby-keyword">end</span></pre>
           </div>
+          
         </div>
 
 
       </div>
 
-      <div id="method-i-delete_all_hooks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">delete_all_hooks</span><span
-            class="method-args">(url, force: false)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-delete_all_hooks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-delete_all_hooks" title="Link to this method">
+                <span class="method-name">delete_all_hooks</span>
+                <span class="method-args">(url, force: false)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Delete all hooked files/urls from target file</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="delete_all_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 403</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 407</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_all_hooks</span>(<span class="ruby-identifier">url</span>, <span class="ruby-value">force:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">force</span>
     <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Are you sure you want to delete ALL hooks from #{url} (y/N)? &quot;</span>
@@ -510,23 +614,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Delete all hooked files/urls from target file</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-delete_hooks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">delete_hooks</span><span
-            class="method-args">(args, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-delete_hooks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-delete_hooks" title="Link to this method">
+                <span class="method-name">delete_hooks</span>
+                <span class="method-args">(args, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Delete hooks between two files/urls</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="delete_hooks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 425</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 429</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_hooks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">urls</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:valid_hook</span>).<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">url</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">url</span> }
   <span class="ruby-identifier">output</span> = []
@@ -556,23 +668,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Delete hooks between two files/urls</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-encode" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">encode</span><span
-            class="method-args">(string)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-encode" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-encode" title="Link to this method">
+                <span class="method-name">encode</span>
+                <span class="method-args">(string)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="encode-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 557</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 561</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">encode</span>(<span class="ruby-identifier">string</span>)
     <span class="ruby-identifier">result</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
 tell application &quot;#{HOOK_APP}&quot;
@@ -582,21 +702,29 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
     <span class="ruby-identifier">print</span> <span class="ruby-identifier">result</span>
   <span class="ruby-keyword">end</span></pre>
           </div>
+          
         </div>
 
 
       </div>
 
-      <div id="method-i-format_regex" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">format_regex</span><span
-            class="method-args">(options)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-format_regex" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-format_regex" title="Link to this method">
+                <span class="method-name">format_regex</span>
+                <span class="method-args">(options)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Create a single regex for validation of an array by first char or full match.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="format_regex-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_regex</span>(<span class="ruby-identifier">options</span>)
@@ -605,26 +733,38 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;^(#{fmt_rx_array.join(&#39;|&#39;)})$&quot;</span>,<span class="ruby-string">&#39;i&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Create a single regex for validation of an array by first char or full match.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-get_hooks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">get_hooks</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-get_hooks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-get_hooks" title="Link to this method">
+                <span class="method-name">get_hooks</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Get bookmarks hooked to file or URL. Return array of bookmark hashes.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="get_hooks-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_hooks</span>(<span class="ruby-identifier">url</span>)
-  <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook!</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+    <span class="ruby-identifier">url</span> = <span class="ruby-identifier">url</span>.<span class="ruby-identifier">valid_hook</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid target: #{url}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">url</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> []
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">hooks</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     tell application &quot;#{HOOK_APP}&quot;
@@ -646,23 +786,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">hooks</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Get bookmarks hooked to file or URL. Return array of bookmark hashes.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-link_all" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">link_all</span><span
-            class="method-args">(args)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-link_all" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-link_all" title="Link to this method">
+                <span class="method-name">link_all</span>
+                <span class="method-args">(args)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Create bi-directional links between every file/url in the list of arguments</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="link_all-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 455</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 459</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_all</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">source</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">valid_hook</span>
@@ -681,23 +829,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-node">&quot;Linked #{args.length} files to each other&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Create bi-directional links between every file/url in the list of arguments</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-link_files" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">link_files</span><span
-            class="method-args">(args)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-link_files" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-link_files" title="Link to this method">
+                <span class="method-name">link_files</span>
+                <span class="method-args">(args)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Link 2 or more files/urls with bi-directional hooks.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="link_files-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 357</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 361</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">link_files</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
   <span class="ruby-identifier">target</span>.<span class="ruby-identifier">valid_hook!</span>
@@ -720,23 +876,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-node">&quot;Linked #{args.length} files to #{target}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Link 2 or more files/urls with bi-directional hooks.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-linked_bookmarks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">linked_bookmarks</span><span
-            class="method-args">(args, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-linked_bookmarks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-linked_bookmarks" title="Link to this method">
+                <span class="method-name">linked_bookmarks</span>
+                <span class="method-args">(args, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Get a list of all hooks on a file/url.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="linked_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 474</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 478</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linked_bookmarks</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-identifier">result</span> = []
 
@@ -783,23 +947,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">result</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">separator</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Get a list of all hooks on a file/url.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-open_gui" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">open_gui</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-open_gui" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-open_gui" title="Link to this method">
+                <span class="method-name">open_gui</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Open the <a href="Hook.html"><code>Hook</code></a> GUI for browsing/performing actions on a file or url</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="open_gui-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 317</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 321</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_gui</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
   tell application &quot;#{HOOK_APP}&quot;
@@ -815,23 +987,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">raise</span> <span class="ruby-identifier">result</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Open the <a href="Hook.html"><code>Hook</code></a> GUI for browsing/performing actions on a file or url</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-open_linked" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">open_linked</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-open_linked" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-open_linked" title="Link to this method">
+                <span class="method-name">open_linked</span>
+                <span class="method-args">(url)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Select from a menu of available hooks and open using macOS `open`.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="open_linked-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 333</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 337</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open_linked</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">marks</span> = <span class="ruby-identifier">get_hooks</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">marks</span>.<span class="ruby-identifier">empty?</span>
@@ -842,23 +1022,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Select from a menu of available hooks and open using macOS ‘open`.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-output_array" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">output_array</span><span
-            class="method-args">(hooks_arr, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-output_array" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-output_array" title="Link to this method">
+                <span class="method-name">output_array</span>
+                <span class="method-args">(hooks_arr, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Output an array of hooks in the given format.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="output_array-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 521</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 525</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_array</span>(<span class="ruby-identifier">hooks_arr</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">hooks_arr</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-value">:files_only</span>]
@@ -895,23 +1083,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">output</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Output an array of hooks in the given format.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-search_bookmarks" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">search_bookmarks</span><span
-            class="method-args">(search, opts)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-search_bookmarks" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-search_bookmarks" title="Link to this method">
+                <span class="method-name">search_bookmarks</span>
+                <span class="method-args">(search, opts)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Search bookmarks, using both names and addresses unless options contain “:names_only”. Return results as formatted list.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="search_bookmarks-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 160</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_bookmarks</span>(<span class="ruby-identifier">search</span>, <span class="ruby-identifier">opts</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">search_name</span>(<span class="ruby-identifier">search</span>)
@@ -934,23 +1130,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Search bookmarks, using both names and addresses unless options contain “:names_only”. Return results as formatted list.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-search_name" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">search_name</span><span
-            class="method-args">(search)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-search_name" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-search_name" title="Link to this method">
+                <span class="method-name">search_name</span>
+                <span class="method-args">(search)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Search boomark names/titles. Return array of bookmark hashes.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="search_name-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 106</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_name</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -968,23 +1172,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Search boomark names/titles. Return array of bookmark hashes.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-search_path_or_address" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">search_path_or_address</span><span
-            class="method-args">(search)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-search_path_or_address" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-search_path_or_address" title="Link to this method">
+                <span class="method-name">search_path_or_address</span>
+                <span class="method-args">(search)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Search bookmark paths and addresses. Return array of bookmark hashes.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="search_path_or_address-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 124</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_path_or_address</span>(<span class="ruby-identifier">search</span>)
   <span class="ruby-node">`osascript &lt;&lt;&#39;APPLESCRIPT&#39;
     set searchString to &quot;#{search.strip}&quot;
@@ -1002,23 +1214,31 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split_hooks</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Search bookmark paths and addresses. Return array of bookmark hashes.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-select_hook" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">select_hook</span><span
-            class="method-args">(marks)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-select_hook" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-select_hook" title="Link to this method">
+                <span class="method-name">select_hook</span>
+                <span class="method-args">(marks)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Generate a menu of available hooks for selecting one or more hooks to operate on. Revamped to use `fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="select_hook-source">
-            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 200</span>
+            <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select_hook</span>(<span class="ruby-identifier">marks</span>)
   <span class="ruby-comment"># intpad = marks.length.to_s.length + 1</span>
   <span class="ruby-comment"># marks.each_with_index do |mark, i|</span>
@@ -1079,21 +1299,29 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">res</span> <span class="ruby-operator">||</span> []
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Generate a menu of available hooks for selecting one or more hooks to operate on. Revamped to use ‘fzf`, which is embedded as `lib/helpers/fuzzyfilefinder` to avoid any conflicts. Allows multiple selections with tab key, and type-ahead fuzzy filtering of results.</p>
         </div>
 
 
       </div>
 
-      <div id="method-i-validate_format" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">validate_format</span><span
-            class="method-args">(fmt, options)</span>
-          <span class="method-click-advice">click to toggle source</span>
+      <div id="method-i-validate_format" class="method-detail anchor-link ">
+        <div class="method-header">
+            <div class="method-heading">
+              <a href="#method-i-validate_format" title="Link to this method">
+                <span class="method-name">validate_format</span>
+                <span class="method-args">(fmt, options)</span>
+              </a>
+            </div>
         </div>
 
-        <div class="method-description">
-          <p>Check if format fully matches or matches the first character of available options. Return full valid format or nil</p>
+          <div class="method-controls">
+            <details class="method-source-toggle">
+              <summary>Source</summary>
+            </details>
+          </div>
 
+        <div class="method-description">
           <div class="method-source-code" id="validate_format-source">
             <pre><span class="ruby-comment"># File lib/hook/hookapp.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">options</span>)
@@ -1109,6 +1337,7 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
   <span class="ruby-identifier">valid_format</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
+          <p>Check if format fully matches or matches the first character of available options. Return full valid format or nil</p>
         </div>
 
 
@@ -1118,11 +1347,4 @@ APPLESCRIPT`</span>.<span class="ruby-identifier">strip</span>.<span class="ruby
 
   </section>
 </main>
-
-
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.3.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
 

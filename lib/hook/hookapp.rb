@@ -56,8 +56,12 @@ class HookApp
 
   # Get bookmarks hooked to file or URL. Return array of bookmark hashes.
   def get_hooks(url)
-    url.valid_hook!
-    raise "Invalid target: #{url}" unless url
+    if url.is_a?(String)
+      url = url.valid_hook
+      raise "Invalid target: #{url}" unless url
+    else
+      return []
+    end
 
     hooks = `osascript <<'APPLESCRIPT'
       tell application "#{HOOK_APP}"
@@ -270,14 +274,14 @@ class HookApp
              Dir.glob(glob.nil? || glob.empty? ? glob_all : glob)
            end
 
-    args = ['--layout=reverse-list',
+           args = ['--layout=reverse-list',
             '--header="esc: cancel, return: browse"',
             '--prompt="  Select file > "',
             %(--preview='hook ls -o m {}'),
             '--height=60%',
             '--min-height=10']
 
-    sel = `echo #{Shellwords.escape(root.join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp.split("\n")
+    sel = `echo #{Shellwords.escape(root[0..300].join("\n"))} | '#{fzf}' #{args.join(' ')}`.chomp.split("\n")
 
     if sel.count == 1
       marks = get_hooks(sel[0])
