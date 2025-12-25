@@ -1,0 +1,16 @@
+# .git is needed for gem building, but we can exclude .gitignore
+.gitignore
+.vscode
+.idea
+# Allow pkg/*.gem for Docker testing
+# *.gem
+# pkg/
+html/
+vendor/
+*.log
+.DS_Store
+node_modules
+*.swp
+*.swo
+*~
+

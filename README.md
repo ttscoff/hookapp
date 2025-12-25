@@ -10,9 +10,38 @@ This gem includes a `hook` binary that allows interaction with the features of H
 
 ## Installation
 
-`gem install hookapp`. 
+**Recommended:** Install without sudo:
+```bash
+gem install hookapp
+```
 
-If you're on a stock Ruby install (i.e. have never installed `rvm` or `rbenv`), you may need sudo and your system password: `sudo gem install hookapp`.
+**If you encounter errors** (especially "cannot load such file" errors), you may have a broken installation. Run the fix script:
+```bash
+./scripts/fix_installation.sh
+```
+
+Then install again:
+```bash
+gem install hookapp
+```
+
+**Note:** If you're on a stock Ruby install (i.e. have never installed `rvm` or `rbenv`), you may need sudo, but this can cause issues. It's better to use a Ruby version manager like `rbenv`, `rvm`, or `mise` (formerly `rtx`).
+
+## Testing Installation
+
+To test the installation in a clean Ruby 2.6 environment (simulating system Ruby):
+
+```bash
+./scripts/test_installation_docker.sh
+```
+
+Or using docker-compose:
+
+```bash
+docker-compose -f docker-compose.test.yml up --build
+```
+
+This will build the gem and test installation in a Docker container with Ruby 2.6, simulating the environment where users might encounter the original error.
 
 ## Usage
 
@@ -38,13 +67,13 @@ COMMANDS
     find, search - Search bookmarks
     from         - Get a Hook URL for the frontmost window of an app
     help         - Shows a list of commands or help for one command
-    link, ln     - Create bidirectional hooks between two or more 
+    link, ln     - Create bidirectional hooks between two or more
                    files/urls
     list, ls     - List hooks on a file or url
     open, gui    - Open the specified file or url in Hook GUI
     remove, rm   - Remove a hook between two files/urls
     scripts      - Shell completion examples
-    select       - Select from hooks on a file/url and open in default  
+    select       - Select from hooks on a file/url and open in default
                    application
 ```
 
@@ -87,7 +116,7 @@ Use `hook find` (or `hook search`) and a search string to find bookmarks contain
 ### Shell completion
 
 Use `hook scripts [SHELL]` to output a completion script for your specified shell (currently `bash`, `zsh`, or `fish` are available). The comment at the top of the output will guide you to install and utilize the script.
- 
+
 
 ## Global Options
 
@@ -114,7 +143,7 @@ Display the program version
 *Copy Hookmark URL for file/url to clipboard*
 
 > Creates a bookmark for the specified file or URL and copies its Hookmark URL to the clipboard.
-> 
+>
 > The copied Hookmark URL can be used to link to other files (use `hook link --paste FILE/URL`,
 > or to paste into another app as a link. Use the -m flag to copy a full Markdown link.
 
@@ -135,7 +164,7 @@ Copy as Markdown
 *Clone all hooks from one file or url onto another*
 
 > Copy all the files and urls that the first file is hooked to onto another file.
-> 
+>
 > Exactly two arguments (SOURCE, TARGET) required.
 
 * * * * * *
@@ -145,7 +174,7 @@ Copy as Markdown
 *Search bookmarks*
 
 > Search bookmark urls and names for a string and output in specified format (default "paths").
-> 
+>
 > Run `hook find` with no search argument to list all bookmarks.
 
 #### Options
@@ -176,7 +205,7 @@ Separate results with NULL separator, only applies with "paths" output for singl
 
 > Specify an application by name (without '.app') to bring that app to the foreground and create a bookmark
 > for the active document, note, task, etc., returning a Hookmark URL.
-> 
+>
 > Use -m to get the response as Markdown, and/or -c to copy the result directly to the clipboard.
 
 #### Options
@@ -213,7 +242,7 @@ List commands one per line, to assist with shell completion
 > If three or more are provided, `link` defaults to creating bi-directional
 > links between each file and the last file in the list. Use `-a` to create
 > bi-directional links between every file in the list.
-> 
+>
 > If using `--paste`, the URL/hook link in the clipboard will be used as one argument,
 > to be combined with one or more file/url arguments.
 
@@ -234,7 +263,7 @@ Paste URL from clipboard
 *List hooks on a file or url*
 
 > Output a list of all hooks attached to given url(s) or file(s) in the specified format (default "paths").
-> 
+>
 > Run `hook list` with no file/url argument to list all bookmarks.
 
 #### Options
@@ -266,7 +295,7 @@ Generate a menu to select hook(s) for opening
 *Open the specified file or url in Hookmark GUI*
 
 > Opens Hookmark on the specified file/URL for browsing and performing actions.
-> 
+>
 > Exactly one argument (File/URL) required.
 
 * * * * * *
@@ -294,7 +323,7 @@ Generate a menu to select hook(s) for opening
 *Remove a hook between two files/urls*
 
 > Remove a hook between two files or URLs. If you use --all, all hooks on a given file will be removed.
-> 
+>
 > If --all isn't specified, exactly two arguments (Files/URLs) are required.
 
 #### Options

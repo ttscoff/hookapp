@@ -1,6 +1,15 @@
 #!/usr/bin/env ruby -W0
 # frozen_string_literal: true
 
+# Ensure rubygems is loaded
+require 'rubygems' unless defined?(Gem)
+
+# Add the gem's lib directory to the load path
+# When installed, bin/hook is at: /path/to/gems/hookapp-X.X.X/bin/hook
+# So lib is at: /path/to/gems/hookapp-X.X.X/lib
+lib_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(lib_path) if File.directory?(lib_path) && !$LOAD_PATH.include?(lib_path)
+
 require 'hook'
 require 'shellwords'
 

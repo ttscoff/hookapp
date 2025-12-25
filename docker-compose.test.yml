@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: hookapp-test:ruby2.6
+    command: sh -c "hook --version && hook help"
+
+
